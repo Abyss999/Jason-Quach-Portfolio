@@ -4,6 +4,7 @@ import {useState} from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -93,6 +94,8 @@ export default function NavBar() {
                 Resume
               </a>
             </Button>
+
+            <ThemeToggle/>
           </nav>
 
           {/* Mobile Nav */}
