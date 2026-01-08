@@ -1,5 +1,10 @@
+"use client";
+
 import Image from "next/image";
+import React from "react";
 import {Mail, Github, Linkedin, FileText} from "lucide-react"; 
+import { profile } from "console";
+import next from "next";
 
 const socials = [
     {
@@ -20,11 +25,31 @@ const socials = [
     {
         label: "Resume",
         icon: <FileText className="h-6 w-6"/>,
-        href: "/Jason_Quach_Resume.pdf",
+        href: "/resume.pdf",
     },
 ];
 
+const profileImages = [
+    "/pfp.jpg",
+    "/pfp_2.png",
+]
+
 export default function AboutMe() {
+    const [currentProfile, setCurrentProfile] = React.useState(0);
+
+    const nextProfile = () => {
+        setCurrentProfile((currentProfile + 1) % profileImages.length);
+    }
+
+    const prevProfile = () => {
+        setCurrentProfile((currentProfile - 1 + profileImages.length) % profileImages.length);
+    }
+
+    React.useEffect(() => {
+        const id = setInterval(nextProfile, 4000);
+        return () => clearInterval(id);
+    }, [currentProfile]);
+
     return (
         <section id = "about" className = "min-h-[calc(100vh-4rem)] py-20 scroll-mt-16">
             <h2 className = "mb-10 text-center text-5xl font-bold text-orange-500">
@@ -36,13 +61,46 @@ export default function AboutMe() {
                 <div className="flex justify-center">
                     <div className = "relative aspect-square w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                         <Image
-                            src="/pfp.jpg"
+                            key={profileImages[currentProfile]}
+                            src={profileImages[currentProfile]}
                             alt="Profile Picture"
                             fill
-                            className="object-cover"
+                            className="object-cover opacity-0 animate-fadeIn"
                             priority
                         />
+
+                        {/* left arrow */}
+                        {profileImages.length > 1 && (
+                        <button onClick={prevProfile} 
+                        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80">
+                            ‹
+                        </button>
+                        )}
+
+                        {/* right arrow */}
+                        {profileImages.length > 1 && (
+                        <button onClick={nextProfile} 
+                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80">
+                            ›
+                        </button>
+                        )}
+
+                        {/* dots */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                            {profileImages.map((_, i) => (
+                                <span
+                                key={i}
+                                className={`h-2 w-2 rounded-full ${
+                                    i === currentProfile ? "bg-orange-500" : "bg-white/40"
+                                }`}
+                                />
+                            ))}
+                            </div>
+
                     </div>
+
+                    
+
                 </div>
             
 
@@ -67,8 +125,8 @@ export default function AboutMe() {
                             <a
                                 key={social.label}
                                 href={social.href}
-                                target={social.href.startsWith("http") ? "_blank" : undefined}
-                                rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                target={social.href.startsWith("http") || social.href.endsWith("pdf") ? "_blank" : undefined}
+                                rel={social.href.startsWith("http") || social.href.endsWith("pdf") ? "noopener noreferrer" : undefined}
                                 className="inline-flex items-center gap-2 rounded-full border border-orange-500/40
                                     px-4 py-2 text-orange-500 transition-colors
                                     hover:bg-orange-500/15 hover:text-orange-400"
