@@ -46,7 +46,7 @@ export default function AboutMe() {
     }
 
     React.useEffect(() => {
-        const id = setInterval(nextProfile, 4000);
+        const id = setInterval(nextProfile, 7000);
         return () => clearInterval(id);
     }, [currentProfile]);
 
