@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import AboutMe from "@/components/AboutMe";
 import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
 
 import SkillCard from "@/components/SkillCard";
 import TechBadge from "@/components/TechBadge";
