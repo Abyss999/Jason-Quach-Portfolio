@@ -1,0 +1,267 @@
+"use client";
+import * as React from "react";
+import Image from "next/image";
+import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from "lucide-react";
+import TechBadge from "@/components/TechBadge";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
+
+type ProjectImage = {
+    src: string;
+    alt?: string;
+    caption?: string;
+};
+
+type Tech = {
+    label: string; 
+    icon?: React.ReactNode;
+}
+
+type ProjectCardProps = {
+    title: string;
+    description: string;
+    images: ProjectImage[];
+    techStack: Tech[];
+    githubLink?: string;
+    liveLink?: string;
+};
+
+export default function ProjectCard({
+    title, description, images, techStack, githubLink, liveLink,
+}: ProjectCardProps) {
+    const [open, setOpen] = React.useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+
+    const hero = images?.[0];
+
+    const canOpen = Array.isArray(images) && images.length > 0;
+
+    const prev = React.useCallback(() => {
+        setCurrentImageIndex((index) => (index - 1 + images.length) % images.length);
+    }, [images.length]);
+
+    const next = React.useCallback(() => {
+        setCurrentImageIndex((index) => (index + 1) % images.length);
+    }, [images.length]);
+
+    // keyboard 
+
+    React.useEffect(() => {
+        if (!open) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key == "ArrowLeft") prev();
+            if (e.key == "ArrowRight") next();
+            if (e.key == "Escape") setOpen(false);
+        }
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [open, prev, next]);
+
+    return (
+        <>
+        <section id ="projects"
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur shadow-sm transition-colors hover:border-orange-500/35 flex flex-col h-full"
+>   
+            <div className="grid items-stretch gap-12 md:grid-cols-2">
+                <div className="flex flex-col">
+                    <h3 className="text-xl font-semibold tracking-tight md:text-2xl text-orange-500">
+                        {title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
+                    {description}
+                    </p>
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                    {githubLink ? (
+                        <Button asChild variant="secondary" className="gap-2">
+                        <a href={githubLink} target="_blank" rel="noreferrer">
+                            <Github className="h-4 w-4" />
+                            View on GitHub
+                        </a>
+                        </Button>
+                    ) : null}
+
+                    {liveLink ? (
+                        <Button asChild className="gap-2">
+                        <a href={liveLink} target="_blank" rel="noreferrer">
+                            <ExternalLink className="h-4 w-4" />
+                            Live Demo
+                        </a>
+                        </Button>
+                    ) : null}
+
+                    {/* tech stack */}
+                    {techStack?.length ? (
+                    <div className="mt-6">
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-orange-500">
+                        Technologies Used
+                        </p>
+                        <div className="grid grid-cols-2 gap-2">
+                        {techStack.map((t) => (
+                            <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
+                        ))}
+                        </div>
+                    </div>
+                    ) : null}
+                    </div>
+            </div>
+
+        {/* RIGHT: image */}
+          <div className="mt-auto pt-6">
+            <button
+              type="button"
+              onClick={() => {
+                if (!canOpen) return;
+                setCurrentImageIndex(0);
+                setOpen(true);
+              }}
+              className={[
+                "group relative h-full w-full overflow-hidden rounded-2xl border border-orange-500/20 bg-muted hover:border-orange-500/35 transition-colors",
+                "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                !canOpen ? "cursor-default" : "cursor-pointer",
+              ].join(" ")}
+              aria-label={canOpen ? "Open project gallery" : "Project image"}
+            >
+              {hero ? (
+                <>
+                  <Image
+                    src={hero.src}
+                    alt={hero.alt ?? `${title} screenshot`}
+                    width={1200}
+                    height={800}
+                    className="h-[260px] w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] md:h-[300px]"
+                    priority={false}
+                  />
+                  {/* subtle overlay hint */}
+                  {canOpen ? (
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  ) : null}
+                  {canOpen ? (
+                    <div className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">
+                      Click to view gallery
+                    </div>
+                  ) : null}
+                </>
+              ) : (
+                <div className="flex h-full min-h-[220px] items-center justify-center text-sm text-muted-foreground">
+                  No image provided
+                </div>
+              )}
+            </button>
+          </div>
+
+        </section>
+
+        {/* Modal slideshow */}
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogContent className="max-w-5xl p-0">
+            <DialogHeader className="border-b px-5 py-4">
+                <div className="flex items-start justify-between gap-4">
+                    <div>
+                        <DialogTitle className="text-base md:text-lg">
+                        {title}
+                        </DialogTitle>
+                        {techStack?.length ? (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                            {techStack.map((t) => (
+                            <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
+                            ))}
+                        </div>
+                        ) : null}
+                    </div>
+
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setOpen(false)}
+                    aria-label="Close"
+                >
+                    <X className="h-5 w-5" />
+                </Button>
+                </div>
+            </DialogHeader>
+
+            <div className="p-5">
+                {/* main image */}
+                <div className="relative overflow-hidden rounded-2xl border bg-muted px-12 sm:px-14">
+                {images?.[currentImageIndex] ? (
+                    <Image
+                    src={images[currentImageIndex].src}
+                    alt={images[currentImageIndex].alt ?? `${title} screenshot ${currentImageIndex + 1}`}
+                    width={1600}
+                    height={900}
+                    className="h-[260px] w-full object-contain p-4 sm:h-[420px] md:h-[520px]"
+                    />
+                ) : null}
+
+                {/* arrows */}
+                {images.length > 1 ? (
+                    <>
+                    <Button
+                        variant="secondary"
+                        size="icon"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                        onClick={prev}
+                        aria-label="Previous image"
+                    >
+                        <ChevronLeft className="h-5 w-5" />
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        size="icon"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                        onClick={next}
+                        aria-label="Next image"
+                    >
+                        <ChevronRight className="h-5 w-5" />
+                    </Button>
+                    </>
+                ) : null}
+                </div>
+
+                {/* caption */}
+                {images?.[currentImageIndex]?.caption ? (
+                <p className="mt-3 text-sm text-muted-foreground">
+                    {images[currentImageIndex].caption}
+                </p>
+                ) : null}
+
+                {/* thumbnails */}
+                {images.length > 1 ? (
+                <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
+                    {images.map((img, i) => (
+                    <button
+                        key={`${img.src}-${i}`}
+                        type="button"
+                        onClick={() => setCurrentImageIndex(i)}
+                        className={[
+                        "relative h-16 w-28 flex-none overflow-hidden rounded-xl border bg-muted",
+                        "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                        i === currentImageIndex ? "ring-2 ring-ring" : "opacity-80 hover:opacity-100",
+                        ].join(" ")}
+                        aria-label={`View image ${i + 1}`}
+                    >
+                        <Image
+                        src={img.src}
+                        alt={img.alt ?? `Thumbnail ${i + 1}`}
+                        width={400}
+                        height={240}
+                        className="h-full w-full object-cover"
+                        />
+                    </button>
+                    ))}
+                </div>
+                ) : null}
+            </div>
+            </DialogContent>
+        </Dialog>
+        </>
+    )
+
+}
