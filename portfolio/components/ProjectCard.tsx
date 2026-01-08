@@ -33,11 +33,34 @@ type ProjectCardProps = {
 };
 
 
-const CATEGORY_MAP: Record<string, {label: string; icon: React.ReactNode}> = {
-    "SWE": { label: "Software Engineering", icon: <Code2 /> },
-    "DS": { label: "Data Science", icon: <BarChart3 /> },
-    "ML": { label: "Machine Learning", icon: <Brain /> },
+const CATEGORY_MAP: Record<
+  string,
+  {
+    label: string;
+    icon: React.ReactNode;
+    className: string;
+  }
+> = {
+  SWE: {
+    label: "Software Engineering",
+    icon: <Code2 />,
+    className:
+      "border-orange-500/40 text-orange-500 hover:bg-orange-500/15 hover:text-orange-400",
+  },
+  DS: {
+    label: "Data Science",
+    icon: <BarChart3 />,
+    className:
+      "border-blue-500/40 text-blue-500 hover:bg-blue-500/15 hover:text-blue-400",
+  },
+  ML: {
+    label: "Machine Learning",
+    icon: <Brain />,
+    className:
+      "border-green-500/40 text-green-500 hover:bg-green-500/15 hover:text-green-400",
+  },
 };
+
 
 export default function ProjectCard({
     title, description, images, techStack, githubLink, liveLink, category,
@@ -138,6 +161,7 @@ export default function ProjectCard({
                     label={CATEGORY_MAP[category].label}
                     icon={CATEGORY_MAP[category].icon}
                     size="sm"
+                    className={CATEGORY_MAP[category].className}
                     />
                 ) : (
                     <div className="invisible">
@@ -200,43 +224,37 @@ export default function ProjectCard({
 
         {/* Modal slideshow */}
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="max-w-5xl p-0">
-            <DialogHeader className="border-b px-5 py-4">
-                <div className="flex items-start justify-between gap-4">
-                    <div>
-                        <DialogTitle className="text-base md:text-lg">
-                        {title}
-                        </DialogTitle>
-                        {techStack?.length ? (
-                        <div className="mt-3 flex flex-wrap gap-2">
-                            {techStack.map((t) => (
-                            <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
-                            ))}
+            <DialogContent className="max-w-5xl p-0 bg-black/95 text-white border border-orange-500/20">
+                <DialogHeader className="border-b border-orange-500/20 px-5 py-4">
+                    <div className="flex items-start justify-between gap-4">
+                        <div>
+                            <DialogTitle className="text-base md:text-lg">
+                            {title}
+                            </DialogTitle>
+                            {techStack?.length ? (
+                            <div className="mt-3 flex flex-wrap gap-2">
+                                {techStack.map((t) => (
+                                <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
+                                ))}
+                            </div>
+                            ) : null}
                         </div>
-                        ) : null}
+
                     </div>
+                </DialogHeader>
 
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setOpen(false)}
-                    aria-label="Close"
-                >
-                    <X className="h-5 w-5" />
-                </Button>
-                </div>
-            </DialogHeader>
 
-            <div className="p-5">
+            <div className="px-5 py-5">
                 {/* main image */}
-                <div className="relative overflow-hidden rounded-2xl border bg-muted px-12 sm:px-14">
+                <div className="relative rounded-2xl border border-orange-500/20 bg-muted flex items-center justify-center py-8 min-h-[400px]">
+
                 {images?.[currentImageIndex] ? (
                     <Image
                     src={images[currentImageIndex].src}
                     alt={images[currentImageIndex].alt ?? `${title} screenshot ${currentImageIndex + 1}`}
                     width={1600}
                     height={900}
-                    className="h-[260px] w-full object-contain p-4 sm:h-[420px] md:h-[520px]"
+                      className="h-auto w-auto max-w-full max-h-[70vh] object-contain"
                     />
                 ) : null}
 
@@ -274,28 +292,32 @@ export default function ProjectCard({
 
                 {/* thumbnails */}
                 {images.length > 1 ? (
-                <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
-                    {images.map((img, i) => (
-                    <button
-                        key={`${img.src}-${i}`}
-                        type="button"
-                        onClick={() => setCurrentImageIndex(i)}
-                        className={[
-                        "relative h-16 w-28 flex-none overflow-hidden rounded-xl border bg-muted",
-                        "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-                        i === currentImageIndex ? "ring-2 ring-ring" : "opacity-80 hover:opacity-100",
-                        ].join(" ")}
-                        aria-label={`View image ${i + 1}`}
-                    >
-                        <Image
-                        src={img.src}
-                        alt={img.alt ?? `Thumbnail ${i + 1}`}
-                        width={400}
-                        height={240}
-                        className="h-full w-full object-cover"
-                        />
-                    </button>
-                    ))}
+                <div className="mt-4">
+                    <div className="grid grid-cols-4 gap-2">
+                        {images.map((img, i) => (
+                        <button
+                            key={`${img.src}-${i}`}
+                            type="button"
+                            onClick={() => setCurrentImageIndex(i)}
+                            className={[
+                            "relative h-16 w-full overflow-hidden rounded-xl border transition-all",
+                            i === currentImageIndex 
+                                ? "border-orange-500 ring-2 ring-orange-500/50" 
+                                : "border-orange-500/20 bg-black/40 opacity-70 hover:opacity-100 hover:border-orange-500/40",
+                            "focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black",
+                            ].join(" ")}
+                            aria-label={`View image ${i + 1}`}
+                        >
+                            <Image
+                            src={img.src}
+                            alt={img.alt ?? `Thumbnail ${i + 1}`}
+                            width={400}
+                            height={240}
+                            className="h-full w-full object-cover"
+                            />
+                        </button>
+                        ))}
+                    </div>
                 </div>
                 ) : null}
             </div>

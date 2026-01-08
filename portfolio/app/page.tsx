@@ -7,7 +7,7 @@ import SkillCard from "@/components/SkillCard";
 import TechBadge from "@/components/TechBadge";
 import ProjectCard from "@/components/ProjectCard";
 
-import {Code2, Laptop} from "lucide-react";
+import {Brain, Code2, Laptop, Layers, Search, TreePine, Trees} from "lucide-react";
 import {
   SiTypescript,
   SiPython,
@@ -25,6 +25,8 @@ import {
   SiMongodb,
   SiDocker,
   SiGithub,
+  SiPandas,
+  SiScikitlearn,
 } from "react-icons/si";
 
 const languageStack = [
@@ -54,6 +56,23 @@ const toolStack = [
 ];
 
 const projects = [
+  {
+    title: "Righteous Bot",
+    description:
+      "Feature-rich Discord bot with 650+ commands, API integrations (Spotify/Reddit/Twitter/TikTok), and web scraping. Built custom automation tools for moderation and interactive community features.",
+    githubLink: null,
+    techStack: [
+      { label: "Node.js", icon: <SiNodedotjs className="h-4 w-4" /> },
+      { label: "Discord.js", icon: <Laptop className="h-4 w-4" /> },
+      { label: "MongoDB", icon: <SiMongodb className="h-4 w-4" /> },
+      { label: "JavaScript", icon: <SiJavascript className="h-4 w-4" /> },
+    ],
+    images: [
+      { src: "/vercel.svg", caption: "Commands (placeholder)" },
+      { src: "/pfp.jpg", caption: "Integrations (placeholder)" },
+    ],
+    category: "SWE",
+  },
   {
     title: "Volunteer Management Web App",
     description:
@@ -112,22 +131,67 @@ const projects = [
     ],
   },
   {
-    title: "Righteous Bot",
-    description:
-      "Feature-rich Discord bot with 650+ commands, API integrations (Spotify/Reddit/Twitter/TikTok), and web scraping. Built custom automation tools for moderation and interactive community features.",
-    githubLink: null,
-    techStack: [
-      { label: "Node.js", icon: <SiNodedotjs className="h-4 w-4" /> },
-      { label: "Discord.js", icon: <Laptop className="h-4 w-4" /> },
-      { label: "MongoDB", icon: <SiMongodb className="h-4 w-4" /> },
-      { label: "JavaScript", icon: <SiJavascript className="h-4 w-4" /> },
-    ],
-    images: [
-      { src: "/vercel.svg", caption: "Commands (placeholder)" },
-      { src: "/pfp.jpg", caption: "Integrations (placeholder)" },
-    ],
-    category: "SWE",
-  },
+  title: "Comic Bot",
+  description:
+    "Discord bot that fetches and serves comic content using web scraping and MongoDB-backed storage. Built with Node.js to automate content retrieval, parsing, and fast lookup through bot commands.",
+  githubLink: "https://github.com/Abyss999/comicbot",
+  liveLink: null,
+  techStack: [
+    { label: "Node.js", icon: <SiNodedotjs className="h-4 w-4" /> },
+    { label: "MongoDB", icon: <SiMongodb className="h-4 w-4" /> },
+    { label: "Web Scraping", icon: <Search className="h-4 w-4" /> },
+    { label: "JavaScript", icon: <SiJavascript className="h-4 w-4" /> },
+  ],
+  images: [
+    { src: "/file.svg", caption: "Comic commands (placeholder)" },
+    { src: "/window.svg", caption: "Scraping pipeline (placeholder)" },
+  ],
+  category: "SWE",
+},
+{
+  title: "DBLP Venue Analysis",
+  description:
+    "Data science analysis of DBLP research venues using TF-IDF text features and citation metadata. Built classification, clustering, anomaly detection, and citation-network EDA pipelines, and evaluated models including LightGBM, Random Forest, SVM, and KNN.",
+  githubLink: "https://github.com/Abyss999/DBLP-data-science",
+  liveLink: "https://github.com/Abyss999/DBLP-data-science/blob/main/COSC%203337%20Group%20Project%20Report.pdf",
+  techStack: [
+    { label: "Python", icon: <SiPython className="h-4 w-4" /> },
+    { label: "Pandas", icon: <SiPandas className="h-4 w-4" /> },
+    { label: "scikit-learn", icon: <SiScikitlearn className="h-4 w-4" /> },
+    { label: "LightGBM", icon: <Brain className="h-4 w-4" /> },
+  ],
+  images: [
+    { src: "/DBLP_1.png"},
+    { src: "/DBLP_2.png"},
+    { src: "/DBLP_3.png"},
+    { src: "/DBLP_4.png"},
+  ],
+  category: "DS",
+},
+{
+  title: "Student Dropout Prediction",
+  description:
+    "Built tree-based ML models to predict student dropout using the UCI “Predict Students' Dropout and Academic Success” dataset (4,424 students, 36 features). Performed preprocessing to avoid leakage, converted the outcome into Dropout vs No Dropout, and compared Decision Trees (with pruning), Bagging, and Random Forests using an 80/20 split and error-rate evaluation.",
+  githubLink: null,
+  liveLink: "/Dropout.pdf",
+  techStack: [
+    { label: "R", icon: <SiR className="h-4 w-4" /> },
+    { label: "Decision Trees", icon: <TreePine className="h-4 w-4" /> },
+    { label: "Bagging", icon: <Layers className="h-4 w-4" /> },
+    { label: "Random Forest", icon: <Trees className="h-4 w-4" /> },
+  ],
+  images: [
+    { src: "/Dropout_1.png" },
+    { src: "/Dropout_2.png" },
+    { src: "/Dropout_3.png" },
+    { src: "/Dropout_4.png" },
+    { src: "/Dropout_5.png" },
+    { src: "/Dropout_6.png" },
+  ],
+  category: "ML",
+}
+
+
 ];
 
 export default function HomePage() {
