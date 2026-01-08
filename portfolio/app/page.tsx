@@ -7,7 +7,7 @@ import SkillCard from "@/components/SkillCard";
 import TechBadge from "@/components/TechBadge";
 import ProjectCard from "@/components/ProjectCard";
 
-import {Brain, Code2, Laptop, Layers, Search, TreePine, Trees} from "lucide-react";
+import {Brain, Code2, Laptop, Layers, Search, TreePine, Trees, Globe} from "lucide-react";
 import {
   SiTypescript,
   SiPython,
@@ -97,7 +97,7 @@ const projects = [
     description:
       "Revamped the club website with a modular React/Tailwind design and integrated the Google Calendar API for dynamic event tracking. Synced backend data via Flask REST APIs using psycopg2.",
     githubLink: "https://github.com/Abyss999/CougarAI-Website-Revamp",
-    liveLink: "https://cougarai.tech",
+    liveLink: "https://www.cougarai.org/",
     techStack: [
       { label: "React", icon: <SiReact className="h-4 w-4" /> },
       { label: "Tailwind CSS", icon: <SiTailwindcss className="h-4 w-4" /> },
@@ -189,7 +189,26 @@ const projects = [
     { src: "/Dropout_6.png" },
   ],
   category: "ML",
-}
+},
+{
+  title: "UH Dining Macros",
+  description:
+    "Python-based web scraper that extracts full nutritional data from University of Houston dining hall menus (Moody Towers) using Playwright. Automatically caches daily results into CSV files and computes macro efficiency metrics like protein-per-calorie for fast analysis and comparison.",
+  githubLink: "https://github.com/Abyss999/UH-Dining-Macros",
+  liveLink: null,
+  techStack: [
+    { label: "Python", icon: <SiPython className="h-4 w-4" /> },
+    { label: "Pandas", icon: <SiPandas className="h-4 w-4" /> },
+    { label: "Playwright", icon: <Globe className="h-4 w-4" /> },
+    { label: "Web Scraping", icon: <Search className="h-4 w-4" /> },
+  ],
+  images: [
+    { src: "/uh_dining.gif", caption: "Gif of scraping process" },
+    { src: "/uh_dining.png", caption: "Cached CSV output" },
+    { src: "/uh_dining_1.png", caption: "Macro efficiency analysis"},
+  ],
+  category: "DE",
+},
 
 
 ];

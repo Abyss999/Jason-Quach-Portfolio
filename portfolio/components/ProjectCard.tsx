@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import { ExternalLink, Github, ChevronLeft, ChevronRight, X, Code2, BarChart3, Brain } from "lucide-react";
+import { ExternalLink, Github, ChevronLeft, ChevronRight, X, Code2, BarChart3, Brain, Database, Globe} from "lucide-react";
 import TechBadge from "@/components/TechBadge";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +15,7 @@ type ProjectImage = {
     src: string;
     alt?: string;
     caption?: string;
+    hidden?: boolean;
 };
 
 type Tech = {
@@ -59,6 +60,12 @@ const CATEGORY_MAP: Record<
     className:
       "border-green-500/40 text-green-500 hover:bg-green-500/15 hover:text-green-400",
   },
+  DE: {
+    label: "Data Engineering",
+    icon: <Database />,
+    className:
+      "border-purple-500/40 text-purple-500 hover:bg-purple-500/15 hover:text-purple-400",
+  }
 };
 
 
@@ -68,10 +75,11 @@ export default function ProjectCard({
     const [open, setOpen] = React.useState(false);
     const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
+    images = images.filter((img) => !img.hidden);
     const hero = images?.[0];
 
     const canOpen = Array.isArray(images) && images.length > 0;
-
+    images = images.filter((img) => !img.hidden);
     const prev = React.useCallback(() => {
         setCurrentImageIndex((index) => (index - 1 + images.length) % images.length);
     }, [images.length]);
@@ -92,6 +100,8 @@ export default function ProjectCard({
         window.addEventListener("keydown", onKey);
         return () => window.removeEventListener("keydown", onKey);
     }, [open, prev, next]);
+
+    const isGif = (src: string) => src.toLowerCase().endsWith(".gif");
 
     return (
         <>
@@ -194,14 +204,22 @@ export default function ProjectCard({
             >
               {hero ? (
                 <>
-                  <Image
-                    src={hero.src}
-                    alt={hero.alt ?? `${title} screenshot`}
-                    width={1200}
-                    height={800}
-                    className="h-[260px] w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] md:h-[300px]"
-                    priority={false}
-                  />
+                  {isGif(hero.src) ? (
+                    <img
+                        src={hero.src}
+                        alt={hero.alt ?? `${title} demo`}
+                        className="h-[340px] w-full object-contain md:h-[420px]"
+                    />
+                    ) : (
+                    <Image
+                        src={hero.src}
+                        alt={hero.alt ?? `${title} screenshot`}
+                        width={1200}
+                        height={800}
+                        className="h-[340px] w-full object-contain md:h-[420px]"
+                    />
+                    )}
+
                   {/* subtle overlay hint */}
                   {canOpen ? (
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -224,7 +242,7 @@ export default function ProjectCard({
 
         {/* Modal slideshow */}
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="max-w-5xl p-0 bg-black/95 text-white border border-orange-500/20">
+            <DialogContent className="w-[min(96vw,1100px)] p-0 bg-black/95 text-white border border-orange-500/20">
                 <DialogHeader className="border-b border-orange-500/20 px-5 py-4">
                     <div className="flex items-start justify-between gap-4">
                         <div>
@@ -234,7 +252,7 @@ export default function ProjectCard({
                             {techStack?.length ? (
                             <div className="mt-3 flex flex-wrap gap-2">
                                 {techStack.map((t) => (
-                                <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
+                                    <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
                                 ))}
                             </div>
                             ) : null}
@@ -244,9 +262,10 @@ export default function ProjectCard({
                 </DialogHeader>
 
 
-            <div className="px-5 py-5">
+            <div className="flex h-[calc(95vh-100px)] flex-col px-4 py-4">
+
                 {/* main image */}
-                <div className="relative rounded-2xl border border-orange-500/20 bg-muted flex items-center justify-center py-8 min-h-[400px]">
+                <div className="relative flex-1 rounded-2xl border border-orange-500/20 bg-black/40 backdrop-blur flex items-center justify-center p-2">
 
                 {images?.[currentImageIndex] ? (
                     <Image
@@ -254,7 +273,7 @@ export default function ProjectCard({
                     alt={images[currentImageIndex].alt ?? `${title} screenshot ${currentImageIndex + 1}`}
                     width={1600}
                     height={900}
-                      className="h-auto w-auto max-w-full max-h-[70vh] object-contain"
+                      className="h-full w-full object-contain"
                     />
                 ) : null}
 
@@ -300,7 +319,7 @@ export default function ProjectCard({
                             type="button"
                             onClick={() => setCurrentImageIndex(i)}
                             className={[
-                            "relative h-16 w-full overflow-hidden rounded-xl border transition-all",
+                            "relative h-20 w-full overflow-hidden rounded-xl border transition-all",
                             i === currentImageIndex 
                                 ? "border-orange-500 ring-2 ring-orange-500/50" 
                                 : "border-orange-500/20 bg-black/40 opacity-70 hover:opacity-100 hover:border-orange-500/40",
