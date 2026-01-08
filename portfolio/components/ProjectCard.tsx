@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ExternalLink, Github, ChevronLeft, ChevronRight, X, Code2, BarChart3, Brain } from "lucide-react";
 import TechBadge from "@/components/TechBadge";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,10 +29,18 @@ type ProjectCardProps = {
     techStack: Tech[];
     githubLink?: string;
     liveLink?: string;
+    category?: string;
+};
+
+
+const CATEGORY_MAP: Record<string, {label: string; icon: React.ReactNode}> = {
+    "SWE": { label: "Software Engineering", icon: <Code2 /> },
+    "DS": { label: "Data Science", icon: <BarChart3 /> },
+    "ML": { label: "Machine Learning", icon: <Brain /> },
 };
 
 export default function ProjectCard({
-    title, description, images, techStack, githubLink, liveLink,
+    title, description, images, techStack, githubLink, liveLink, category,
 }: ProjectCardProps) {
     const [open, setOpen] = React.useState(false);
     const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
@@ -77,39 +85,71 @@ export default function ProjectCard({
                     </p>
                 </div>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                    {githubLink ? (
-                        <Button asChild variant="secondary" className="gap-2">
-                        <a href={githubLink} target="_blank" rel="noreferrer">
-                            <Github className="h-4 w-4" />
-                            View on GitHub
-                        </a>
-                        </Button>
-                    ) : null}
+            <div className="flex flex-col gap-6">
+            {/* buttons (only this wraps) */}
+            <div className="flex flex-wrap gap-2">
+                {githubLink ? (
+                <Button
+                    asChild
+                    className="gap-2 border border-orange-500/30 bg-transparent text-orange-500 
+                    hover:bg-orange-500/10 hover:text-orange-300">
+                    <a href={githubLink} target="_blank" rel="noreferrer">
+                    <Github className="h-4 w-4" />
+                    Github
+                    </a>
+                </Button>
+                ) : null}
 
-                    {liveLink ? (
-                        <Button asChild className="gap-2">
-                        <a href={liveLink} target="_blank" rel="noreferrer">
-                            <ExternalLink className="h-4 w-4" />
-                            Live Demo
-                        </a>
-                        </Button>
-                    ) : null}
+                {liveLink ? (
+                <Button 
+                    asChild 
+                    className="gap-2 border border-orange-500/30 bg-transparent text-orange-500 
+                    hover:bg-orange-500/10 hover:text-orange-300">
+                    <a href={liveLink} target="_blank" rel="noreferrer">
+                    <ExternalLink className="h-4 w-4" />
+                    Visit
+                    </a>
+                </Button>
+                ) : null}
+            </div>
 
-                    {/* tech stack */}
-                    {techStack?.length ? (
-                    <div className="mt-6">
-                        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-orange-500">
+            {/* tech stack */}
+            {techStack?.length ? (
+                <div className="mt-6 min-h-[148px]">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-orange-500">
                         Technologies Used
-                        </p>
-                        <div className="grid grid-cols-2 gap-2">
-                        {techStack.map((t) => (
-                            <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
-                        ))}
-                        </div>
+                    </p>
+                <div className="grid grid-cols-2 gap-2">
+                    {techStack.map((t) => (
+                    <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
+                    ))}
+                </div>
+                </div>
+            ) : null}
+
+            {/* category (stable position) */}
+            <div>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-orange-500">
+                Category
+                </p>
+                <div className="flex justify-start">
+                {category && CATEGORY_MAP[category] ? (
+                    <TechBadge
+                    label={CATEGORY_MAP[category].label}
+                    icon={CATEGORY_MAP[category].icon}
+                    size="sm"
+                    />
+                ) : (
+                    <div className="invisible">
+                    <TechBadge label="Placeholder" icon={CATEGORY_MAP.SWE.icon} size="sm" />
                     </div>
-                    ) : null}
-                    </div>
+                )}
+                </div>
+            </div>
+            </div>
+
+
+
             </div>
 
         {/* RIGHT: image */}

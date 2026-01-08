@@ -7,7 +7,7 @@ import SkillCard from "@/components/SkillCard";
 import TechBadge from "@/components/TechBadge";
 import ProjectCard from "@/components/ProjectCard";
 
-import { Code2, Laptop} from "lucide-react";
+import {Code2, Laptop} from "lucide-react";
 import {
   SiTypescript,
   SiPython,
@@ -58,7 +58,8 @@ const projects = [
     title: "Volunteer Management Web App",
     description:
       "Full-stack volunteer platform with JWT auth, email verification, and role-based access. Built admin/volunteer dashboards and implemented real-time reminders using Socket.IO + APScheduler.",
-    githubUrl: "https://github.com/Abyss999/volunteer-app",
+    githubLink: "https://github.com/Abyss999/volunteer-app",
+    category: "SWE",
     techStack: [
       { label: "React", icon: <SiReact className="h-4 w-4" /> },
       { label: "TypeScript", icon: <SiTypescript className="h-4 w-4" /> },
@@ -76,7 +77,8 @@ const projects = [
     title: "CougarAI Website",
     description:
       "Revamped the club website with a modular React/Tailwind design and integrated the Google Calendar API for dynamic event tracking. Synced backend data via Flask REST APIs using psycopg2.",
-    githubUrl: "https://github.com/Abyss999/CougarAI-Website-Revamp",
+    githubLink: "https://github.com/Abyss999/CougarAI-Website-Revamp",
+    liveLink: "https://cougarai.tech",
     techStack: [
       { label: "React", icon: <SiReact className="h-4 w-4" /> },
       { label: "Tailwind CSS", icon: <SiTailwindcss className="h-4 w-4" /> },
@@ -88,12 +90,14 @@ const projects = [
       { src: "/globe.svg", caption: "Homepage (placeholder)" },
       { src: "/next.svg", caption: "Calendar (placeholder)" },
     ],
+    category: "SWE"
   },
   {
     title: "Coog Zoo",
+    category: "SWE",
     description:
       "Multi-role zoo management web app with secure authentication, dynamic data entry for animals/staff/events, and automated SQL triggers. Built dashboards for sales, donations, and event reporting.",
-    githubUrl: "https://github.com/Abyss999/Zoo-DB-Project-Final",
+    githubLink: "https://github.com/Abyss999/Zoo-DB-Project-Final",
     techStack: [
       { label: "React", icon: <SiReact className="h-4 w-4" /> },
       { label: "Express.js", icon: <SiExpress className="h-4 w-4" /> },
@@ -111,7 +115,7 @@ const projects = [
     title: "Righteous Bot",
     description:
       "Feature-rich Discord bot with 650+ commands, API integrations (Spotify/Reddit/Twitter/TikTok), and web scraping. Built custom automation tools for moderation and interactive community features.",
-    githubUrl: null,
+    githubLink: null,
     techStack: [
       { label: "Node.js", icon: <SiNodedotjs className="h-4 w-4" /> },
       { label: "Discord.js", icon: <Laptop className="h-4 w-4" /> },
@@ -122,6 +126,7 @@ const projects = [
       { src: "/vercel.svg", caption: "Commands (placeholder)" },
       { src: "/pfp.jpg", caption: "Integrations (placeholder)" },
     ],
+    category: "SWE",
   },
 ];
 
