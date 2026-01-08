@@ -34,7 +34,7 @@ export default function AboutMe() {
             {/* Profile Picture  */}
             <div className = "grid gap-10 md:grid-cols-2 md:items-center">
                 <div className="flex justify-center">
-                    <div className = "relative h-96 w-96 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                    <div className = "relative aspect-square w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                         <Image
                             src="/pfp.jpg"
                             alt="Profile Picture"
