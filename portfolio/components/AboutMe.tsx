@@ -3,8 +3,6 @@
 import Image from "next/image";
 import React from "react";
 import {Mail, Github, Linkedin, FileText} from "lucide-react"; 
-import { profile } from "console";
-import next from "next";
 
 const socials = [
     {
@@ -59,7 +57,7 @@ export default function AboutMe() {
             {/* Profile Picture  */}
             <div className = "grid gap-10 md:grid-cols-2 md:items-center">
                 <div className="flex justify-center">
-                    <div className = "relative aspect-square w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                    <div className = "relative aspect-square w-full max-w-xs sm:max-w-sm md:max-w-md overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5">
                         <Image
                             key={profileImages[currentProfile]}
                             src={profileImages[currentProfile]}
@@ -91,7 +89,7 @@ export default function AboutMe() {
                                 <span
                                 key={i}
                                 className={`h-2 w-2 rounded-full ${
-                                    i === currentProfile ? "bg-orange-500" : "bg-white/40"
+                                    i === currentProfile ? "bg-orange-500" : "bg-gray-400 dark:bg-white/40"
                                 }`}
                                 />
                             ))}
@@ -107,16 +105,16 @@ export default function AboutMe() {
                 {/* Texts & Socials*/}
 
                 <div>
-                    <p className="text-lg leading-relaxed text-white/80">
-                        I'm a Computer Science student at the University of Houston with a passion for full-stack web development.
-                        I enjoy creating clean, scalable applications that provide excellent user experiences. 
-                        When I'm not coding, I love exploring new technologies, hiking, and playing video games.
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-white/80">
+                        I'm a Computer Science student at the University of Houston and Vice President of CougarAI. 
+                        I specialize in full-stack development with a passion for backend engineering—from Discord bots that generated <b>$8k+</b> in revenue to volunteer platforms with real-time features. 
+                        I love building APIs, designing databases, and architecting scalable server-side systems.
                     </p>
 
-                    <p className="mt-4 text-lg leading-relaxed text-white/80">
-                        I’ve built projects using React, Next.js, Flask, PostgreSQL, and
-                        Docker, and I’m currently looking to keep growing through real-world
-                        team projects and internships.
+                    <p className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-white/80">
+                        My stack includes Flask, PostgreSQL, React, Next.js, MongoDB, and Docker. 
+                        When I'm not coding, you'll find me at the gym, rewatching superhero movies, or exploring new tech. 
+                        Currently seeking internships where I can build production-level applications and grow as a backend engineer.
                     </p>  
 
                     {/* Links */}
@@ -143,4 +141,3 @@ export default function AboutMe() {
         </section>
     )
 }
-

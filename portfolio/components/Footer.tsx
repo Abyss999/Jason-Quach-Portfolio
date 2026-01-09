@@ -4,13 +4,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-black/40 backdrop-blur-sm">
+    <footer className="border-t border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black/40 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-6 py-12 md:py-16 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           {/* Left side - Name/Brand */}
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold text-orange-500">Jason Quach</h3>
-            <p className="mt-1 text-sm text-white/60">Computer Science • Full-Stack</p>
+            <p className="mt-1 text-sm text-gray-600 dark:text-white/60">Computer Science • Full-Stack</p>
           </div>
 
           {/* Center - Social Links */}
@@ -43,15 +43,15 @@ export default function Footer() {
           </div>
 
           {/* Right side - Copyright */}
-          <div className="text-center text-sm text-white/60 md:text-right">
+          <div className="text-center text-sm text-gray-600 dark:text-white/60 md:text-right">
             <p>© {currentYear} Jason Quach</p>
             <p className="mt-1">All rights reserved.</p>
           </div>
         </div>
 
         {/* Bottom text */}
-        <div className="mt-8 border-t border-white/5 pt-8 text-center">
-          <p className="text-xs text-white/40">
+        <div className="mt-8 border-t border-gray-200 dark:border-white/5 pt-8 text-center">
+          <p className="text-xs text-gray-500 dark:text-white/40">
             Built with Next.js, React, and Tailwind CSS
           </p>
         </div>

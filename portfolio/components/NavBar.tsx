@@ -61,7 +61,7 @@ export default function NavBar() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="border-b border-orange-500/20 bg-black">
+      <div className="bg-white dark:bg-black">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
           {/* Brand */}
           <Link
@@ -114,9 +114,9 @@ export default function NavBar() {
                 </button>
               </SheetTrigger>
 
-              <SheetContent side="right" className="bg-black text-white">
+              <SheetContent side="right" className="bg-white dark:bg-black text-gray-900 dark:text-white">
                 <SheetHeader>
-                  <SheetTitle className="text-orange-500">Navigation</SheetTitle>
+                  <SheetTitle className="text-gray-900 dark:text-orange-500">Navigation</SheetTitle>
                 </SheetHeader>
 
                 <div className="mt-6 flex flex-col gap-2">

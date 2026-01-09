@@ -106,14 +106,14 @@ export default function ProjectCard({
     return (
         <>
         <section id ="projects"
-            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur shadow-sm transition-colors hover:border-orange-500/35 flex flex-col h-full"
+            className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 md:p-8 backdrop-blur shadow-sm transition-colors hover:border-orange-500/35 flex flex-col h-full"
 >   
             <div className="grid items-stretch gap-12 md:grid-cols-2">
                 <div className="flex flex-col">
                     <h3 className="text-xl font-semibold tracking-tight md:text-2xl text-orange-500">
                         {title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
+                    <p className="mt-3 text-sm leading-relaxed text-gray-700 dark:text-white/70 md:text-base">
                     {description}
                     </p>
                 </div>
@@ -196,7 +196,7 @@ export default function ProjectCard({
                 setOpen(true);
               }}
               className={[
-                "group relative h-full w-full overflow-hidden rounded-2xl border border-orange-500/20 bg-muted hover:border-orange-500/35 transition-colors",
+                "group relative h-full w-full overflow-hidden rounded-2xl border border-orange-500/20 bg-gray-100 dark:bg-muted hover:border-orange-500/35 transition-colors",
                 "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                 !canOpen ? "cursor-default" : "cursor-pointer",
               ].join(" ")}
@@ -231,7 +231,7 @@ export default function ProjectCard({
                   ) : null}
                 </>
               ) : (
-                <div className="flex h-full min-h-[220px] items-center justify-center text-sm text-muted-foreground">
+                <div className="flex h-full min-h-[220px] items-center justify-center text-sm text-gray-500 dark:text-muted-foreground">
                   No image provided
                 </div>
               )}
@@ -242,8 +242,8 @@ export default function ProjectCard({
 
         {/* Modal slideshow */}
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="w-[min(96vw,1100px)] p-0 bg-black/95 text-white border border-orange-500/20">
-                <DialogHeader className="border-b border-orange-500/20 px-5 py-4">
+            <DialogContent className="w-[min(96vw,1100px)] p-0 bg-white dark:bg-black/95 text-gray-900 dark:text-white border border-gray-200 dark:border-orange-500/20">
+                <DialogHeader className="border-b border-gray-200 dark:border-orange-500/20 px-5 py-4">
                     <div className="flex items-start justify-between gap-4">
                         <div>
                             <DialogTitle className="text-base md:text-lg">
@@ -265,7 +265,7 @@ export default function ProjectCard({
             <div className="flex h-[calc(95vh-100px)] flex-col px-4 py-4">
 
                 {/* main image */}
-                <div className="relative flex-1 rounded-2xl border border-orange-500/20 bg-black/40 backdrop-blur flex items-center justify-center p-2">
+                <div className="relative flex-1 rounded-2xl border border-gray-200 dark:border-orange-500/20 bg-gray-100 dark:bg-black/40 backdrop-blur flex items-center justify-center p-2">
 
                 {images?.[currentImageIndex] ? (
                     <Image
@@ -304,7 +304,7 @@ export default function ProjectCard({
 
                 {/* caption */}
                 {images?.[currentImageIndex]?.caption ? (
-                <p className="mt-3 text-sm text-muted-foreground">
+                <p className="mt-3 text-sm text-gray-600 dark:text-muted-foreground">
                     {images[currentImageIndex].caption}
                 </p>
                 ) : null}
@@ -322,8 +322,8 @@ export default function ProjectCard({
                             "relative h-20 w-full overflow-hidden rounded-xl border transition-all",
                             i === currentImageIndex 
                                 ? "border-orange-500 ring-2 ring-orange-500/50" 
-                                : "border-orange-500/20 bg-black/40 opacity-70 hover:opacity-100 hover:border-orange-500/40",
-                            "focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black",
+                                : "border-gray-300 dark:border-orange-500/20 bg-gray-100 dark:bg-black/40 opacity-70 hover:opacity-100 hover:border-orange-500/40",
+                            "focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-black",
                             ].join(" ")}
                             aria-label={`View image ${i + 1}`}
                         >
