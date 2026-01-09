@@ -99,12 +99,11 @@ export default function NavBar() {
           </nav>
 
           {/* Mobile Nav */}
-          <div className="md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
             <ThemeToggle/>
-
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-
+                
                  <button
                     aria-label="Open menu"
                     className="inline-flex items-center justify-center rounded-md 
@@ -118,9 +117,9 @@ export default function NavBar() {
 
               <SheetContent side="right" className="bg-white dark:bg-black text-gray-900 dark:text-white">
                 <SheetHeader>
-                  <SheetTitle className="text-gray-900 dark:text-orange-500">Navigation</SheetTitle>
+                   <SheetTitle className="text-gray-900 dark:text-orange-500">Navigation</SheetTitle>
                 </SheetHeader>
-
+                
                 <div className="mt-6 flex flex-col gap-2">
                     {navItems.map((item) => {
                         const isActive =
