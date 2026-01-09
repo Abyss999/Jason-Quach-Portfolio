@@ -69,7 +69,7 @@ const projects = [
       { label: "JavaScript", icon: <SiJavascript className="h-4 w-4" /> },
     ],
     images: [
-      { src: "/righteous.png", caption: "Connect4 Command" },
+      { src: "/righteous.png", caption: "Connect 4 Command" },
       { src: "/righteous_1.png", caption: "Righteous Server Statistics" },
       { src: "/righteous_2.png", caption: "XXXTENTACION Colab" },
       { src: "/righteous_3.png", caption: "Spotify Integration" },
