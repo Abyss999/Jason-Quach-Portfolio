@@ -69,9 +69,9 @@ const projects = [
       { label: "JavaScript", icon: <SiJavascript className="h-4 w-4" /> },
     ],
     images: [
-      { src: "/righteous.png", caption: "XXXTENTACION Collab" },
-      { src: "/righteous_1.png", caption: "Connect 4 Command" },
-      { src: "/righteous_2.png", caption: "Righteous Server Statistics" },
+      { src: "/righteous.png", caption: "Connect4 Command" },
+      { src: "/righteous_1.png", caption: "Righteous Server Statistics" },
+      { src: "/righteous_2.png", caption: "XXXTENTACION Colab" },
       { src: "/righteous_3.png", caption: "Spotify Integration" },
       { src: "/righteous_4.png", caption: "Youtube Integration" },
       { src: "/righteous_5.png", caption: "LastFM Integration" },
