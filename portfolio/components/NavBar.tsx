@@ -100,6 +100,8 @@ export default function NavBar() {
 
           {/* Mobile Nav */}
           <div className="md:hidden">
+            <ThemeToggle/>
+
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
 
