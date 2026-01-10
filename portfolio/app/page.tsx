@@ -112,8 +112,10 @@ const projects = [
       { label: "Python", icon: <SiPython className="h-4 w-4" /> },
     ],
     images: [
-      { src: "/globe.svg", caption: "Homepage (placeholder)" },
-      { src: "/next.svg", caption: "Calendar (placeholder)" },
+      { src: "/cai_old_1.png", caption: "Homepage" },
+      { src: "/cai_old_2.png", caption: "Calendar" },
+      { src: "/cai_old_3.png", caption: "Members" },
+      { src: "/cai_old_4.png", caption: "About Us" },
     ],
     category: "SWE"
   },
