@@ -89,6 +89,7 @@ const projects = [
       { label: "Flask", icon: <SiFlask className="h-4 w-4" /> },
       { label: "PostgreSQL", icon: <SiPostgresql className="h-4 w-4" /> },
       { label: "Python", icon: <SiPython className="h-4 w-4" /> },
+      { label: "Next.js", icon: <SiNextdotjs className="h-4 w-4" /> },
     ],
     images: [
       { src: "/cai_old_1.png", caption: "Homepage" },
