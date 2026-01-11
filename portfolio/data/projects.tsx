@@ -51,8 +51,8 @@ export type Project = {
   title: string;
   description: string;
   longDescription?: string;
-  githubLink?: string | null;
-  liveLink?: string | null;
+  githubLink?: string | null | undefined;  
+  liveLink?: string | null | undefined;  
   category: ProjectCategory;
   techStack: ProjectTech[];
   images: ProjectImage[];
@@ -102,8 +102,7 @@ export const projects: Project[] = [
       { src: "/cai_old_4.png", caption: "About Us" },
     ],
     category: "SWE"
-  },
-  {
+  },{
     id: "coog-zoo",
     title: "Coog Zoo",
     category: "SWE",

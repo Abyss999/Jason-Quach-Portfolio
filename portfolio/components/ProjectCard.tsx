@@ -29,8 +29,8 @@ type ProjectCardProps = {
     longDescription?: string;
     images: ProjectImage[];
     techStack: Tech[];
-    githubLink: string | null | undefined;  
-    liveLink?: string | null;  
+    githubLink?: string | null | undefined;  
+    liveLink?: string | null | undefined;  
     category?: string;
 };
 
