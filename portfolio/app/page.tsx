@@ -79,27 +79,6 @@ const projects = [
     category: "SWE",
   },
   {
-    title: "Volunteer Management Web App",
-    description: "Full-stack volunteer platform with JWT auth, email verification, and role-based access. Built admin/volunteer dashboards and implemented real-time reminders using Socket.IO + APScheduler.",
-    githubLink: "https://github.com/Abyss999/volunteer-app",
-    category: "SWE",
-    techStack: [
-      { label: "React", icon: <SiReact className="h-4 w-4" /> },
-      { label: "TypeScript", icon: <SiTypescript className="h-4 w-4" /> },
-      { label: "Flask", icon: <SiFlask className="h-4 w-4" /> },
-      { label: "PostgreSQL", icon: <SiPostgresql className="h-4 w-4" /> },
-      { label: "Tailwind CSS", icon: <SiTailwindcss className="h-4 w-4" /> },
-      { label: "Docker", icon: <SiDocker className="h-4 w-4" /> },
-      { label: "Socket.IO", icon: <SiSocketdotio className="h-4 w-4" /> },
-      { label: "APScheduler", icon: <Calendar className="h-4 w-4" /> },
-    ],
-    images: [
-      { src: "/vol_1.png", caption: "Slideshow" },
-      { src: "/vol_2.png", caption: "Admin Management Table" },
-      { src: "/vol_3.png", caption: "Dashboard" },
-    ],
-  },
-  {
     title: "CougarAI Website",
     description: "Revamped club website with React/Tailwind and Google Calendar API integration.",
     githubLink: "https://github.com/Abyss999/CougarAI-Website-Revamp",
@@ -159,6 +138,27 @@ const projects = [
   ],
   category: "SWE",
 },
+  {
+    title: "Volunteer Management Web App",
+    description: "Full-stack volunteer platform with JWT auth, email verification, and role-based access. Built admin/volunteer dashboards and implemented real-time reminders using Socket.IO + APScheduler.",
+    githubLink: "https://github.com/Abyss999/volunteer-app",
+    category: "SWE",
+    techStack: [
+      { label: "React", icon: <SiReact className="h-4 w-4" /> },
+      { label: "TypeScript", icon: <SiTypescript className="h-4 w-4" /> },
+      { label: "Flask", icon: <SiFlask className="h-4 w-4" /> },
+      { label: "PostgreSQL", icon: <SiPostgresql className="h-4 w-4" /> },
+      { label: "Tailwind CSS", icon: <SiTailwindcss className="h-4 w-4" /> },
+      { label: "Docker", icon: <SiDocker className="h-4 w-4" /> },
+      { label: "Socket.IO", icon: <SiSocketdotio className="h-4 w-4" /> },
+      { label: "APScheduler", icon: <Calendar className="h-4 w-4" /> },
+    ],
+    images: [
+      { src: "/vol_1.png", caption: "Slideshow" },
+      { src: "/vol_2.png", caption: "Admin Management Table" },
+      { src: "/vol_3.png", caption: "Dashboard" },
+    ],
+  },
 {
   title: "DBLP Venue Analysis",
   description:

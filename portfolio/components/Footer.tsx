@@ -11,6 +11,7 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold text-orange-500">Jason Quach</h3>
             <p className="mt-1 text-sm text-gray-600 dark:text-white/60">Computer Science • Full-Stack</p>
+            <a href="mailto:jtquach@cougarnet.uh.edu" className="mt-1 text-sm text-gray-600 dark:text-white/60">jtquach@cougarnet.uh.edu</a>
           </div>
 
           {/* Center - Social Links */}

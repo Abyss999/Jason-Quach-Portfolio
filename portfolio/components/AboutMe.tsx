@@ -19,6 +19,10 @@ const socials = [
         label: "Email",
         icon: <Mail className="h-6 w-6"/>,
         href: "mailto:jtquach@cougarnet.uh.edu",
+        onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+            e.preventDefault();
+            window.location.href = "mailto:jtquach@cougarnet.uh.edu";
+        },
     },
     {
         label: "Resume",
@@ -123,6 +127,7 @@ export default function AboutMe() {
                             <a
                                 key={social.label}
                                 href={social.href}
+                                onClick={social.onClick}
                                 target={social.href.startsWith("http") || social.href.endsWith("pdf") ? "_blank" : undefined}
                                 rel={social.href.startsWith("http") || social.href.endsWith("pdf") ? "noopener noreferrer" : undefined}
                                 className="inline-flex items-center gap-2 rounded-full border border-orange-500/40
