@@ -175,12 +175,11 @@ export default function NavBar() {
                                   label={item.label}
                                   isActive={item.id ? activeSection === item.id : false}
                                   onClick={
-                                    item.onClick
-                                      ? () => {
-                                          setOpen(false);
-                                          item.onClick?.();
-                                        }
-                                      : () => setOpen(false)
+                                    item.label === "Contact" ? 
+                                    () => {
+                                      setOpen(false);
+                                      item.onClick?.();
+                                    } : undefined
                                   }
 
                               />
