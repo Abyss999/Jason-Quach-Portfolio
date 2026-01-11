@@ -2,13 +2,11 @@ import Image from "next/image";
 
 import AboutMe from "@/components/AboutMe";
 import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
 
 import SkillCard from "@/components/SkillCard";
-import TechBadge from "@/components/TechBadge";
 import ProjectCard from "@/components/ProjectCard";
 
-import {Brain, Code2, Laptop, Layers, Search, TreePine, Trees, Globe} from "lucide-react";
+import {Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe} from "lucide-react";
 import {
   SiTypescript,
   SiPython,
@@ -28,6 +26,8 @@ import {
   SiGithub,
   SiPandas,
   SiScikitlearn,
+  SiDiscord,
+  SiSocketdotio,
 } from "react-icons/si";
 
 const languageStack = [
@@ -59,12 +59,11 @@ const toolStack = [
 const projects = [
   {
     title: "Righteous Bot",
-    description:
-      "Feature-rich Discord bot with 650+ commands, API integrations (Spotify/Reddit/Twitter/TikTok), and web scraping. Built custom automation tools for moderation and interactive community features.",
+    description: "Feature-rich Discord bot with 650+ commands, API integrations (Spotify/Reddit/Twitter/TikTok), and web scraping. Built custom automation tools for moderation and interactive community features.",
     githubLink: null,
     techStack: [
       { label: "Node.js", icon: <SiNodedotjs className="h-4 w-4" /> },
-      { label: "Discord.js", icon: <Laptop className="h-4 w-4" /> },
+      { label: "Discord.js", icon: <SiDiscord className="h-4 w-4" /> },
       { label: "MongoDB", icon: <SiMongodb className="h-4 w-4" /> },
       { label: "JavaScript", icon: <SiJavascript className="h-4 w-4" /> },
     ],
@@ -81,8 +80,7 @@ const projects = [
   },
   {
     title: "Volunteer Management Web App",
-    description:
-      "Full-stack volunteer platform with JWT auth, email verification, and role-based access. Built admin/volunteer dashboards and implemented real-time reminders using Socket.IO + APScheduler.",
+    description: "Full-stack volunteer platform with JWT auth, email verification, and role-based access. Built admin/volunteer dashboards and implemented real-time reminders using Socket.IO + APScheduler.",
     githubLink: "https://github.com/Abyss999/volunteer-app",
     category: "SWE",
     techStack: [
@@ -92,16 +90,18 @@ const projects = [
       { label: "PostgreSQL", icon: <SiPostgresql className="h-4 w-4" /> },
       { label: "Tailwind CSS", icon: <SiTailwindcss className="h-4 w-4" /> },
       { label: "Docker", icon: <SiDocker className="h-4 w-4" /> },
+      { label: "Socket.IO", icon: <SiSocketdotio className="h-4 w-4" /> },
+      { label: "APScheduler", icon: <Calendar className="h-4 w-4" /> },
     ],
     images: [
-      { src: "/file.svg", caption: "Dashboard (placeholder)" },
-      { src: "/window.svg", caption: "Schema (placeholder)" },
+      { src: "/vol_1.png", caption: "Slideshow" },
+      { src: "/vol_2.png", caption: "Admin Management Table" },
+      { src: "/vol_3.png", caption: "Dashboard" },
     ],
   },
   {
     title: "CougarAI Website",
-    description:
-      "Revamped the club website with a modular React/Tailwind design and integrated the Google Calendar API for dynamic event tracking. Synced backend data via Flask REST APIs using psycopg2.",
+    description: "Revamped club website with React/Tailwind and Google Calendar API integration.",
     githubLink: "https://github.com/Abyss999/CougarAI-Website-Revamp",
     liveLink: "https://www.cougarai.org/",
     techStack: [
@@ -122,8 +122,7 @@ const projects = [
   {
     title: "Coog Zoo",
     category: "SWE",
-    description:
-      "Multi-role zoo management web app with secure authentication, dynamic data entry for animals/staff/events, and automated SQL triggers. Built dashboards for sales, donations, and event reporting.",
+    description: "Multi-role zoo management web app with secure authentication, dynamic data entry for animals/staff/events, and automated SQL triggers. Built dashboards for sales, donations, and event reporting.",
     githubLink: "https://github.com/Abyss999/Zoo-DB-Project-Final",
     techStack: [
       { label: "React", icon: <SiReact className="h-4 w-4" /> },
@@ -134,25 +133,29 @@ const projects = [
       { label: "Tailwind CSS", icon: <SiTailwindcss className="h-4 w-4" /> },
     ],
     images: [
-      { src: "/window.svg", caption: "Dashboard (placeholder)" },
-      { src: "/file.svg", caption: "Roles (placeholder)" },
+      { src: "/zoo_5.png", caption: "Dashboard" },
+      { src: "/zoo_1.png", caption: "Schema" },
+      { src: "/zoo_2.png", caption: "Tickets" },
+      { src: "/zoo_3.png", caption: "Calendar // Events" },
+      { src: "/zoo_4.png", caption: "Membership" },
     ],
   },
   {
   title: "Comic Bot",
-  description:
-    "Discord bot that fetches and serves comic content using web scraping and MongoDB-backed storage. Built with Node.js to automate content retrieval, parsing, and fast lookup through bot commands.",
+  description: "Comic Bot is a Discord bot that lets users search, browse, and read comics from free comics online sources directly in Discord. Built with Node.js, it uses web scraping and MongoDB to index series and issues, supporting fast search, pagination, and page-by-page comic images.",
+  longDescription: "Comic Bot is a Discord bot that enables users to search, browse, and read comics sourced from free comics online platforms directly within Discord. Built with Node.js, the bot automates comic discovery through web scraping, parses series and issue data, and stores structured metadata in MongoDB for fast lookup and pagination. The bot supports interactive search flows, issue navigation, and image-based reading, delivering a seamless reading experience without leaving Discord",
   githubLink: "https://github.com/Abyss999/comicbot",
   liveLink: null,
   techStack: [
+    { label: "Discord.js", icon: <SiDiscord className="h-4 w-4" /> },
     { label: "Node.js", icon: <SiNodedotjs className="h-4 w-4" /> },
     { label: "MongoDB", icon: <SiMongodb className="h-4 w-4" /> },
     { label: "Web Scraping", icon: <Search className="h-4 w-4" /> },
     { label: "JavaScript", icon: <SiJavascript className="h-4 w-4" /> },
   ],
   images: [
-    { src: "/file.svg", caption: "Comic commands (placeholder)" },
-    { src: "/window.svg", caption: "Scraping pipeline (placeholder)" },
+    { src: "/comic_1.png", caption: "Reading Spider-Man comics" },
+    { src: "/comic_2.png", caption: "Scraping query" },
   ],
   category: "SWE",
 },

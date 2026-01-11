@@ -26,6 +26,7 @@ type Tech = {
 type ProjectCardProps = {
     title: string;
     description: string;
+    longDescription?: string;
     images: ProjectImage[];
     techStack: Tech[];
     githubLink: string | null | undefined;  
@@ -70,7 +71,7 @@ const CATEGORY_MAP: Record<
 
 
 export default function ProjectCard({
-    title, description, images, techStack, githubLink, liveLink, category,
+    title, description, longDescription, images, techStack, githubLink, liveLink, category,
 }: ProjectCardProps) {
     const [open, setOpen] = React.useState(false);
     const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
@@ -262,10 +263,10 @@ export default function ProjectCard({
                 </DialogHeader>
 
 
-            <div className="flex h-[calc(95vh-100px)] flex-col px-4 py-4">
+            <div className="flex h-[calc(95vh-100px)] min-h-0 flex-col px-4 py-4">
 
                 {/* main image */}
-                <div className="relative flex-1 rounded-2xl border border-gray-200 dark:border-orange-500/20 bg-gray-100 dark:bg-black/40 backdrop-blur flex items-center justify-center p-2">
+                <div className="relative flex-1 min-h-0 rounded-2xl border border-gray-200 dark:border-orange-500/20 bg-gray-100 dark:bg-black/40 backdrop-blur flex items-center justify-center p-2">
 
                 {images?.[currentImageIndex] ? (
                     <Image
