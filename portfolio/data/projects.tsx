@@ -71,6 +71,7 @@ export const projects: Project[] = [
       Tech.javascript,
     ],
     images: [
+      { src: "/righteous_pfp.png", caption: "Righteous Bot Profile Picture"},
       { src: "/righteous.png", caption: "Connect 4 Command" },
       { src: "/righteous_1.png", caption: "Righteous Server Statistics" },
       { src: "/righteous_2.png", caption: "XXXTENTACION Colab" },
