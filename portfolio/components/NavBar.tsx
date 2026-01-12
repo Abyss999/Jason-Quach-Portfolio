@@ -61,7 +61,6 @@ function NavLink({
 
 export default function NavBar() {
 
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>("hero");

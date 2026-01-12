@@ -201,7 +201,7 @@ export default function AboutMe() {
                     <div className = "grid max-w-5xl grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
                         <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur">
                             {/* card 1 */}
-                            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Education</h3>
+                            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">📙 Education</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {education.map((edu) => (
                                         <InfoEntry
@@ -216,7 +216,7 @@ export default function AboutMe() {
 
                         <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur">
                             {/* card 2 */}
-                            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Work Experience</h3>
+                            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">💼 Work Experience</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {work_experience.map((work) => (
                                         <InfoEntry

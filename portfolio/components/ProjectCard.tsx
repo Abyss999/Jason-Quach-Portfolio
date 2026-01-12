@@ -32,6 +32,8 @@ type ProjectCardProps = {
     githubLink?: string | null | undefined;  
     liveLink?: string | null | undefined;  
     category?: string;
+
+    onTechClick?: (tech: string) => void;
 };
 
 
@@ -70,8 +72,9 @@ const CATEGORY_MAP: Record<
 };
 
 
+
 export default function ProjectCard({
-    title, description, longDescription, images, techStack, githubLink, liveLink, category,
+    title, description, longDescription, images, techStack, githubLink, liveLink, category, onTechClick,
 }: ProjectCardProps) {
     const [open, setOpen] = React.useState(false);
     const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
@@ -106,9 +109,7 @@ export default function ProjectCard({
 
     return (
         <>
-        <section id ="projects"
-            className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 md:p-8 backdrop-blur shadow-sm transition-colors hover:border-orange-500/35 flex flex-col h-full"
->   
+        <section className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 md:p-8 backdrop-blur shadow-sm transition-colors hover:border-orange-500/35 flex flex-col h-full">   
             <div className="grid items-stretch gap-12 md:grid-cols-2">
                 <div className="flex flex-col">
                     <h3 className="text-xl font-semibold tracking-tight md:text-2xl text-orange-500">
@@ -155,7 +156,14 @@ export default function ProjectCard({
                     </p>
                 <div className="grid grid-cols-2 gap-2">
                     {techStack.map((t) => (
-                    <TechBadge key={t.label} label={t.label} icon={t.icon} size="sm" />
+                        <button
+                            key={t.label}
+                            type="button"
+                            onClick={() => onTechClick?.(t.label)}
+                            className={onTechClick ? "text-left" : "pointer-events-none"}
+                            >
+                            <TechBadge label={t.label} icon={t.icon} size="sm" className={onTechClick ? "cursor-pointer" : ""}/>
+                        </button>
                     ))}
                 </div>
                 </div>
