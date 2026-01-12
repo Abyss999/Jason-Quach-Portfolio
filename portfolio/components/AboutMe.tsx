@@ -4,6 +4,8 @@ import Image from "next/image";
 import React from "react";
 import {Mail, Github, Linkedin, FileText} from "lucide-react"; 
 
+import SkillCard from "./SkillCard";
+
 const socials = [
     {
         label: "Github",
@@ -34,7 +36,64 @@ const socials = [
 const profileImages = [
     "/pfp.jpg",
     "/pfp_2.png",
-]
+];
+
+const education = [
+    {
+        title: "B.S. Computer Science",
+        subtitle: ["University of Houston 2024-2026", "GPA: 3.6"].join("\n"),
+        description: ["Coursework: Database Systems, Software Design, Algorithms & Data Structures"].join("\n"),
+    }, {
+        title: "A.S. Computer Science",
+        subtitle: ["Houston Community College 2022-2024", "GPA: 3.9"].join("\n"),
+        description: ["Coursework: Data Structures, Computer Architecture, Calculus I-II"].join("\n"),
+    }
+];
+
+const work_experience = [
+  {
+    title: "Vice President – CougarAI",
+    subtitle: ["Houston, TX | June 2025 – Present"].join("\n"),
+    description: "Leading development of CougarAI’s web platform and automation systems to improve member experience and operations."
+  },
+  {
+    title: "Software Engineer – CougarAI",
+    subtitle: ["Houston, TX | February 2025 – June 2025"].join("\n"),
+    description: "Developed and maintained features for the club website and bot using Flask, React, and SQL."
+  },
+  {
+    title: "Righteous Bot",
+    subtitle: ["Personal Project | June 2019 – April 2025"].join("\n"),
+    description: "Built and monetized a feature-rich Discord bot with 650+ commands, generating real revenue from production users."
+  }
+];
+
+type EntryProps = {
+    title: string;
+    subtitle?: string;
+    description: string;
+}
+
+function InfoEntry({ title, subtitle, description }: EntryProps) {
+    return (
+        <div className = "space-y-1">
+            <p className="font-semibold text-orange-500 dark:text-orange-500">{title}</p>
+
+            {subtitle && (
+                <p className="text-sm text-gray-600 dark:text-white/60 whitespace-pre-line">
+                    {subtitle}
+                </p>
+            )}
+
+            {description && (
+                <p className="text-sm text-gray-900 dark:text-white whitespace-pre-line">
+                    {description}
+                </p>
+            )}
+            
+        </div>
+    )
+}
 
 export default function AboutMe() {
     const [currentProfile, setCurrentProfile] = React.useState(0);
@@ -101,11 +160,8 @@ export default function AboutMe() {
 
                     </div>
 
-                    
-
                 </div>
             
-
                 {/* Texts & Socials*/}
 
                 <div>
@@ -141,6 +197,42 @@ export default function AboutMe() {
 
                     </div>
                 </div>
+
+                {/* Education  */}
+                <div className = "md: col-span-2 flex justify-center">
+                    <div className = "grid max-w-5xl grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                        <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur">
+                            {/* card 1 */}
+                            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Education</h3>
+                                <div className="flex flex-wrap gap-3">
+                                    {education.map((edu) => (
+                                        <InfoEntry
+                                            key={edu.title} 
+                                            title={edu.title}
+                                            subtitle={edu.subtitle}
+                                            description={edu.description}
+                                        />
+                                    ))}
+                                </div>
+                        </div>
+
+                        <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur">
+                            {/* card 2 */}
+                            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Work Experience</h3>
+                                <div className="flex flex-wrap gap-3">
+                                    {work_experience.map((work) => (
+                                        <InfoEntry
+                                            key={work.title} 
+                                            title={work.title}
+                                            subtitle={work.subtitle}
+                                            description={work.description}
+                                        />
+                                    ))}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </section>
