@@ -4,8 +4,6 @@ import Image from "next/image";
 import React from "react";
 import {Mail, Github, Linkedin, FileText} from "lucide-react"; 
 
-import SkillCard from "./SkillCard";
-
 const socials = [
     {
         label: "Github",
