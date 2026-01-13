@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe, Shield, Plug} from "lucide-react";
+import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe, Shield, Plug, Plug2} from "lucide-react";
 import {
   SiTypescript, SiPython, SiJavascript, SiCplusplus, SiR,
   SiNodedotjs, SiReact, SiTailwindcss, SiExpress, SiFlask, SiNextdotjs,
@@ -45,11 +45,11 @@ export const Tech = {
   vercel: { label: "Vercel", icon: <SiVercel className="h-4 w-4" /> },
   jwt: { label: "JWT", icon: <Shield className="h-4 w-4" /> },
   rest: { label: "REST APIs", icon: <Plug className="h-4 w-4" /> },
-
+  api_integration: { label: "API Integration", icon: <Plug2 className="h-4 w-4" /> },
 } satisfies Record<string, ProjectTech>;
 
 
-export type ProjectCategory = "SWE" | "DS" | "ML" | "DE";
+export type ProjectCategory = "SWE" | "DS" | "ML" | "DE" | "WIP";
 
 export type ProjectImage = { src: string; caption?: string; alt?: string };
 export type ProjectTech = { label: string; icon: ReactNode };
@@ -61,7 +61,7 @@ export type Project = {
   longDescription?: string;
   githubLink?: string | null | undefined;  
   liveLink?: string | null | undefined;  
-  category: ProjectCategory;
+  categories: ProjectCategory[];
   techStack: ProjectTech[];
   images: ProjectImage[];
 };
@@ -77,6 +77,8 @@ export const projects: Project[] = [
       Tech.discordjs,
       Tech.mongodb,
       Tech.javascript,
+      Tech.webscraping,
+      Tech.api_integration,
     ],
     images: [
       { src: "/righteous_pfp.png", caption: "Righteous Bot Profile Picture"},
@@ -88,7 +90,7 @@ export const projects: Project[] = [
       { src: "/righteous_5.png", caption: "LastFM Integration" },
       { src: "/righteous_6.png", caption: "Wordle Command " },
     ],
-    category: "SWE",
+    categories: ["SWE"],
   },
   {
     id: "cougarai-website",
@@ -110,7 +112,7 @@ export const projects: Project[] = [
       { src: "/cai_old_3.png", caption: "Members" },
       { src: "/cai_old_4.png", caption: "About Us" },
     ],
-    category: "SWE"
+    categories: ["SWE", "WIP"]
   },{
     id: "comic-bot",
     title: "Comic Bot",
@@ -129,7 +131,7 @@ export const projects: Project[] = [
         { src: "/comic_1.png", caption: "Reading Spider-Man comics" },
         { src: "/comic_2.png", caption: "Scraping query" },
     ],
-    category: "SWE",
+    categories: ["SWE"],
 }, {
     id: "CougarAI Bot",
     title: "CougarAI Bot",
@@ -139,6 +141,7 @@ export const projects: Project[] = [
       Tech.nodejs,
       Tech.postgresql,
       Tech.javascript,
+      Tech.api_integration,
     ], 
     images: [
       {src: "/cai_bot_2.png", caption: "Point System (Google Forms -> Google Sheets -> PostgreSQL)"},
@@ -146,11 +149,11 @@ export const projects: Project[] = [
       {src: "/cai_bot.png", caption: "Points Manage Command"},
       {src: "/cai_bot_3.png", caption: "Points History Command"},
     ],
-    category: "SWE",
+    categories: ["SWE", "WIP"],
 },{
     id: "coog-zoo",
     title: "Coog Zoo",
-    category: "SWE",
+    categories: ["SWE"],
     description: "Multi-role zoo management web app with secure authentication, dynamic data entry for animals/staff/events, and automated SQL triggers. Built dashboards for sales, donations, and event reporting.",
     githubLink: "https://github.com/Abyss999/Zoo-DB-Project-Final",
     techStack: [
@@ -173,7 +176,7 @@ export const projects: Project[] = [
     title: "Volunteer Management Web App",
     description: "Full-stack volunteer platform with JWT auth, email verification, and role-based access. Built admin/volunteer dashboards and implemented real-time reminders using Socket.IO + APScheduler.",
     githubLink: "https://github.com/Abyss999/volunteer-app",
-    category: "SWE",
+    categories: ["SWE"],
     techStack: [
       Tech.react,
       Tech.typescript,
@@ -208,7 +211,7 @@ export const projects: Project[] = [
     { src: "/DBLP_3.png"},
     { src: "/DBLP_4.png"},
   ],
-  category: "DS",
+  categories: ["DS"],
 }, {
     id: "student-dropout-prediction",
     title: "Student Dropout Prediction",
@@ -230,7 +233,7 @@ export const projects: Project[] = [
         { src: "/Dropout_5.png" },
         { src: "/Dropout_6.png" },
     ],
-    category: "ML",
+    categories: ["ML"],
     },{
     id: "uh-dining-macros",
     title: "UH Dining Macros",
@@ -249,6 +252,6 @@ export const projects: Project[] = [
         { src: "/uh_dining.png", caption: "Cached CSV output" },
         { src: "/uh_dining_1.png", caption: "Macro efficiency analysis"},
     ],
-    category: "DE",
+    categories: ["DE", "WIP"],
     },
 ]

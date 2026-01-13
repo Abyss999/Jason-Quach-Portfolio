@@ -5,19 +5,22 @@ const CATEGORY_LABELS: Record<ProjectCategory, string> = {
   DS: "Data Science",
   ML: "Machine Learning",
   DE: "Data Engineering",
+  WIP: "Work in Progress",
 }
 
 type Props = {
-  active: ProjectCategory | "ALL";
+  activeCategories: Set<ProjectCategory>;
   onChange: (category: ProjectCategory | "ALL") => void;
 }
 
-export default function ProjectCategoryFilter({ active, onChange }: Props) {
+export default function ProjectCategoryFilter({ activeCategories, onChange }: Props) {
+  const isAllActive = activeCategories.size === 0;
+  
   return (
     <div className="mb-8 flex flex-wrap justify-center gap-3">
       <CategoryPill
         label="All"
-        active={active === "ALL"}
+        active={isAllActive}
         onClick={() => onChange("ALL")}
       />
       
@@ -25,7 +28,7 @@ export default function ProjectCategoryFilter({ active, onChange }: Props) {
         <CategoryPill
           key={category}
           label={label}
-          active={active === category}
+          active={activeCategories.has(category as ProjectCategory)}
           onClick={() => onChange(category as ProjectCategory)}
         />
       ))}
@@ -47,10 +50,10 @@ function CategoryPill({
       type="button"
       onClick={onClick}
       className={[
-        "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+        "rounded-full px-4 py-2 text-sm font-medium transition-all",
         active
-          ? "bg-orange-500/20 text-orange-500"
-          : "text-orange-500 hover:bg-orange-500/15",
+          ? "bg-orange-500 text-black shadow-lg shadow-orange-500/20"
+          : "bg-orange-500/15 text-orange-500 hover:bg-orange-500/25",
       ].join(" ")}
     >
       {label}

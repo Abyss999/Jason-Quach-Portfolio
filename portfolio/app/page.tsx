@@ -37,32 +37,50 @@ const dataStack = [
   Tech.numpy,
   Tech.scikitlearn,
   Tech.tensorflow,
-]
+];
 
 const cloudStack = [
   Tech.docker,
   Tech.heroku,
   Tech.vercel,
-]
+];
 
 const otherSkills = [
   Tech.github,
   Tech.vscode,
   Tech.jwt,
   Tech.rest,
-]
+];
 
 export default function HomePage() {
 
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory | "ALL">("ALL");
+  const [activeCategories, setActiveCategories] = useState<Set<ProjectCategory>>(new Set());
   const [activeTech, setActiveTech] = useState<string | null>(null);
 
+  const toggleCategory = (category: ProjectCategory | "ALL") => {
+    if (category === "ALL") {
+      setActiveCategories(new Set());
+    } else {
+      setActiveCategories((prev) => {
+        const next = new Set(prev);
+        if (next.has(category)) {
+          next.delete(category);
+        } else {
+          next.add(category);
+        }
+        return next;
+      });
+    }
+  };
 
   const filteredProjects = useMemo(() => {
     let list = projects;
 
-    if (activeCategory !== "ALL") {
-      list = list.filter((p) => p.category === activeCategory);
+    // Filter by categories - show projects that have ALL selected categories
+    if (activeCategories.size > 0) {
+      list = list.filter((p) => 
+        Array.from(activeCategories).every((cat) => p.categories.includes(cat))
+      );
     }
 
     if (activeTech) {
@@ -72,7 +90,7 @@ export default function HomePage() {
     }
 
     return list;
-  }, [activeCategory, activeTech]);
+  }, [activeCategories, activeTech]);
 
   return (
     <main className="mx-auto max-w-6xl px-4 text-white">
@@ -99,7 +117,6 @@ export default function HomePage() {
 
         {/* SKILL OVERVIEW */}
         <div className="mt-12 grid gap-4 text-center md:grid-cols-4">
-
           <div className="rounded-lg bg-orange-500/10 p-6">
             <div className="text-3xl font-bold text-orange-500">{languageStack.length}</div>
             <div className="mt-2 text-sm text-gray-400">Languages</div>
@@ -119,12 +136,7 @@ export default function HomePage() {
             <div className="text-3xl font-bold text-orange-500">{projects.length}</div>
             <div className="mt-2 text-sm text-gray-400">Projects</div>
           </div>
-          
-
         </div>
-
-
-
       </section>
 
       {/* PROJECTS */}
@@ -134,15 +146,15 @@ export default function HomePage() {
         </h2>
 
         <ProjectCategoryFilter
-          active={activeCategory}
-          onChange={(category) => setActiveCategory(category)}
+          activeCategories={activeCategories}
+          onChange={toggleCategory}
         />
 
         {activeTech && (
           <div className="mb-6 flex justify-center">
             <button
               onClick={() => setActiveTech(null)}
-              className="rounded-full px-4 py-2 text-sm text-orange-500 hover:bg-orange-500/15 transition-colors"
+              className="rounded-full bg-orange-500/15 px-4 py-2 text-sm text-orange-500 hover:bg-orange-500/25 transition-all"
             >
               Filtered by: {activeTech} · Clear
             </button>

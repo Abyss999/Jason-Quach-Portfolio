@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import { ExternalLink, Github, ChevronLeft, ChevronRight, X, Code2, BarChart3, Brain, Database, Globe} from "lucide-react";
+import { ExternalLink, Github, ChevronLeft, ChevronRight, Code2, BarChart3, Brain, Database, Globe} from "lucide-react";
 import TechBadge from "@/components/TechBadge";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,7 +31,7 @@ type ProjectCardProps = {
     techStack: Tech[];
     githubLink?: string | null | undefined;  
     liveLink?: string | null | undefined;  
-    category?: string;
+    categories?: string[];
 
     onTechClick?: (tech: string) => void;
 };
@@ -68,13 +68,19 @@ const CATEGORY_MAP: Record<
     icon: <Database />,
     className:
       "border-purple-500/40 text-purple-500 hover:bg-purple-500/15 hover:text-purple-400",
+  }, 
+  WIP:{
+    label: "WIP",
+    icon: <Globe />,
+    className:
+      "border-yellow-500/40 text-yellow-500 hover:bg-yellow-500/15 hover:text-yellow-400",
   }
 };
 
 
 
 export default function ProjectCard({
-    title, description, longDescription, images, techStack, githubLink, liveLink, category, onTechClick,
+    title, description, longDescription, images, techStack, githubLink, liveLink, categories, onTechClick,
 }: ProjectCardProps) {
     const [open, setOpen] = React.useState(false);
     const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
@@ -172,16 +178,22 @@ export default function ProjectCard({
             {/* category (stable position) */}
             <div>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-orange-500">
-                Category
+                {categories && categories.length > 1 ? "Categories" : "Category"}
                 </p>
                 <div className="flex justify-start">
-                {category && CATEGORY_MAP[category] ? (
-                    <TechBadge
-                    label={CATEGORY_MAP[category].label}
-                    icon={CATEGORY_MAP[category].icon}
-                    size="sm"
-                    className={CATEGORY_MAP[category].className}
-                    />
+                {categories && categories.length > 0 ? (
+                    categories.map((cat) => (
+                        CATEGORY_MAP[cat] ? (
+                            <TechBadge
+                                key={cat}
+                                label={CATEGORY_MAP[cat].label}
+                                icon={CATEGORY_MAP[cat].icon}
+                                size="sm"
+                                className={CATEGORY_MAP[cat].className + " mr-2 mb-2"}
+                            />
+                        ) : null
+                    ))
+                    
                 ) : (
                     <div className="invisible">
                     <TechBadge label="Placeholder" icon={CATEGORY_MAP.SWE.icon} size="sm" />
