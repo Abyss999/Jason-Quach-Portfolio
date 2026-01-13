@@ -52,7 +52,7 @@ const work_experience = [
   {
     title: "Vice President – CougarAI",
     subtitle: ["Houston, TX | June 2025 – Present"].join("\n"),
-    description: "Leading development of CougarAI’s web platform and automation systems to improve member experience and operations."
+    description: "Leading development of CougarAI's web platform and automation systems to improve member experience and operations."
   },
   {
     title: "Software Engineer – CougarAI",
@@ -95,12 +95,15 @@ function InfoEntry({ title, subtitle, description }: EntryProps) {
 
 export default function AboutMe() {
     const [currentProfile, setCurrentProfile] = React.useState(0);
+    const [imageLoaded, setImageLoaded] = React.useState(false);
 
     const nextProfile = () => {
+        setImageLoaded(false);
         setCurrentProfile((currentProfile + 1) % profileImages.length);
     }
 
     const prevProfile = () => {
+        setImageLoaded(false);
         setCurrentProfile((currentProfile - 1 + profileImages.length) % profileImages.length);
     }
 
@@ -124,28 +127,34 @@ export default function AboutMe() {
                             src={profileImages[currentProfile]}
                             alt="Profile Picture"
                             fill
-                            className="object-cover opacity-0 animate-fadeIn"
+                            sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 448px"
+                            className={`object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            onLoadingComplete={() => setImageLoaded(true)}
                             priority
                         />
 
                         {/* left arrow */}
                         {profileImages.length > 1 && (
-                        <button onClick={prevProfile} 
-                        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80">
+                        <button 
+                            onClick={prevProfile} 
+                            aria-label="Previous image"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80 transition-colors z-10">
                             ‹
                         </button>
                         )}
 
                         {/* right arrow */}
                         {profileImages.length > 1 && (
-                        <button onClick={nextProfile} 
-                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80">
+                        <button 
+                            onClick={nextProfile}
+                            aria-label="Next image"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80 transition-colors z-10">
                             ›
                         </button>
                         )}
 
                         {/* dots */}
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                             {profileImages.map((_, i) => (
                                 <span
                                 key={i}
@@ -154,7 +163,7 @@ export default function AboutMe() {
                                 }`}
                                 />
                             ))}
-                            </div>
+                        </div>
 
                     </div>
 
@@ -184,9 +193,9 @@ export default function AboutMe() {
                                 onClick={social.onClick}
                                 target={social.href.startsWith("http") || social.href.endsWith("pdf") ? "_blank" : undefined}
                                 rel={social.href.startsWith("http") || social.href.endsWith("pdf") ? "noopener noreferrer" : undefined}
-                                className="inline-flex items-center gap-2 rounded-full border border-orange-500/40
-                                    px-4 py-2 text-orange-500 transition-colors
-                                    hover:bg-orange-500/15 hover:text-orange-400"
+                                className="inline-flex items-center gap-2 rounded-full bg-orange-500/15
+                                    px-4 py-2 text-orange-500 transition-all
+                                    hover:bg-orange-500/25"
                             >
                                 {social.icon}
                                 <span className="text-sm font-medium">{social.label}</span>
@@ -197,12 +206,12 @@ export default function AboutMe() {
                 </div>
 
                 {/* Education  */}
-                <div className = "md: col-span-2 flex justify-center">
+                <div className = "md:col-span-2 flex justify-center">
                     <div className = "grid max-w-5xl grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
                         <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur">
                             {/* card 1 */}
                             <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">📙 Education</h3>
-                                <div className="flex flex-wrap gap-3">
+                                <div className="flex flex-col gap-4">
                                     {education.map((edu) => (
                                         <InfoEntry
                                             key={edu.title} 
@@ -217,7 +226,7 @@ export default function AboutMe() {
                         <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur">
                             {/* card 2 */}
                             <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">💼 Work Experience</h3>
-                                <div className="flex flex-wrap gap-3">
+                                <div className="flex flex-col gap-4">
                                     {work_experience.map((work) => (
                                         <InfoEntry
                                             key={work.title} 
