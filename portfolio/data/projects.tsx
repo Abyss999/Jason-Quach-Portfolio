@@ -93,7 +93,7 @@ export const projects: Project[] = [
   {
     id: "cougarai-website",
     title: "CougarAI Website",
-    description: "Revamped club website with React/Tailwind and Google Calendar API integration.",
+    description: "CougarAI’s public website with a modular React + Tailwind UI and a Flask/PostgreSQL backend, integrating Google Calendar for live event listings and building responsive pages for members, announcements, and club information",
     githubLink: "https://github.com/Abyss999/CougarAI-Website-Revamp",
     liveLink: "https://www.cougarai.org/",
     techStack: [
@@ -112,6 +112,42 @@ export const projects: Project[] = [
     ],
     category: "SWE"
   },{
+    id: "comic-bot",
+    title: "Comic Bot",
+    description: "Comic Bot is a Discord bot that lets users search, browse, and read comics from free comics online sources directly in Discord. Built with Node.js, it uses web scraping and MongoDB to index series and issues, supporting fast search, pagination, and page-by-page comic images.",
+    longDescription: "Comic Bot is a Discord bot that enables users to search, browse, and read comics sourced from free comics online platforms directly within Discord. Built with Node.js, the bot automates comic discovery through web scraping, parses series and issue data, and stores structured metadata in MongoDB for fast lookup and pagination. The bot supports interactive search flows, issue navigation, and image-based reading, delivering a seamless reading experience without leaving Discord",
+    githubLink: "https://github.com/Abyss999/comicbot",
+    liveLink: null,
+    techStack: [
+        { label: "Discord.js", icon: <SiDiscord className="h-4 w-4" /> },
+        Tech.nodejs,
+        Tech.mongodb,
+        Tech.webscraping,
+        Tech.javascript,
+    ],
+    images: [
+        { src: "/comic_1.png", caption: "Reading Spider-Man comics" },
+        { src: "/comic_2.png", caption: "Scraping query" },
+    ],
+    category: "SWE",
+}, {
+    id: "CougarAI Bot",
+    title: "CougarAI Bot",
+    description: "Discord bot that powers CougarAI’s member points and admin workflows, syncing Google Forms submissions through Google Sheets into PostgreSQL and providing officer-only commands for event management, point adjustments, and full points history tracking",
+    techStack: [
+      Tech.discordjs,
+      Tech.nodejs,
+      Tech.postgresql,
+      Tech.javascript,
+    ], 
+    images: [
+      {src: "/cai_bot_2.png", caption: "Point System (Google Forms -> Google Sheets -> PostgreSQL)"},
+      {src: "/cai_bot_1.png", caption: "Manage Events Command"},
+      {src: "/cai_bot.png", caption: "Points Manage Command"},
+      {src: "/cai_bot_3.png", caption: "Points History Command"},
+    ],
+    category: "SWE",
+},{
     id: "coog-zoo",
     title: "Coog Zoo",
     category: "SWE",
@@ -132,27 +168,7 @@ export const projects: Project[] = [
       { src: "/zoo_3.png", caption: "Calendar // Events" },
       { src: "/zoo_4.png", caption: "Membership" },
     ],
-  },
-  {
-    id: "comic-bot",
-    title: "Comic Bot",
-    description: "Comic Bot is a Discord bot that lets users search, browse, and read comics from free comics online sources directly in Discord. Built with Node.js, it uses web scraping and MongoDB to index series and issues, supporting fast search, pagination, and page-by-page comic images.",
-    longDescription: "Comic Bot is a Discord bot that enables users to search, browse, and read comics sourced from free comics online platforms directly within Discord. Built with Node.js, the bot automates comic discovery through web scraping, parses series and issue data, and stores structured metadata in MongoDB for fast lookup and pagination. The bot supports interactive search flows, issue navigation, and image-based reading, delivering a seamless reading experience without leaving Discord",
-    githubLink: "https://github.com/Abyss999/comicbot",
-    liveLink: null,
-    techStack: [
-        { label: "Discord.js", icon: <SiDiscord className="h-4 w-4" /> },
-        Tech.nodejs,
-        Tech.mongodb,
-        Tech.webscraping,
-        Tech.javascript,
-    ],
-    images: [
-        { src: "/comic_1.png", caption: "Reading Spider-Man comics" },
-        { src: "/comic_2.png", caption: "Scraping query" },
-    ],
-    category: "SWE",
-}, {
+  },{
     id: "volunteer-management-app",
     title: "Volunteer Management Web App",
     description: "Full-stack volunteer platform with JWT auth, email verification, and role-based access. Built admin/volunteer dashboards and implemented real-time reminders using Socket.IO + APScheduler.",
