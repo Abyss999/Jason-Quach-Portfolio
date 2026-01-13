@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
-import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe } from "lucide-react";
+import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe, Shield, Plug} from "lucide-react";
 import {
   SiTypescript, SiPython, SiJavascript, SiCplusplus, SiR,
   SiNodedotjs, SiReact, SiTailwindcss, SiExpress, SiFlask, SiNextdotjs,
   SiPostgresql, SiMysql, SiMongodb, SiDocker, SiGithub, SiPandas,
-  SiScikitlearn, SiDiscord, SiSocketdotio,
+  SiScikitlearn, SiDiscord, SiSocketdotio, SiTensorflow, SiNumpy,
+  SiHeroku, SiVercel
 } from "react-icons/si";
 
 export const Tech = {
@@ -38,6 +39,13 @@ export const Tech = {
   calendar: { label: "APScheduler", icon: <Calendar className="h-4 w-4" /> },
   express: { label: "Express", icon: <SiExpress className="h-4 w-4" /> },
   apscheduler: { label: "APScheduler", icon: <Calendar className="h-4 w-4" /> },
+  numpy: { label: "NumPy", icon: <SiNumpy className="h-4 w-4" /> },
+  tensorflow: { label: "TensorFlow", icon: <SiTensorflow className="h-4 w-4" /> },
+  heroku: { label: "Heroku", icon: <SiHeroku className="h-4 w-4" /> },
+  vercel: { label: "Vercel", icon: <SiVercel className="h-4 w-4" /> },
+  jwt: { label: "JWT", icon: <Shield className="h-4 w-4" /> },
+  rest: { label: "REST APIs", icon: <Plug className="h-4 w-4" /> },
+
 } satisfies Record<string, ProjectTech>;
 
 

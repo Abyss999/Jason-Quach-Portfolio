@@ -26,14 +26,31 @@ const frameworkStack = [
   Tech.flask,
 ];
 
-const toolStack = [
+const databaseStack = [
   Tech.postgresql,
   Tech.mysql,
   Tech.mongodb,
+];
+
+const dataStack = [
+  Tech.pandas,
+  Tech.numpy,
+  Tech.scikitlearn,
+  Tech.tensorflow,
+]
+
+const cloudStack = [
   Tech.docker,
+  Tech.heroku,
+  Tech.vercel,
+]
+
+const otherSkills = [
   Tech.github,
   Tech.vscode,
-];
+  Tech.jwt,
+  Tech.rest,
+]
 
 export default function HomePage() {
 
@@ -71,8 +88,43 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-3">
           <SkillCard title="Languages" skills={languageStack} />
           <SkillCard title="Frameworks" skills={frameworkStack} />
-          <SkillCard title="Tools" skills={toolStack} />
+          <SkillCard title="Databases" skills={databaseStack} />
         </div>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <SkillCard title="Data" skills={dataStack} />
+          <SkillCard title="Cloud" skills={cloudStack} />
+          <SkillCard title="Other" skills={otherSkills} />
+        </div>
+
+        {/* SKILL OVERVIEW */}
+        <div className="mt-12 grid gap-4 text-center md:grid-cols-4">
+
+          <div className="rounded-lg bg-orange-500/10 p-6">
+            <div className="text-3xl font-bold text-orange-500">{languageStack.length}</div>
+            <div className="mt-2 text-sm text-gray-400">Languages</div>
+          </div>
+
+          <div className="rounded-lg bg-orange-500/10 p-6">
+            <div className="text-3xl font-bold text-orange-500">{frameworkStack.length}</div>
+            <div className="mt-2 text-sm text-gray-400">Frameworks</div>
+          </div>
+
+          <div className="rounded-lg bg-orange-500/10 p-6">
+            <div className="text-3xl font-bold text-orange-500">{databaseStack.length}</div>
+            <div className="mt-2 text-sm text-gray-400">Databases</div>
+          </div>
+
+          <div className="rounded-lg bg-orange-500/10 p-6">
+            <div className="text-3xl font-bold text-orange-500">{projects.length}</div>
+            <div className="mt-2 text-sm text-gray-400">Projects</div>
+          </div>
+          
+
+        </div>
+
+
+
       </section>
 
       {/* PROJECTS */}
