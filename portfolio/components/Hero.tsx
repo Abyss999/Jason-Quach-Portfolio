@@ -42,7 +42,7 @@ export default function Hero() {
     return (
         <section 
             id="hero"
-            className="relative min-h-[calc(100vh-4rem)] scroll-mt-16 py-20 flex items-center overflow-x-hidden"
+            className="relative min-h-[calc(100vh-4rem)] scroll-mt-16 py-20 flex items-center overflow-x-hidden md:overflow-x-visible"
         >
             <div
                 aria-hidden
@@ -53,8 +53,8 @@ export default function Hero() {
             </div>
 
             <div className="max-w-3xl">
-                {/* small intro */}
-                <p className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm text-orange-400 dark:text-orange-500">
+                {/* small intro - FIXED: Better contrast in light mode */}
+                <p className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm text-orange-700 dark:text-orange-300">
                     Computer Science • University of Houston
                 </p>
 
