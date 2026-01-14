@@ -34,7 +34,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="relative min-h-screen">
             {/* Background Glow Effects */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-x-hidden">
               {/* Soft wash - darker in light mode, subtle in dark mode */}
               <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent dark:from-orange-500/5" />
               
