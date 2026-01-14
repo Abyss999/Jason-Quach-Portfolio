@@ -42,7 +42,7 @@ export default function Hero() {
     return (
         <section 
             id="hero"
-            className="relative min-h-[calc(100vh-4rem)] scroll-mt-16 py-20 flex items-center overflow-hidden"
+            className="relative min-h-[calc(100vh-4rem)] scroll-mt-16 py-20 flex items-center overflow-x-hidden"
         >
             <div
                 aria-hidden
