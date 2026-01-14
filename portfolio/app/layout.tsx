@@ -27,14 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black text-gray-900 dark:text-orange-500`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black text-gray-900 dark:text-orange-500 overflow-x-hidden`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="relative min-h-screen">
+          <div className="relative min-h-screen overflow-x-hidden">
             {/* Background Glow Effects */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-x-hidden">
+            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
               {/* Soft wash - darker in light mode, subtle in dark mode */}
               <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent dark:from-orange-500/5" />
               
