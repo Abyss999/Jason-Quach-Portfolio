@@ -20,6 +20,7 @@ const languageStack = [
 const frameworkStack = [
   Tech.tailwindcss,
   Tech.expressjs,
+  Tech.streamlit,
   Tech.nodejs,
   Tech.nextjs,
   Tech.react,

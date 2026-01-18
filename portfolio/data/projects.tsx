@@ -5,7 +5,7 @@ import {
   SiNodedotjs, SiReact, SiTailwindcss, SiExpress, SiFlask, SiNextdotjs,
   SiPostgresql, SiMysql, SiMongodb, SiDocker, SiGithub, SiPandas,
   SiScikitlearn, SiDiscord, SiSocketdotio, SiTensorflow, SiNumpy,
-  SiHeroku, SiVercel
+  SiHeroku, SiVercel, SiStreamlit
 } from "react-icons/si";
 
 export const Tech = {
@@ -46,6 +46,7 @@ export const Tech = {
   jwt: { label: "JWT", icon: <Shield className="h-4 w-4" /> },
   rest: { label: "REST APIs", icon: <Plug className="h-4 w-4" /> },
   api_integration: { label: "API Integration", icon: <Plug2 className="h-4 w-4" /> },
+  streamlit: { label: "Streamlit", icon: <SiStreamlit className="h-4 w-4" /> },
 } satisfies Record<string, ProjectTech>;
 
 
@@ -246,11 +247,13 @@ export const projects: Project[] = [
         Tech.pandas,
         Tech.playwright,
         Tech.webscraping,
+        Tech.streamlit,
     ],
     images: [
         { src: "/uh_dining.gif", caption: "Gif of scraping process" },
-        { src: "/uh_dining.png", caption: "Cached CSV output" },
-        { src: "/uh_dining_1.png", caption: "Macro efficiency analysis"},
+        { src: "/uh_dining_0.png", caption: "Streamlit interface for UH Dining Macros" },
+        { src: "/uh_dining_1.png", caption: "Cached CSV output" },
+        { src: "/uh_dining_2.png", caption: "Macro efficiency analysis"},
     ],
     categories: ["DE", "WIP"],
     },
