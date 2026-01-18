@@ -53,8 +53,8 @@ export default function Hero() {
             </div>
 
             <div className="max-w-3xl">
-                {/* small intro */}
-                <p className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm text-orange-300 dark:text-orange-300">
+                {/* small intro - FIXED: Better contrast in light mode */}
+                <p className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm text-orange-700 dark:text-orange-300">
                     Computer Science • University of Houston
                 </p>
 
