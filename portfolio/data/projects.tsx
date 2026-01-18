@@ -251,7 +251,7 @@ export const projects: Project[] = [
     ],
     images: [
         { src: "/uh_dining.gif", caption: "Gif of scraping process" },
-        { src: "/uh_dining_0.png", caption: "Streamlit interface for UH Dining Macros" },
+        { src: "/uh_dining.png", caption: "Streamlit interface for UH Dining Macros" },
         { src: "/uh_dining_1.png", caption: "Cached CSV output" },
         { src: "/uh_dining_2.png", caption: "Macro efficiency analysis"},
     ],
