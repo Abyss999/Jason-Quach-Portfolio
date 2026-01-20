@@ -49,21 +49,28 @@ const education = [
 ];
 
 const work_experience = [
-  {
-    title: "Vice President – CougarAI",
-    subtitle: ["Houston, TX | June 2025 – Present"].join("\n"),
-    description: "Leading development of CougarAI's web platform and automation systems to improve member experience and operations."
-  },
-  {
-    title: "Software Engineer – CougarAI",
-    subtitle: ["Houston, TX | February 2025 – June 2025"].join("\n"),
-    description: "Developed and maintained features for the club website and bot using Flask, React, and SQL."
-  },
-  {
-    title: "Righteous Bot",
-    subtitle: ["Personal Project | June 2019 – April 2025"].join("\n"),
-    description: "Built and monetized a feature-rich Discord bot with 650+ commands, generating real revenue from production users."
-  }
+    {
+        title: "Software Engineering Intern - EnergyAI Solutions",
+        subtitle: ["Houston, TX | January 2026 – Present"].join("\n"),
+        description: ["Built automation to collect and normalize publicly available job listing data for analysis.",
+        "Cleaned and structured scraped data to improve downstream search and reporting."
+        ].join("\n")
+    },
+    {
+        title: "Vice President – CougarAI",
+        subtitle: ["Houston, TX | June 2025 – Present"].join("\n"),
+        description: "Leading development of CougarAI's web platform and automation systems to improve member experience and operations."
+    },
+    {
+        title: "Software Engineer – CougarAI",
+        subtitle: ["Houston, TX | February 2025 – June 2025"].join("\n"),
+        description: "Developed and maintained features for the club website and bot using Flask, React, and SQL."
+    },
+    {
+        title: "Righteous Bot",
+        subtitle: ["Personal Project | June 2019 – April 2025"].join("\n"),
+        description: "Built and monetized a feature-rich Discord bot with 650+ commands, generating real revenue from production users."
+    }
 ];
 
 type EntryProps = {
