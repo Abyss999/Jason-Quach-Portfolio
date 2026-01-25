@@ -52,8 +52,9 @@ const work_experience = [
     {
         title: "Software Engineering Intern - EnergyAI Solutions",
         subtitle: ["Houston, TX | January 2026 – Present"].join("\n"),
-        description: ["Built automation to collect and normalize publicly available job listing data for analysis.",
-        "Cleaned and structured scraped data to improve downstream search and reporting."
+        description: [
+        "Contributed as part of a 5-person engineering team building internal applications.",
+        "Focused on web scraping and data normalization, extracting job posting data from multiple external sources to support downstream analysis."
         ].join("\n")
     },
     {

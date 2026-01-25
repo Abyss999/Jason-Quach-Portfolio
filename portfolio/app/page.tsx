@@ -44,6 +44,7 @@ const cloudStack = [
   Tech.docker,
   Tech.heroku,
   Tech.vercel,
+  Tech.azure,
 ];
 
 const otherSkills = [

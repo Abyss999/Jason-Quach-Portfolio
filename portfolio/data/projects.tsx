@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe, Shield, Plug, Plug2} from "lucide-react";
+import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe, Shield, Plug, Plug2, Cloud} from "lucide-react";
 import {
   SiTypescript, SiPython, SiJavascript, SiCplusplus, SiR,
   SiNodedotjs, SiReact, SiTailwindcss, SiExpress, SiFlask, SiNextdotjs,
@@ -47,6 +47,7 @@ export const Tech = {
   rest: { label: "REST APIs", icon: <Plug className="h-4 w-4" /> },
   api_integration: { label: "API Integration", icon: <Plug2 className="h-4 w-4" /> },
   streamlit: { label: "Streamlit", icon: <SiStreamlit className="h-4 w-4" /> },
+  azure: { label: "Azure", icon: <Cloud className="h-4 w-4" /> },
 } satisfies Record<string, ProjectTech>;
 
 
