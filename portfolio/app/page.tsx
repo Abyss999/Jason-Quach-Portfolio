@@ -30,6 +30,7 @@ const frameworkStack = [
 const databaseStack = [
   Tech.postgresql,
   Tech.mysql,
+  Tech.sql_server,
   Tech.mongodb,
 ];
 
