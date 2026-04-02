@@ -5,7 +5,7 @@ import {
   SiNodedotjs, SiReact, SiTailwindcss, SiExpress, SiFlask, SiNextdotjs,
   SiPostgresql, SiMysql, SiMongodb, SiDocker, SiGithub, SiPandas,
   SiScikitlearn, SiDiscord, SiSocketdotio, SiTensorflow, SiNumpy,
-  SiHeroku, SiVercel, SiStreamlit,
+  SiHeroku, SiVercel, SiStreamlit, SiPytorch, SiPlotly,
 } from "react-icons/si";
 
 export const Tech = {
@@ -49,6 +49,8 @@ export const Tech = {
   streamlit: { label: "Streamlit", icon: <SiStreamlit className="h-4 w-4" /> },
   azure: { label: "Azure", icon: <Cloud className="h-4 w-4" /> },
   sql_server: { label: "SQL Server", icon: <DatabaseIcon className="h-4 w-4" /> },
+  pytorch: { label: "PyTorch", icon: <SiPytorch className="h-4 w-4" /> },
+  plotly: { label: "Plotly", icon: <SiPlotly className="h-4 w-4" /> },
 
 } satisfies Record<string, ProjectTech>;
 
@@ -259,5 +261,23 @@ export const projects: Project[] = [
         { src: "/uh_dining_2.png", caption: "Macro efficiency analysis"},
     ],
     categories: ["DE", "WIP"],
+    },{
+    id: "pneumonia-xray-classifier",
+    title: "Pneumonia X-Ray Classifier",
+    description:
+        "A deep learning web application that classifies chest X-ray images into Bacterial Pneumonia, Viral Pneumonia, or Normal using two independently trained DenseNet121 models. Built as a senior capstone in a team of three — I was responsible for the full Streamlit UI, model wiring, Plotly visualizations, and the conflict resolution logic when the two models disagree on a diagnosis.",
+    githubLink: null,
+    liveLink: null,
+    techStack: [
+        Tech.python,
+        Tech.pytorch,
+        Tech.streamlit,
+        Tech.plotly,
+    ],
+    images: [
+        { src: "/pneumonia_1.png", caption: "Model 1 — Primary Classifier output with class probability chart" },
+        { src: "/pneumonia_2.png", caption: "Model 2 — Secondary Classifier and Final Verdict with conflict resolution" },
+    ],
+    categories: ["DS"],
     },
 ]
