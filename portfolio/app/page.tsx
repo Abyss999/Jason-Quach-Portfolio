@@ -120,22 +120,22 @@ export default function HomePage() {
 
         {/* SKILL OVERVIEW */}
         <div className="mt-12 grid gap-4 text-center md:grid-cols-4">
-          <div className="rounded-lg bg-orange-500/10 p-6">
+          <div className="rounded-lg bg-orange-500/10 p-6 transition-transform hover:-translate-y-1">
             <div className="text-3xl font-bold text-orange-500">{languageStack.length}</div>
             <div className="mt-2 text-sm text-gray-400">Languages</div>
           </div>
 
-          <div className="rounded-lg bg-orange-500/10 p-6">
+          <div className="rounded-lg bg-orange-500/10 p-6 transition-transform hover:-translate-y-1">
             <div className="text-3xl font-bold text-orange-500">{frameworkStack.length}</div>
             <div className="mt-2 text-sm text-gray-400">Frameworks</div>
           </div>
 
-          <div className="rounded-lg bg-orange-500/10 p-6">
+          <div className="rounded-lg bg-orange-500/10 p-6 transition-transform hover:-translate-y-1">
             <div className="text-3xl font-bold text-orange-500">{databaseStack.length}</div>
             <div className="mt-2 text-sm text-gray-400">Databases</div>
           </div>
 
-          <div className="rounded-lg bg-orange-500/10 p-6">
+          <div className="rounded-lg bg-orange-500/10 p-6 transition-transform hover:-translate-y-1">
             <div className="text-3xl font-bold text-orange-500">{projects.length}</div>
             <div className="mt-2 text-sm text-gray-400">Projects</div>
           </div>

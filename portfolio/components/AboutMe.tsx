@@ -34,33 +34,46 @@ const socials = [
 const profileImages = [
     "/pfp.jpg",
     "/pfp_2.png",
+    "/pfp_3.jpg",
 ];
 
 const education = [
     {
-        title: "B.S. Computer Science",
-        subtitle: ["University of Houston 2024-2026", "GPA: 3.6"].join("\n"),
-        description: ["Coursework: Database Systems, Software Design, Algorithms & Data Structures"].join("\n"),
+        title: "B.S. Computer Science, Minor in Mathematics",
+        subtitle: ["University of Houston | Aug. 2024 – May 2026", "GPA: 3.6"].join("\n"),
+        description: [
+        "Coursework: Algorithms & Data Structures, Software Design, Operating Systems, Database Systems, Data Science I & II, Artificial Intelligence",
+        "Vice President of CougarAI — an AI/ML student org with 200+ active members.",
+        "Dean's List: SP 2025, FA 2025 · 4.0 GPA in SU 2025"
+        ].join("\n"),
     }, {
         title: "A.S. Computer Science",
-        subtitle: ["Houston Community College 2022-2024", "GPA: 3.9"].join("\n"),
-        description: ["Coursework: Data Structures, Computer Architecture, Calculus I-II"].join("\n"),
+        subtitle: ["Houston Community College | 2022 – 2024", "GPA: 3.9"].join("\n"),
+        description: [
+        "Coursework: Programming Fundamentals I–III, Data Structures, Computer Organization, Calculus I–II",
+        "Dean's List: Fall 2022, Spring 2023 · Honors List: Spring 2024",
+        "Graduated with honors."
+        ].join("\n"),
     }
 ];
 
 const work_experience = [
     {
-        title: "Software Engineering Intern - EnergyAI Solutions",
+        title: "Software Engineering Intern – Energy AI Solutions",
         subtitle: ["Houston, TX | January 2026 – Present"].join("\n"),
         description: [
-        "Contributed as part of a 5-person engineering team building internal applications.",
-        "Focused on web scraping and data normalization, extracting job posting data from multiple external sources to support downstream analysis."
+        "Built full-stack internal tooling (React, Flask, T-SQL) on Azure within a 5-person agile team.",
+        "Engineered Workday scraping pipelines with configurable scheduling; scraped 100+ employers weekly.",
+        "Built a job management dashboard with filtering and reschedule controls, saving 2+ hrs/week."
         ].join("\n")
     },
     {
         title: "Vice President – CougarAI",
         subtitle: ["Houston, TX | June 2025 – Present"].join("\n"),
-        description: "Leading development of CougarAI's web platform and automation systems to improve member experience and operations."
+        description: [
+        "Led 4 engineers to rebuild the org's full-stack website and bot for 200+ active members.",
+        "Integrated Stripe API and a points system, increasing member engagement by 60%."
+        ].join("\n")
     },
     {
         title: "Software Engineer – CougarAI",
@@ -68,9 +81,12 @@ const work_experience = [
         description: "Developed and maintained features for the club website and bot using Flask, React, and SQL."
     },
     {
-        title: "Righteous Bot",
-        subtitle: ["Personal Project | June 2019 – April 2025"].join("\n"),
-        description: "Built and monetized a feature-rich Discord bot with 650+ commands, generating real revenue from production users."
+        title: "Founder & Software Engineer – Righteous Bot",
+        subtitle: ["Remote | June 2019 – April 2025"].join("\n"),
+        description: [
+        "Built a Discord bot with 650+ commands using Node.js and MongoDB; 100,000+ users across 200+ servers.",
+        "Generated $8,000+ in revenue through paid features and custom integrations."
+        ].join("\n")
     }
 ];
 

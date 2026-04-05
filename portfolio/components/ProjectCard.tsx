@@ -229,7 +229,7 @@ export default function ProjectCard({
                     <img
                         src={hero.src}
                         alt={hero.alt ?? `${title} demo`}
-                        className="h-[340px] w-full object-contain md:h-[420px]"
+                        className="h-[340px] w-full object-contain md:h-[420px] transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                     ) : (
                     <Image
@@ -237,7 +237,7 @@ export default function ProjectCard({
                         alt={hero.alt ?? `${title} screenshot`}
                         width={1200}
                         height={800}
-                        className="h-[340px] w-full object-contain md:h-[420px]"
+                        className="h-[340px] w-full object-contain md:h-[420px] transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                     )}
 

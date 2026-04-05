@@ -7,8 +7,8 @@ type SkillCardProps = {
 
 export default function SkillCard({ title, skills }: SkillCardProps) {
     return (
-        <div 
-            className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur">
+        <div
+            className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 backdrop-blur transition-transform hover:-translate-y-1 hover:shadow-md">
             <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>
                 <div className="flex flex-wrap gap-3">
                     {skills.map((skill) => (

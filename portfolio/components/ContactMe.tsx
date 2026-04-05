@@ -61,7 +61,9 @@ export default function ContactMe({ open, onOpenChange, toEmail = "jtquach@couga
                     <Button
                         asChild
                         className="mt-6 w-full border border-orange-500/30 bg-orange-500/15 text-orange-500 hover:bg-orange-500/20 hover:text-orange-300"
-                    ></Button>
+                    >
+                        <a href={mailtoLink}>Send Message</a>
+                    </Button>
 
                     <p className="mt-4 text-center text-sm text-gray-600 dark:text-white/60">
                         Or email me directly at{" "}
