@@ -266,8 +266,8 @@ export const projects: Project[] = [
     title: "Pneumonia X-Ray Classifier",
     description:
         "A deep learning web application that classifies chest X-ray images into Bacterial Pneumonia, Viral Pneumonia, or Normal using two independently trained DenseNet121 models. Built as a senior capstone in a team of three — I was responsible for the full Streamlit UI, model wiring, Plotly visualizations, and the conflict resolution logic when the two models disagree on a diagnosis.",
-    githubLink: null,
-    liveLink: null,
+    githubLink: "https://github.com/Abyss999/COSC-4337",
+    liveLink: "https://pneumonia-xray.streamlit.app/",
     techStack: [
         Tech.python,
         Tech.pytorch,
