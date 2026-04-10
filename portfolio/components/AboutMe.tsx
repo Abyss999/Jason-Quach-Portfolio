@@ -244,8 +244,8 @@ export default function AboutMe() {
 
     return (
         <section id = "about" className = "min-h-[calc(100vh-4rem)] py-20 scroll-mt-16">
-            <h2 className = "mb-10 text-center text-5xl font-bold text-orange-500">
-            About Me
+            <h2 className="mb-10 text-center text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500">
+                About Me
             </h2>
 
             {/* Profile Picture  */}

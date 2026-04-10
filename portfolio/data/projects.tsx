@@ -199,6 +199,26 @@ export const projects: Project[] = [
       { src: "/vol_3.png", caption: "Dashboard" },
     ],
   }, {
+    id: "personal-portfolio",
+    title: "Personal Portfolio",
+    description: "This portfolio website — built with Next.js 15, React 19, and Tailwind CSS 4. Features a responsive layout, dark mode, animated typing hero, filterable projects grid, work/education timelines, and a skills section.",
+    longDescription: "Designed and built from scratch as a personal showcase. Highlights include a scroll-aware fixed navbar with active section tracking, a LinkedIn-style timeline for work and education, a project gallery modal with keyboard navigation, and a tech-filter system for the projects grid. Deployed on Vercel.",
+    githubLink: "https://github.com/Abyss999/Jason-Quach-Portfolio",
+    liveLink: "https://jason-portfolio-one.vercel.app/",
+    techStack: [
+      Tech.nextjs,
+      Tech.react,
+      Tech.typescript,
+      Tech.tailwindcss,
+      Tech.vercel,
+    ],
+    images: [
+      {src: "/portfolio_1.jpeg", caption: "Project modal with keyboard navigation"},
+      {src: "/portfolio_2.png", caption: "Timeline section with work and education timelines"},
+      {src: "/portfolio_3.png", caption: "Homepage with animated hero and scroll-aware navbar"},
+    ],
+    categories: ["SWE"],
+  }, {
     id: "dblp-venue-analysis",
   title: "DBLP Venue Analysis",
   description:
@@ -278,6 +298,6 @@ export const projects: Project[] = [
         { src: "/pneumonia_1.png", caption: "Model 1 — Primary Classifier output with class probability chart" },
         { src: "/pneumonia_2.png", caption: "Model 2 — Secondary Classifier and Final Verdict with conflict resolution" },
     ],
-    categories: ["DS"],
+    categories: ["DS", "SWE"],
     },
 ]

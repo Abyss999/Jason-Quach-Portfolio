@@ -59,14 +59,14 @@ export default function Hero() {
                 </p>
 
                 {/* headline */}
-                <h1 className="mt-6 text-5xl font-extrabold tracking-tight sm:text-6xl">
+                <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
                     <span className="text-gray-900 dark:text-white">Hello, I'm </span>
                     <span className="text-orange-500">Jason</span>
                     <span className="text-gray-900 dark:text-white"> 👋</span>
                 </h1>
 
                 {/* Dynamic role with typing effect */}
-                <div className="mt-5 text-2xl font-semibold text-gray-900 dark:text-white sm:text-3xl min-h-[2.5rem]">
+                <div className="mt-5 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl md:text-3xl min-h-[2rem] sm:min-h-[2.5rem]">
                     <span>{displayedText}</span>
                     <span className="animate-blink">|</span>
                 </div>

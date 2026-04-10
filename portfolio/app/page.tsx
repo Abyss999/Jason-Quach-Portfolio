@@ -102,7 +102,7 @@ export default function HomePage() {
 
       {/* SKILLS */}
       <section id="skills" className="scroll-mt-16 min-h-[calc(100vh-4rem)] py-20">
-        <h2 className="mb-10 text-center text-5xl font-bold text-orange-500">
+        <h2 className="mb-10 text-center text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500">
           My Skills
         </h2>
 
@@ -144,7 +144,7 @@ export default function HomePage() {
 
       {/* PROJECTS */}
       <section id="projects" className="scroll-mt-16 min-h-[calc(100vh-4rem)] py-20">
-        <h2 className="mb-10 text-center text-5xl font-bold text-orange-500">
+        <h2 className="mb-10 text-center text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500">
           Projects
         </h2>
 
@@ -164,7 +164,7 @@ export default function HomePage() {
           </div>
         )}
 
-        <div className="grid items-start gap-12 md:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((p) => (
             <ProjectCard key={p.id} {...p} onTechClick={(tech) => setActiveTech(tech)} />
           ))}

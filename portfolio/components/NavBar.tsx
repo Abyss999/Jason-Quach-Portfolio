@@ -64,6 +64,13 @@ export default function NavBar() {
   const [open, setOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>("hero");
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const navItems = [
     { label: "Home", path: "/#hero", id: "hero" },
@@ -105,8 +112,13 @@ export default function NavBar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50">
-        <div className="bg-white dark:bg-black">
+      <header className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-200",
+        scrolled
+          ? "bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200/60 dark:border-white/10 shadow-sm"
+          : "bg-white dark:bg-black"
+      )}>
+        <div>
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
             {/* Brand */}
             <Link
@@ -165,25 +177,18 @@ export default function NavBar() {
                   </SheetHeader>
                   
                   <div className="mt-6 flex flex-col gap-2">
-                      {navItems.map((item) => {
-                 
-                          return (
-                              <NavLink
-                                  key={item.path}
-                                  href={item.path}
-                                  label={item.label}
-                                  isActive={item.id ? activeSection === item.id : false}
-                                  onClick={
-                                    item.label === "Contact" ? 
-                                    () => {
-                                      setOpen(false);
-                                      item.onClick?.();
-                                    } : undefined
-                                  }
-
-                              />
-                          );
-                      })}
+                      {navItems.map((item) => (
+                          <NavLink
+                              key={item.path}
+                              href={item.path}
+                              label={item.label}
+                              isActive={item.id ? activeSection === item.id : false}
+                              onClick={() => {
+                                setOpen(false);
+                                item.onClick?.();
+                              }}
+                          />
+                      ))}
 
                     <div className="mt-4">
                       <Button
