@@ -196,17 +196,18 @@ export default function ProjectCard({
 
         {/* Modal */}
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="sm:max-w-none w-[min(96vw,1500px)] h-[88vh] p-0 bg-white dark:bg-black/95 text-gray-900 dark:text-white border border-gray-200 dark:border-orange-500/20 overflow-hidden">
+            <DialogContent className="sm:max-w-none w-[min(96vw,1500px)] max-h-[92vh] md:h-[88vh] p-0 bg-white dark:bg-black/95 text-gray-900 dark:text-white border border-gray-200 dark:border-orange-500/20 overflow-hidden">
                 {/* Hidden title for accessibility */}
                 <DialogHeader className="sr-only">
                     <DialogTitle>{title}</DialogTitle>
                 </DialogHeader>
 
-                <div className="flex flex-col md:flex-row h-full overflow-hidden">
+                {/* Mobile: single scrollable column. Desktop: fixed-height two-column. */}
+                <div className="flex flex-col md:flex-row overflow-y-auto md:overflow-hidden md:h-full">
                     {/* Left — gallery */}
-                    <div className="flex flex-col min-h-0 md:flex-1 bg-gray-100 dark:bg-black/40 p-4 gap-3 h-full">
-                        {/* Main image */}
-                        <div className="relative flex-1 min-h-0 rounded-xl border border-gray-200 dark:border-orange-500/20 overflow-hidden flex items-center justify-center">
+                    <div className="flex flex-col shrink-0 md:flex-1 md:min-h-0 bg-gray-100 dark:bg-black/40 p-4 gap-3 md:h-full">
+                        {/* Main image — fixed aspect ratio on mobile, flex fill on desktop */}
+                        <div className="relative aspect-video md:aspect-auto md:flex-1 md:min-h-0 rounded-xl border border-gray-200 dark:border-orange-500/20 overflow-hidden flex items-center justify-center">
                             {visibleImages?.[currentImageIndex] ? (
                                 <Image
                                     src={visibleImages[currentImageIndex].src}
@@ -236,9 +237,9 @@ export default function ProjectCard({
                             </p>
                         ) : null}
 
-                        {/* Thumbnail strip */}
+                        {/* Thumbnail strip — hidden on mobile to save space */}
                         {visibleImages.length > 1 ? (
-                            <div className="grid grid-cols-4 gap-2 shrink-0">
+                            <div className="hidden md:grid grid-cols-4 gap-2 shrink-0">
                                 {visibleImages.map((img, i) => (
                                     <button
                                         key={`${img.src}-${i}`}
@@ -261,7 +262,7 @@ export default function ProjectCard({
                     </div>
 
                     {/* Right — details */}
-                    <div className="md:w-72 lg:w-80 shrink-0 flex flex-col overflow-y-auto border-t md:border-t-0 md:border-l border-gray-200 dark:border-orange-500/20 p-5 gap-4">
+                    <div className="md:w-72 lg:w-80 shrink-0 flex flex-col md:overflow-y-auto border-t md:border-t-0 md:border-l border-gray-200 dark:border-orange-500/20 p-5 gap-4">
                         {/* Title */}
                         <h2 className="text-lg font-semibold text-orange-500 leading-snug">{title}</h2>
 
