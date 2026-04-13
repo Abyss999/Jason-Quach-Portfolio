@@ -11,27 +11,38 @@ const CATEGORY_LABELS: Record<ProjectCategory, string> = {
 type Props = {
   activeCategories: Set<ProjectCategory>;
   onChange: (category: ProjectCategory | "ALL") => void;
+  resultCount: number;
+  total: number;
 }
 
-export default function ProjectCategoryFilter({ activeCategories, onChange }: Props) {
+export default function ProjectCategoryFilter({ activeCategories, onChange, resultCount, total }: Props) {
   const isAllActive = activeCategories.size === 0;
-  
+  const isFiltered = resultCount < total;
+
   return (
-    <div className="mb-8 flex flex-wrap justify-center gap-3">
-      <CategoryPill
-        label="All"
-        active={isAllActive}
-        onClick={() => onChange("ALL")}
-      />
-      
-      {Object.entries(CATEGORY_LABELS).map(([category, label]) => (
+    <div className="mb-8 flex flex-col items-center gap-3">
+      <div className="flex flex-wrap justify-center gap-3">
         <CategoryPill
-          key={category}
-          label={label}
-          active={activeCategories.has(category as ProjectCategory)}
-          onClick={() => onChange(category as ProjectCategory)}
+          label="All"
+          active={isAllActive}
+          onClick={() => onChange("ALL")}
         />
-      ))}
+
+        {Object.entries(CATEGORY_LABELS).map(([category, label]) => (
+          <CategoryPill
+            key={category}
+            label={label}
+            active={activeCategories.has(category as ProjectCategory)}
+            onClick={() => onChange(category as ProjectCategory)}
+          />
+        ))}
+      </div>
+
+      <p className="text-xs text-gray-500">
+        {isFiltered
+          ? `${resultCount} of ${total} projects`
+          : "Tip: click a tech badge on any card to filter by stack"}
+      </p>
     </div>
   )
 }

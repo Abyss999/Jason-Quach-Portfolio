@@ -5,8 +5,6 @@ import {useEffect, useState} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
-import ContactMe from "@/components/ContactMe";
-
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -62,7 +60,6 @@ function NavLink({
 export default function NavBar() {
 
   const [open, setOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>("hero");
   const [scrolled, setScrolled] = useState(false);
 
@@ -77,14 +74,11 @@ export default function NavBar() {
     { label: "About", path: "/#about", id: "about" },
     { label: "Skills", path: "/#skills", id: "skills" },
     { label: "Projects", path: "/#projects", id: "projects" },
-    { label: "Contact", path: "#", onClick: () => {
-        setContactOpen(true)
-      } 
-    },
+    { label: "Contact", path: "/#contact", id: "contact" },
   ];
 
   useEffect(() => {
-    const sections = ["hero", "about", "skills", "projects"];
+    const sections = ["hero", "about", "skills", "projects", "contact"];
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -208,7 +202,6 @@ export default function NavBar() {
         </div>
       </header>
 
-      <ContactMe open={contactOpen} onOpenChange={setContactOpen} />
-    </>   
+    </>
   );
 }

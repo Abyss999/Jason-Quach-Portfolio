@@ -39,7 +39,7 @@ const logoMap: {[key: string]: string} = {
     "UH": "/uh.png",
     "EAI": "/eai.jpeg",
     "SLHS": "/SLHS.jpeg",
-    "UT": "/ut.png",
+    "UT": "/UT.png",
 }
 
 const profileImages = [
