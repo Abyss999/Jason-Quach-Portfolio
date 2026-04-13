@@ -19,6 +19,7 @@ All source code lives in `Jason-Quach-Portfolio/portfolio/` relative to the repo
 | `app/page.tsx` | Homepage — renders Hero, AboutMe, Skills, Projects, Contact sections |
 | `app/layout.tsx` | Root layout — metadata, fonts, NavBar, Footer, ThemeProvider |
 | `app/globals.css` | Tailwind import + OKLCh CSS custom properties for theme colors |
+| `app/api/github-stats/route.ts` | Server-side API route — proxies GitHub GraphQL + contributor stats; reads `GITHUB_TOKEN` |
 | `components/NavBar.tsx` | Sticky navbar with scroll-aware backdrop blur, active section tracking, mobile sheet |
 | `components/AboutMe.tsx` | About section — profile pic carousel, bio, education & work experience timelines |
 | `components/Hero.tsx` | Hero with typing animation |
@@ -28,6 +29,7 @@ All source code lives in `Jason-Quach-Portfolio/portfolio/` relative to the repo
 | `components/SkillCard.tsx` | Category skill card used in the Skills section |
 | `components/ContactMe.tsx` | Legacy contact modal — no longer wired up (superseded by inline Contact section) |
 | `data/projects.tsx` | All project data and tech stack definitions |
+| `.env.local` | `GITHUB_TOKEN=...` — gitignored, never commit; required for contributions + diff stats |
 
 ## Page Sections (in order)
 `Hero` → `AboutMe` → `Skills` → `Projects` → `Contact`
@@ -82,27 +84,43 @@ Order within the section:
 2. Stat overview tiles (Languages count, Frameworks count, Databases count, Projects count)
 3. GitHub Activity (see below)
 
-## GitHub Activity (`app/page.tsx`)
-Fetched client-side in a single `useEffect` via 4 parallel requests (all unauthenticated):
+## GitHub Activity (`app/page.tsx` + `app/api/github-stats/route.ts`)
 
+### Client-side fetches (unauthenticated, in `page.tsx` useEffect)
 | Data | Endpoint |
 |------|----------|
-| Public repos | `GET /users/Abyss999` → `public_repos` |
+| Public repos + followers | `GET /users/Abyss999` |
 | Top languages | `GET /users/Abyss999/repos?per_page=100` → count by `language` field |
-| Total commits | `GET /search/commits?q=author:Abyss999&per_page=1` → `total_count` |
-| Pull requests | `GET /search/issues?q=author:Abyss999+type:pr&per_page=1` → `total_count` |
 
-`GitHubStats` type: `{ repos, commits, pullRequests, topLangs: { name, count }[] }`
+### Server-side fetches (authenticated, in `/api/github-stats`)
+| Data | Method |
+|------|--------|
+| All-time contributions | GitHub GraphQL — yearly aliases summed server-side |
+| Lines added / deleted | `GET /repos/Abyss999/{repo}/stats/contributors` for top 10 non-fork repos |
+
+`GitHubStats` type: `{ repos, contributions, additions, deletions, topLangs: { name, count }[] }`
+- `contributions`, `additions`, `deletions` are `number | null` — `null` means token not set; those stat rows are hidden gracefully
 
 **Cards rendered:**
-- **Stats card** — Public Repos / Total Commits / Pull Requests with Lucide icons; links to `github.com/Abyss999`
+- **Stats card** — Public Repos / Contributions / Lines Added / Lines Removed; links to `github.com/Abyss999`
 - **Top Languages card** — uses `LANG_TO_TECH` map to render `TechBadge` for known langs (TypeScript, JavaScript, Python, C++, R), plain orange pill for unknowns
 - **Contribution graph** — full-width `<img src="https://ghchart.rshah.org/f97316/Abyss999">` (orange-tinted SVG, no auth needed)
 
-**Important GitHub API limits (unauthenticated):**
-- REST API: 60 req/hour per IP
-- Search API (`/search/*`): 10 req/minute — used for commits + PRs
-- The real "contributions" count (green squares total) requires GraphQL API + a personal access token; it is NOT available via REST
+**Security architecture:**
+```
+Browser → GET /api/github-stats → Next.js server (reads GITHUB_TOKEN) → GitHub → { contributions, additions, deletions }
+```
+Token never reaches the browser. Never prefix it with `NEXT_PUBLIC_`.
+
+**API route caching:** `next: { revalidate: 86400 }` — GitHub is only hit once per day per server instance.
+
+**Diff stat caveat:** additions/deletions only cover repos the user *owns* (not contributions to other people's repos). Top 10 non-fork repos sorted by most recently pushed.
+
+**GitHub API rate limits:**
+- Unauthenticated REST: 60 req/hour per IP
+- Authenticated REST: 5,000 req/hour
+- GraphQL (authenticated): 5,000 points/hour
+- The real contributions count is NOT available via unauthenticated REST — requires GraphQL + token
 
 Skeleton loaders shown while fetching; entire section hidden on fetch error (silent fail).
 

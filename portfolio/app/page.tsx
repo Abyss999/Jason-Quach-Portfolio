@@ -10,7 +10,7 @@ import TechBadge from "@/components/TechBadge";
 import {projects, Tech, ProjectCategory} from "@/data/projects";
 import ProjectCategoryFilter from "@/components/ProjectCategoryFilter";
 import { Button } from "@/components/ui/button";
-import { X, BookOpen, GitCommit, TrendingUp, TrendingDown } from "lucide-react";
+import { X, BookOpen, GitCommit, Users } from "lucide-react";
 
 // Map GitHub API language names → Tech entries for badge rendering
 const LANG_TO_TECH: Record<string, { label: string; icon: React.ReactNode }> = {
@@ -23,8 +23,7 @@ const LANG_TO_TECH: Record<string, { label: string; icon: React.ReactNode }> = {
 
 type GitHubStats = {
   repos: number;
-  additions: number | null;
-  deletions: number | null;
+  followers: number;
   contributions: number | null; // null = token not set yet, hides the stat gracefully
   topLangs: { name: string; count: number }[];
 };
@@ -105,7 +104,7 @@ export default function HomePage() {
           .slice(0, 6)
           .map(([name, count]) => ({ name, count }));
 
-        setGithubStats({ repos: user.public_repos, additions: contributionsData.additions, deletions: contributionsData.deletions, contributions: contributionsData.contributions, topLangs });
+        setGithubStats({ repos: user.public_repos, followers: user.followers, contributions: contributionsData.contributions, topLangs });
       } catch {
         // silently fail — section just won't render
       } finally {
@@ -234,15 +233,10 @@ export default function HomePage() {
                 ) : (
                   <div className="space-y-3">
                     {[
-                      { icon: <BookOpen className="h-4 w-4" />,    label: "Public Repos",   value: githubStats!.repos },
+                      { icon: <BookOpen className="h-4 w-4" />, label: "Public Repos",  value: githubStats!.repos },
+                      { icon: <Users    className="h-4 w-4" />, label: "Followers",     value: githubStats!.followers },
                       ...(githubStats!.contributions !== null ? [
-                        { icon: <GitCommit className="h-4 w-4" />,  label: "Contributions",  value: githubStats!.contributions! },
-                      ] : []),
-                      ...(githubStats!.additions !== null ? [
-                        { icon: <TrendingUp className="h-4 w-4" />,   label: "Lines Added",   value: `+${githubStats!.additions!.toLocaleString()}` },
-                      ] : []),
-                      ...(githubStats!.deletions !== null ? [
-                        { icon: <TrendingDown className="h-4 w-4" />, label: "Lines Removed", value: `-${githubStats!.deletions!.toLocaleString()}` },
+                        { icon: <GitCommit className="h-4 w-4" />, label: "Contributions", value: githubStats!.contributions! },
                       ] : []),
                     ].map(({ icon, label, value }) => (
                       <div key={label} className="flex items-center justify-between">
