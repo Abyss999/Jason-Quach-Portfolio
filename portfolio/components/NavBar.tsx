@@ -3,7 +3,6 @@
 import {useEffect, useState} from "react";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -131,8 +130,7 @@ export default function NavBar() {
                           key={item.path}
                           href={item.path}
                           label={item.label}
-                          isActive={item.id ? activeSection === item.id : false}
-                          onClick={item.onClick}
+                          isActive={activeSection === item.id}
                       />
                   );
               })}
@@ -176,11 +174,8 @@ export default function NavBar() {
                               key={item.path}
                               href={item.path}
                               label={item.label}
-                              isActive={item.id ? activeSection === item.id : false}
-                              onClick={() => {
-                                setOpen(false);
-                                item.onClick?.();
-                              }}
+                              isActive={activeSection === item.id}
+                              onClick={() => setOpen(false)}
                           />
                       ))}
 
