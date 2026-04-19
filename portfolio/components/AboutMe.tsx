@@ -243,8 +243,8 @@ type SpotifyData = {
 }
 
 const TIME_RANGE_LABELS: Record<string, string> = {
-    short_term: "1 Month",
-    medium_term: "6 Months",
+    short_term: "Recent",
+    medium_term: "This Year",
     long_term: "All Time",
 };
 
