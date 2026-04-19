@@ -149,6 +149,39 @@ All logo images live in `public/` and are referenced via `logoMap`:
 
 Logo rendering: `<Image>` if `logoImg` is set, otherwise letter initials on `logoColor` background. When `logoImg` is set, the box background becomes `bg-white` for contrast.
 
+## Spotify Section (`components/AboutMe.tsx`)
+
+Collapsible "My Music Taste" section at the bottom of the About Me section. It is the **last child inside** the `md:grid-cols-2` grid, placed as `md:col-span-2` so it inherits the grid's `gap-10` spacing automatically — do not add manual `mt-*` to it.
+
+### API
+- Route: `app/api/spotify/route.ts` — single `GET` endpoint, accepts `?timeRange=short_term|medium_term|long_term`
+- Returns: `{ nowPlaying, topTracks, topArtists }`
+- Env vars required: `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`
+- Required Spotify scopes: `user-read-currently-playing user-top-read`
+- Redirect URI registered in Spotify dashboard: `https://jason-portfolio-one.vercel.app/`
+- Token refresh flow: client credentials → exchange refresh token → get access token each request
+
+### UI
+- **Toggle button** — "My Music Taste" with Music icon + ChevronDown/Up
+- **Time range filter pills** — "1 Month" (`short_term`), "6 Months" (`medium_term`), "All Time" (`long_term`); refetches on change
+- **Now Playing** — green-bordered card, pulsing green dot when `is_playing`, links to Spotify; shows "Not currently playing" when null
+- **Top Tracks + Top Artists** — 2-column grid (`lg:grid-cols-2`), top 5 each, album/artist thumbnails, ranked, each row links to Spotify
+- Skeleton loaders shown while fetching
+
+### Next.js image config
+`i.scdn.co` added to `remotePatterns` in `next.config.ts` for Spotify album/artist images.
+
+### Workspace root issue
+If `npm run dev` fails with "Can't resolve 'tailwindcss'" error, Turbopack is inferring the wrong workspace root. **Solution:** ensure a `package.json` exists at `Jason-Quach-Portfolio/` (parent of `portfolio/`) with a workspaces declaration:
+```json
+{
+  "name": "jason-quach-portfolio-root",
+  "private": true,
+  "workspaces": ["portfolio"]
+}
+```
+This tells Turbopack that `portfolio/` is the actual workspace to resolve dependencies from. Do NOT add a `package-lock.json` at this level.
+
 ## Responsive / Mobile Conventions
 - Section headings: `text-3xl sm:text-4xl md:text-5xl` — never just `text-5xl`
 - Hero h1: `text-4xl sm:text-5xl md:text-6xl`

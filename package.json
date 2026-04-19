@@ -1,0 +1,7 @@
+{
+  "name": "jason-quach-portfolio-root",
+  "private": true,
+  "workspaces": [
+    "portfolio"
+  ]
+}
