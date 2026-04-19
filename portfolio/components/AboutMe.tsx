@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import {Mail, Github, Linkedin, FileText} from "lucide-react";
+import {Mail, Github, Linkedin, FileText, Music, ChevronDown, ChevronUp} from "lucide-react";
 import TechBadge from "@/components/TechBadge";
 
 const socials = [
@@ -223,9 +223,47 @@ const work_experience: WorkEntry[] = [
 ];
 
 
+type SpotifyTrack = {
+    name: string;
+    artists: { name: string }[];
+    album: { images: { url: string }[] };
+    external_urls: { spotify: string };
+}
+
+type SpotifyArtist = {
+    name: string;
+    images: { url: string }[];
+    external_urls: { spotify: string };
+}
+
+type SpotifyData = {
+    nowPlaying: { is_playing: boolean; item: SpotifyTrack } | null;
+    topTracks: SpotifyTrack[];
+    topArtists: SpotifyArtist[];
+}
+
+const TIME_RANGE_LABELS: Record<string, string> = {
+    short_term: "1 Month",
+    medium_term: "6 Months",
+    long_term: "All Time",
+};
+
 export default function AboutMe() {
     const [currentProfile, setCurrentProfile] = React.useState(0);
     const [imageLoaded, setImageLoaded] = React.useState(false);
+    const [spotifyExpanded, setSpotifyExpanded] = React.useState(false);
+    const [timeRange, setTimeRange] = React.useState<"short_term" | "medium_term" | "long_term">("short_term");
+    const [spotifyData, setSpotifyData] = React.useState<SpotifyData | null>(null);
+    const [spotifyLoading, setSpotifyLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        if (!spotifyExpanded) return;
+        setSpotifyLoading(true);
+        fetch(`/api/spotify?timeRange=${timeRange}`)
+            .then(r => r.json())
+            .then(data => { setSpotifyData(data); setSpotifyLoading(false); })
+            .catch(() => setSpotifyLoading(false));
+    }, [spotifyExpanded, timeRange]);
 
     const nextProfile = () => {
         setImageLoaded(false);
@@ -448,7 +486,164 @@ export default function AboutMe() {
                     </div>
                 </div>
 
+            {/* Spotify */}
+            <div className="md:col-span-2 flex justify-center">
+                <div className="w-full max-w-5xl">
+                    <button
+                        onClick={() => setSpotifyExpanded(v => !v)}
+                        className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-600 dark:text-white/60 hover:border-orange-500/40 hover:text-orange-500 dark:hover:text-orange-500 transition-all duration-200"
+                    >
+                        <Music className="h-4 w-4" />
+                        <span className="text-sm font-medium">My Music Taste</span>
+                        {spotifyExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                    </button>
+
+                    {spotifyExpanded && (
+                        <div className="mt-4 space-y-4">
+                            {/* Time range filter */}
+                            <div className="flex justify-center gap-2">
+                                {(["short_term", "medium_term", "long_term"] as const).map(range => (
+                                    <button
+                                        key={range}
+                                        onClick={() => setTimeRange(range)}
+                                        className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
+                                            timeRange === range
+                                                ? "bg-orange-500 text-white border-orange-500"
+                                                : "border-gray-200 dark:border-white/10 text-gray-600 dark:text-white/60 hover:border-orange-500/40 hover:text-orange-500"
+                                        }`}
+                                    >
+                                        {TIME_RANGE_LABELS[range]}
+                                    </button>
+                                ))}
+                            </div>
+
+                            {spotifyLoading ? (
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                    {[0, 1].map(i => (
+                                        <div key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4 space-y-3">
+                                            <div className="h-4 w-24 rounded bg-gray-200 dark:bg-white/10 animate-pulse" />
+                                            {[...Array(5)].map((_, j) => (
+                                                <div key={j} className="flex items-center gap-3">
+                                                    <div className="h-9 w-9 rounded bg-gray-200 dark:bg-white/10 animate-pulse shrink-0" />
+                                                    <div className="flex-1 space-y-1.5">
+                                                        <div className="h-3 w-3/4 rounded bg-gray-200 dark:bg-white/10 animate-pulse" />
+                                                        <div className="h-2.5 w-1/2 rounded bg-gray-200 dark:bg-white/10 animate-pulse" />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : spotifyData && (
+                                <div className="space-y-4">
+                                    {/* Now Playing */}
+                                    {spotifyData.nowPlaying?.item ? (
+                                        <a
+                                            href={spotifyData.nowPlaying.item.external_urls.spotify}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`flex items-center gap-4 p-4 rounded-2xl border transition-colors ${
+                                                spotifyData.nowPlaying.is_playing
+                                                    ? "border-green-500/30 bg-green-500/5 hover:border-green-500/50"
+                                                    : "border-orange-500/30 bg-orange-500/5 hover:border-orange-500/50"
+                                            }`}
+                                        >
+                                            <div className="relative shrink-0">
+                                                <Image
+                                                    src={spotifyData.nowPlaying.item.album.images[0]?.url}
+                                                    alt="Album art"
+                                                    width={56}
+                                                    height={56}
+                                                    className="rounded-lg"
+                                                />
+                                                {spotifyData.nowPlaying.is_playing && (
+                                                    <span className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-green-500 border-2 border-white dark:border-[oklch(0.145_0_0)] animate-pulse" />
+                                                )}
+                                            </div>
+                                            <div className="min-w-0">
+                                                <p className={`text-xs font-medium mb-0.5 ${spotifyData.nowPlaying.is_playing ? "text-green-500" : "text-orange-500"}`}>
+                                                    {spotifyData.nowPlaying.is_playing ? "▶ Currently listening to" : "⏸ Last played"}
+                                                </p>
+                                                <p className="font-semibold text-gray-900 dark:text-white truncate">{spotifyData.nowPlaying.item.name}</p>
+                                                <p className="text-sm text-gray-500 dark:text-white/55 truncate">{spotifyData.nowPlaying.item.artists.map(a => a.name).join(", ")}</p>
+                                            </div>
+                                        </a>
+                                    ) : (
+                                        <div className="flex items-center gap-3 p-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5">
+                                            <Music className="h-5 w-5 text-gray-400 shrink-0" />
+                                            <p className="text-sm text-gray-500 dark:text-white/50">Not currently playing anything</p>
+                                        </div>
+                                    )}
+
+                                    {/* Top Tracks + Top Artists */}
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                        <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4">
+                                            <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">🎵 Top Tracks</h3>
+                                            <div className="space-y-1">
+                                                {spotifyData.topTracks?.map((track, i) => (
+                                                    <a
+                                                        key={i}
+                                                        href={track.external_urls.spotify}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-orange-500/10 transition-colors group"
+                                                    >
+                                                        <span className="text-xs text-gray-400 dark:text-white/30 w-4 shrink-0 text-right">{i + 1}</span>
+                                                        <Image
+                                                            src={track.album.images[0]?.url}
+                                                            alt={track.name}
+                                                            width={36}
+                                                            height={36}
+                                                            className="rounded shrink-0"
+                                                        />
+                                                        <div className="min-w-0">
+                                                            <p className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-orange-500 transition-colors">{track.name}</p>
+                                                            <p className="text-xs text-gray-500 dark:text-white/50 truncate">{track.artists.map(a => a.name).join(", ")}</p>
+                                                        </div>
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-4">
+                                            <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">🎤 Top Artists</h3>
+                                            <div className="space-y-1">
+                                                {spotifyData.topArtists?.map((artist, i) => (
+                                                    <a
+                                                        key={i}
+                                                        href={artist.external_urls.spotify}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-orange-500/10 transition-colors group"
+                                                    >
+                                                        <span className="text-xs text-gray-400 dark:text-white/30 w-4 shrink-0 text-right">{i + 1}</span>
+                                                        {artist.images[0]?.url ? (
+                                                            <Image
+                                                                src={artist.images[0].url}
+                                                                alt={artist.name}
+                                                                width={36}
+                                                                height={36}
+                                                                className="rounded-full shrink-0 object-cover"
+                                                            />
+                                                        ) : (
+                                                            <div className="h-9 w-9 rounded-full shrink-0 bg-orange-500/20 flex items-center justify-center text-xs font-bold text-orange-500">
+                                                                {artist.name[0]}
+                                                            </div>
+                                                        )}
+                                                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-orange-500 transition-colors">{artist.name}</p>
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
+
+        </div>
 
         </section>
     )
