@@ -5,7 +5,7 @@ import {
   SiNodedotjs, SiReact, SiTailwindcss, SiExpress, SiFlask, SiNextdotjs,
   SiPostgresql, SiMysql, SiMongodb, SiDocker, SiGithub, SiPandas,
   SiScikitlearn, SiDiscord, SiSocketdotio, SiTensorflow, SiNumpy,
-  SiHeroku, SiVercel, SiStreamlit, SiPytorch, SiPlotly,
+  SiHeroku, SiVercel, SiStreamlit, SiPytorch, SiPlotly, SiVite,
 } from "react-icons/si";
 
 export const Tech = {
@@ -51,6 +51,8 @@ export const Tech = {
   sql_server: { label: "SQL Server", icon: <DatabaseIcon className="h-4 w-4" /> },
   pytorch: { label: "PyTorch", icon: <SiPytorch className="h-4 w-4" /> },
   plotly: { label: "Plotly", icon: <SiPlotly className="h-4 w-4" /> },
+  vite: { label: "Vite", icon: <SiVite className="h-4 w-4" /> },
+  framermotion: { label: "Framer Motion", icon: <Layers className="h-4 w-4" /> },
 
 } satisfies Record<string, ProjectTech>;
 
@@ -299,5 +301,29 @@ export const projects: Project[] = [
         { src: "/pneumonia_2.png", caption: "Model 2 — Secondary Classifier and Final Verdict with conflict resolution" },
     ],
     categories: ["DS", "SWE"],
-    },
+    }, {
+    id: "sortlab",
+    title: "SortLab",
+    description:
+      "Sorting algorithm visualizer and mini-game suite built for UH COSC 2436 and COSC 3320 students. Step through Bubble, Selection, Insertion, Merge, Quick, and Heap sort with live code highlighting in 5 languages, then test your intuition in the Bubble drag-sort game or the Manual Sort bar-drag challenge.",
+    longDescription:
+      "SortLab is an interactive learning tool for University of Houston data structures and algorithms courses. The visualizer pre-computes all comparison/swap steps, lets you play/pause/step at variable speed, and syncs per-line code highlighting across Python, C++, JavaScript, TypeScript, and Java using Shiki. The Bubble Game scatters numbered bubbles on a canvas — arrange them smallest → largest by X position before you run out of lives (three difficulty tiers with pop-on-collision mechanics). Manual Sort presents a draggable bar chart where you rearrange bars by drag-and-drop, with pitch-mapped sound feedback on every move.",
+    liveLink: "https://abyss999.github.io/SortLab/",
+    githubLink: null,
+    categories: ["SWE"],
+    techStack: [
+      Tech.react,
+      Tech.typescript,
+      Tech.tailwindcss,
+      Tech.vite,
+      Tech.framermotion,
+    ],
+    images: [
+      { src: "/SortLab_1.gif", caption: "Gif of visualizer of merge sort" },
+      { src: "/SortLab_2.gif", caption: "Gif of manual sort" },
+      { src: "/SortLab_1.png", caption: "Visualizer — Bubble Sort with live code highlighting" },
+      { src: "/SortLab_2.png", caption: "Bubble Game — drag bubbles to sort smallest → largest" },
+      { src: "/SortLab_3.png", caption: "Manual Sort — drag-and-drop bar sorting challenge" },
+    ],
+  },
 ]
