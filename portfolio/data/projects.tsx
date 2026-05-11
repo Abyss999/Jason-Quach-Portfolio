@@ -115,10 +115,12 @@ export const projects: Project[] = [
       Tech.nextjs,
     ],
     images: [
-      { src: "/cai_old_1.png", caption: "Homepage" },
-      { src: "/cai_old_2.png", caption: "Calendar" },
-      { src: "/cai_old_3.png", caption: "Members" },
-      { src: "/cai_old_4.png", caption: "About Us" },
+      { src: "/cai_new_1.png", caption: "Home Page" },
+      { src: "/cai_new_2.png", caption: "About Us" },
+      { src: "/cai_new_3.png", caption: "Memberships" },
+      { src: "/cai_new_4.png", caption: "Contact Us" },
+      { src: "/cai_new_5.png", caption: "Calendar" },
+      { src: "/cai_new_6.png", caption: "Join Page" },
     ],
     categories: ["SWE", "WIP"]
   },{
@@ -167,7 +169,7 @@ export const projects: Project[] = [
       "SortLab is an interactive learning tool for University of Houston data structures and algorithms courses. The visualizer pre-computes all comparison/swap steps, lets you play/pause/step at variable speed, and syncs per-line code highlighting across Python, C++, JavaScript, TypeScript, and Java using Shiki. The Bubble Game scatters numbered bubbles on a canvas — arrange them smallest → largest by X position before you run out of lives (three difficulty tiers with pop-on-collision mechanics). Manual Sort presents a draggable bar chart where you rearrange bars by drag-and-drop, with pitch-mapped sound feedback on every move.",
     liveLink: "https://abyss999.github.io/SortLab/",
     githubLink: null,
-    categories: ["SWE"],
+    categories: ["SWE", "WIP"],
     techStack: [
       Tech.react,
       Tech.typescript,
@@ -243,7 +245,7 @@ export const projects: Project[] = [
       {src: "/portfolio_2.png", caption: "Timeline section with work and education timelines"},
       {src: "/portfolio_3.png", caption: "Homepage with animated hero and scroll-aware navbar"},
     ],
-    categories: ["SWE"],
+    categories: ["SWE", "WIP"],
   }, {
     id: "dblp-venue-analysis",
   title: "DBLP Venue Analysis",
