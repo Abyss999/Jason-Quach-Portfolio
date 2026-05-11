@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black text-gray-900 dark:text-orange-500 overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#050402] text-gray-900 dark:text-orange-500 overflow-x-hidden`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="relative min-h-screen overflow-x-hidden">

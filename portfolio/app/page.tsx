@@ -1,7 +1,9 @@
 "use client";
 import {useMemo, useState, useEffect} from "react";
+import { useTheme } from "next-themes";
 import AboutMe from "@/components/AboutMe";
 import Hero from "@/components/Hero";
+import SiteBackground from "@/components/SiteBackground";
 
 import SkillCard from "@/components/SkillCard";
 import ProjectCard from "@/components/ProjectCard";
@@ -75,6 +77,7 @@ const otherSkills = [
 ];
 
 export default function HomePage() {
+  const { resolvedTheme } = useTheme();
 
   const [activeCategories, setActiveCategories] = useState<Set<ProjectCategory>>(new Set());
   const [activeTech, setActiveTech] = useState<string | null>(null);
@@ -161,7 +164,9 @@ export default function HomePage() {
   }, [activeCategories, activeTech]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 text-white">
+    <div className="relative">
+      {resolvedTheme === 'dark' && <SiteBackground />}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 text-white">
       <Hero />
       <AboutMe />
 
@@ -401,6 +406,7 @@ export default function HomePage() {
           </p>
         </div>
       </section>
-    </main>
+      </div>
+    </div>
   );
 }
