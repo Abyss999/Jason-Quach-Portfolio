@@ -7,7 +7,7 @@ interface NetNode {
   r: number; pulse: number;
 }
 
-function NeuralCanvas() {
+function NeuralCanvas({ isDark }: { isDark: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -35,6 +35,13 @@ function NeuralCanvas() {
       for (let i = 0; i < NODE_COUNT; i++) nodes.push(mkNode());
     }
 
+    // Dark: bright orange on near-black. Light: darker orange on warm white.
+    const edgeColor  = isDark ? '249,115,22' : '194,65,12';   // orange-500 vs orange-800
+    const nodeColor  = isDark ? '249,115,22' : '194,65,12';
+    const glowBg     = isDark ? '0,0,0'      : '255,255,255';
+    const edgeAlpha  = isDark ? 0.38         : 0.30;
+    const nodeAlpha  = isDark ? 0.42         : 0.55;
+
     let pTimer = 0;
     function loop() {
       ctx.clearRect(0, 0, W, H);
@@ -57,9 +64,9 @@ function NeuralCanvas() {
           const dy = nodes[i].y - nodes[j].y;
           const d = Math.hypot(dx, dy);
           if (d < MAX_DIST) {
-            const a = (1 - d / MAX_DIST) * 0.38;
+            const a = (1 - d / MAX_DIST) * edgeAlpha;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(249,115,22,${a})`;
+            ctx.strokeStyle = `rgba(${edgeColor},${a})`;
             ctx.lineWidth = 0.75;
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -69,17 +76,17 @@ function NeuralCanvas() {
       }
 
       for (const n of nodes) {
-        const a = 0.42 + n.pulse * 0.58;
+        const a = nodeAlpha + n.pulse * 0.45;
         const r = n.r + n.pulse * 2.8;
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(249,115,22,${a})`;
+        ctx.fillStyle = `rgba(${nodeColor},${a})`;
         ctx.fill();
 
         if (n.pulse > 0.22) {
           const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 26);
-          grd.addColorStop(0, `rgba(249,115,22,${n.pulse * 0.38})`);
-          grd.addColorStop(1, 'rgba(0,0,0,0)');
+          grd.addColorStop(0, `rgba(${nodeColor},${n.pulse * 0.38})`);
+          grd.addColorStop(1, `rgba(${glowBg},0)`);
           ctx.beginPath();
           ctx.arc(n.x, n.y, 26, 0, Math.PI * 2);
           ctx.fillStyle = grd;
@@ -97,7 +104,7 @@ function NeuralCanvas() {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <canvas
@@ -108,28 +115,76 @@ function NeuralCanvas() {
   );
 }
 
-export default function SiteBackground() {
+export default function SiteBackground({ isDark }: { isDark: boolean }) {
+  if (isDark) {
+    return (
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
+        {/* 1 — warm dark base */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(150deg, #0a0805 0%, #050402 55%, #080603 100%)' }}
+        />
+
+        {/* 2 — neural net canvas */}
+        <NeuralCanvas isDark={true} />
+
+        {/* 3 — hero glow */}
+        <div
+          className="absolute inset-0 z-[2]"
+          style={{ background: 'radial-gradient(ellipse 75% 52% at 50% 17%, rgba(234,88,12,0.45), transparent 72%)' }}
+        />
+
+        {/* 4 — edge vignette */}
+        <div
+          className="absolute inset-0 z-[2]"
+          style={{ background: 'radial-gradient(ellipse 130% 100% at 50% 50%, transparent 48%, rgba(0,0,0,0.72) 100%)' }}
+        />
+
+        {/* 5 — orange grid */}
+        <div
+          className="absolute inset-0 z-[2]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(234,88,12,.08) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(234,88,12,.08) 1px, transparent 1px)
+            `,
+            backgroundSize: '36px 36px',
+            WebkitMaskImage: 'radial-gradient(ellipse 88% 58% at 50% 28%, black 25%, transparent 78%)',
+            maskImage: 'radial-gradient(ellipse 88% 58% at 50% 28%, black 25%, transparent 78%)',
+          }}
+        />
+
+        {/* 6 — bottom fade */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-[3]"
+          style={{ height: '38%', background: 'linear-gradient(to bottom, transparent, #050402)' }}
+        />
+      </div>
+    );
+  }
+
+  // Light mode
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
-      {/* 1 — warm dark base */}
+      {/* 1 — warm light base */}
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(150deg, #0a0805 0%, #050402 55%, #080603 100%)' }}
+        style={{ background: 'linear-gradient(150deg, #fff8f3 0%, #fdfaf7 55%, #fffbf8 100%)' }}
       />
 
       {/* 2 — neural net canvas */}
-      <NeuralCanvas />
+      <NeuralCanvas isDark={false} />
 
-      {/* 3 — hero glow */}
+      {/* 3 — hero glow (soft warm bloom) */}
       <div
         className="absolute inset-0 z-[2]"
-        style={{ background: 'radial-gradient(ellipse 75% 52% at 50% 17%, rgba(234,88,12,0.45), transparent 72%)' }}
+        style={{ background: 'radial-gradient(ellipse 75% 52% at 50% 17%, rgba(234,88,12,0.18), transparent 72%)' }}
       />
 
-      {/* 4 — edge vignette */}
+      {/* 4 — subtle warm vignette (light, not dark) */}
       <div
         className="absolute inset-0 z-[2]"
-        style={{ background: 'radial-gradient(ellipse 130% 100% at 50% 50%, transparent 48%, rgba(0,0,0,0.72) 100%)' }}
+        style={{ background: 'radial-gradient(ellipse 130% 100% at 50% 50%, transparent 48%, rgba(253,245,235,0.6) 100%)' }}
       />
 
       {/* 5 — orange grid */}
@@ -137,8 +192,8 @@ export default function SiteBackground() {
         className="absolute inset-0 z-[2]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(234,88,12,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(234,88,12,.08) 1px, transparent 1px)
+            linear-gradient(rgba(194,65,12,.09) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(194,65,12,.09) 1px, transparent 1px)
           `,
           backgroundSize: '36px 36px',
           WebkitMaskImage: 'radial-gradient(ellipse 88% 58% at 50% 28%, black 25%, transparent 78%)',
@@ -146,10 +201,10 @@ export default function SiteBackground() {
         }}
       />
 
-      {/* 6 — bottom fade */}
+      {/* 6 — bottom fade to warm white */}
       <div
         className="absolute bottom-0 left-0 right-0 z-[3]"
-        style={{ height: '38%', background: 'linear-gradient(to bottom, transparent, #050402)' }}
+        style={{ height: '38%', background: 'linear-gradient(to bottom, transparent, #fdfaf7)' }}
       />
     </div>
   );

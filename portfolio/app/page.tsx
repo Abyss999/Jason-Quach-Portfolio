@@ -167,7 +167,7 @@ export default function HomePage() {
 
   return (
     <div className="relative">
-      {resolvedTheme === 'dark' && <SiteBackground />}
+      <SiteBackground isDark={resolvedTheme !== 'light'} />
       <div className="relative z-10 mx-auto max-w-6xl px-4 text-white">
       <Hero />
       <AboutMe />
