@@ -43,9 +43,11 @@ const logoMap: {[key: string]: string} = {
 }
 
 const profileImages = [
-    "/pfp.jpg",
-    "/pfp_2.png",
     "/pfp_3.jpg",
+    "/grad_2.jpg",
+    "/pfp.jpg",
+    "/grad_1.jpg",
+    "/pfp_2.png",
 ];
 
 type EduEntry = {
@@ -79,7 +81,7 @@ const education: EduEntry[] = [
     {
         degree: "B.S. Computer Science, Minor in Mathematics",
         school: "University of Houston",
-        gpa: "GPA: 3.6",
+        gpa: "GPA: 3.65",
         location: "Houston, TX",
         dates: "Aug 2024 – May 2026",
         logo: "UH",
@@ -140,11 +142,28 @@ type WorkEntry = {
 
 const work_experience: WorkEntry[] = [
     {
+        role: "Lead Software Engineer",
+        company: "CougarAI",
+        type: "Part-time",
+        location: "Houston, TX",
+        dates: "May 2026 – Present",
+        logo: "CAI",
+        logoColor: "bg-red-600",
+        logoImg: logoMap["CAI"],
+        bullets: [
+            "Lead technical architecture and full-stack development of CougarAI's production platform (React 19, TypeScript, Flask, PostgreSQL) with a team of 3 engineers, supporting 200+ active members and partner organizations.",
+            "Designed and shipped role-based access control across 5 user tiers, event management with QR/geolocation check-in, Stripe membership payments, real-time in-app notifications, and a partner org portal.",
+            "Mentor engineers and officer teams on REST API design, JWT auth patterns, system design, and production deployment workflows.",
+            "Drove platform-wide security hardening — JWT token rotation, rate limiting, SQL injection prevention, webhook signature verification, and CORS configuration for production.",
+        ],
+        tags: ["Leadership", "React", "TypeScript", "Flask", "PostgreSQL", "Python", "JWT", "Stripe", "REST API", "System Design"],
+    },
+    {
         role: "Software Engineering Intern",
         company: "Energy AI Solutions",
         type: "Internship",
         location: "Spring, TX",
-        dates: "Jan 2026 – Present",
+        dates: "Jan 2026 – May 2026",
         logo: "EAI",
         logoColor: "bg-blue-600",
         logoImg: "/eai.jpeg",
@@ -160,7 +179,7 @@ const work_experience: WorkEntry[] = [
         company: "CougarAI",
         type: "Part-time",
         location: "Houston, TX",
-        dates: "Mar 2026 – Present",
+        dates: "Mar 2026 – Jun 2026",
         logo: "CAI",
         logoColor: "bg-red-600",
         logoImg: logoMap["CAI"],
@@ -341,15 +360,14 @@ export default function AboutMe() {
 
                 <div>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-white/80">
-                        I'm a Computer Science student at the University of Houston and Vice President of CougarAI. 
-                        I specialize in full-stack development with a passion for backend engineering—from Discord bots that generated <b>$8k+</b> in revenue to volunteer platforms with real-time features. 
+                        I'm a Computer Science graduate from the University of Houston and Lead Software Engineer at CougarAI.
+                        I specialize in full-stack development with a passion for backend engineering—from Discord bots that generated <b>$8k+</b> in revenue to production platforms serving 200+ active members.
                         I love building APIs, designing databases, and architecting scalable server-side systems.
                     </p>
 
                     <p className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-white/80">
-                        My stack includes Flask, PostgreSQL, React, Next.js, MongoDB, and Docker. 
-                        When I'm not coding, you'll find me at the gym, rewatching superhero movies, or exploring new tech. 
-                        Currently seeking internships where I can build production-level applications and grow as a backend engineer.
+                        My stack includes Flask, PostgreSQL, React, Next.js, MongoDB, and Docker.
+                        When I'm not coding, you'll find me at the gym, rewatching superhero movies, or exploring new tech.
                     </p>  
 
                     {/* Links */}

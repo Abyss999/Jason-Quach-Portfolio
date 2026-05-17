@@ -6,6 +6,7 @@ import {
   SiPostgresql, SiMysql, SiMongodb, SiDocker, SiGithub, SiPandas,
   SiScikitlearn, SiDiscord, SiSocketdotio, SiTensorflow, SiNumpy,
   SiHeroku, SiVercel, SiStreamlit, SiPytorch, SiPlotly, SiVite,
+  SiOpenai, SiAnthropic,
 } from "react-icons/si";
 
 export const Tech = {
@@ -53,6 +54,8 @@ export const Tech = {
   plotly: { label: "Plotly", icon: <SiPlotly className="h-4 w-4" /> },
   vite: { label: "Vite", icon: <SiVite className="h-4 w-4" /> },
   framermotion: { label: "Framer Motion", icon: <Layers className="h-4 w-4" /> },
+  chatgpt: { label: "ChatGPT", icon: <SiOpenai className="h-4 w-4" /> },
+  claude: { label: "Claude", icon: <SiAnthropic className="h-4 w-4" /> },
 
 } satisfies Record<string, ProjectTech>;
 
@@ -103,16 +106,21 @@ export const projects: Project[] = [
   {
     id: "cougarai-website",
     title: "CougarAI Website",
-    description: "CougarAI’s public website with a modular React + Tailwind UI and a Flask/PostgreSQL backend, integrating Google Calendar for live event listings and building responsive pages for members, announcements, and club information",
+    description: "Full-stack SPA for the CougarAI club at UH — React + Flask with JWT auth, role-based dashboards (admin/officer/partner/member), Stripe membership payments, event management with QR check-in and geolocation, in-app notifications, progress reports, receipt book, and Google Calendar integration.",
+    longDescription: "Built with React 19 + TypeScript + Vite + Tailwind CSS 4 on the frontend and Python Flask + PostgreSQL on the backend. Features a unified admin/officer dashboard for managing events, users, sponsors, partners, and officer progress reports. Members get a personal dashboard with points, leaderboard, attendance streaks, and QR-code check-in. Stripe handles semester/yearly membership checkout with webhook-driven role upgrades. Real-time in-app notifications are delivered via Flask-APScheduler. Partner orgs have their own dashboard with resource links and member/event stats.",
     githubLink: "https://github.com/Abyss999/CougarAI-Website-Revamp",
     liveLink: "https://www.cougarai.org/",
     techStack: [
       Tech.react,
+      Tech.typescript,
       Tech.tailwindcss,
+      Tech.vite,
       Tech.flask,
       Tech.postgresql,
       Tech.python,
-      Tech.nextjs,
+      Tech.jwt,
+      Tech.rest,
+      Tech.apscheduler,
     ],
     images: [
       { src: "/cai_new_1.png", caption: "Home Page" },
@@ -121,6 +129,10 @@ export const projects: Project[] = [
       { src: "/cai_new_4.png", caption: "Contact Us" },
       { src: "/cai_new_5.png", caption: "Calendar" },
       { src: "/cai_new_6.png", caption: "Join Page" },
+      { src: "/cai_admin.png", caption: "Admin / Officer Dashboard" },
+      { src: "/cai_partner.png", caption: "Partner Portal" },
+      { src: "/cai_member_dashboard.png", caption: "Member Dashboard — Points & Leaderboard" },
+      { src: "/cai_geolocation.png", caption: "Event Editor — Geolocation Check-In & QR Code" },
     ],
     categories: ["SWE", "WIP"]
   },{
@@ -143,16 +155,18 @@ export const projects: Project[] = [
     ],
     categories: ["SWE"],
 }, {
-    id: "CougarAI Bot",
+    id: "cougarai-bot",
     title: "CougarAI Bot",
-    description: "Discord bot that powers CougarAI’s member points and admin workflows, syncing Google Forms submissions through Google Sheets into PostgreSQL and providing officer-only commands for event management, point adjustments, and full points history tracking",
+    description: "Discord.js bot that powers CougarAI’s officer workflows — bridges the website backend via REST to expose slash commands for event management (/events, /attendance, /stats), member/officer CRUD (/users, /officers), announcements (/announce), and point awards (/points award). Supports Discord Guild Scheduled Events and QR check-in management.",
+    longDescription: "Built as an ES Module project with auto-loading commands, buttons, and modals. All data flows through the CougarAI website’s REST API (JWT-authenticated via a dedicated admin account). Officers use slash commands to manage events (with live stats, QR codes, Discord events), view and remind on progress reports, look up and update member roles, and manage officer rosters. The point system awards/deducts via the website’s /admin/points endpoint. Pagination, embed builders, and modal flows are all handled via custom utilities attached to the Discord.js client.",
     techStack: [
       Tech.discordjs,
       Tech.nodejs,
       Tech.postgresql,
       Tech.javascript,
       Tech.api_integration,
-    ], 
+      Tech.rest,
+    ],
     images: [
       {src: "/cai_bot_2.png", caption: "Point System (Google Forms -> Google Sheets -> PostgreSQL)"},
       {src: "/cai_bot_1.png", caption: "Manage Events Command"},

@@ -74,6 +74,8 @@ const otherSkills = [
   Tech.vscode,
   Tech.jwt,
   Tech.rest,
+  Tech.chatgpt,
+  Tech.claude,
 ];
 
 export default function HomePage() {
