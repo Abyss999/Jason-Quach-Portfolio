@@ -93,17 +93,17 @@ export default function Hero() {
           </a>
           <a
             href="#about"
-            className="rounded-full border border-orange-500/40 px-6 py-3 text-sm font-semibold text-orange-500 dark:text-orange-300 transition-all hover:bg-orange-500/10 hover:-translate-y-0.5"
+            className="rounded-full border border-orange-500 dark:border-orange-500/40 px-6 py-3 text-sm font-semibold text-orange-600 dark:text-orange-300 transition-all hover:bg-orange-500/10 hover:-translate-y-0.5"
           >
             About Me
           </a>
         </div>
 
         {/* Stats row */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-0">
+        <div className="mt-10 flex items-center justify-center gap-0">
           {stats.map((stat, i) => (
             <div key={stat.label} className="flex items-center">
-              <div className="flex flex-col gap-0.5 pr-6 sm:pr-8">
+              <div className="flex flex-col gap-0.5 pr-3 sm:pr-6 md:pr-8">
                 <span className="font-[family-name:var(--font-syne)] text-2xl font-bold text-orange-500 leading-none">
                   {stat.value}
                 </span>
@@ -112,7 +112,7 @@ export default function Hero() {
                 </span>
               </div>
               {i < stats.length - 1 && (
-                <div className="w-px h-9 bg-gray-300/60 dark:bg-white/10 mr-6 sm:mr-8" />
+                <div className="w-px h-9 bg-gray-300/60 dark:bg-white/10 mr-3 sm:mr-6 md:mr-8" />
               )}
             </div>
           ))}
