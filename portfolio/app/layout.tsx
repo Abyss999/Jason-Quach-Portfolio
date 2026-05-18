@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 
 import NavBar from "@/components/NavBar";
@@ -16,6 +16,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["700", "800"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
   title: "Jason Quach | Portfolio",
   description: "Computer Science Student | Software Developer",
@@ -29,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#fdfaf7] dark:bg-[#050402] text-gray-900 dark:text-orange-500 overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} ${dmSans.variable} font-[family-name:var(--font-dm-sans)] antialiased bg-[#fdfaf7] dark:bg-[#050402] text-gray-900 dark:text-orange-500 overflow-x-hidden`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="relative min-h-screen overflow-x-hidden">

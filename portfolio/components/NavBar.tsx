@@ -32,10 +32,10 @@ function NavLink({
 }) {
 
   const classes = cn(
-    "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-        "text-orange-500 hover:text-orange-500 hover:bg-orange-500/15",
-        isActive && "text-orange-500 bg-orange-500/20"
-      );
+    "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
+    "text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/6",
+    isActive && "text-orange-500 dark:text-orange-500 hover:text-orange-500 dark:hover:text-orange-500"
+  );
 
     if (onClick) {
       return (
@@ -63,21 +63,25 @@ export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+      if (atBottom) setActiveSection("contact");
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const navItems = [
-    { label: "Home", path: "/#hero", id: "hero" },
     { label: "About", path: "/#about", id: "about" },
     { label: "Skills", path: "/#skills", id: "skills" },
+    { label: "GitHub", path: "/#github", id: "github" },
     { label: "Projects", path: "/#projects", id: "projects" },
     { label: "Contact", path: "/#contact", id: "contact" },
   ];
 
   useEffect(() => {
-    const sections = ["hero", "about", "skills", "projects", "contact"];
+    const sections = ["hero", "about", "skills", "github", "projects", "contact"];
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -106,45 +110,45 @@ export default function NavBar() {
   return (
     <>
       <header className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-200",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200/60 dark:border-white/10 shadow-sm"
-          : "bg-white dark:bg-black"
+          ? "bg-white/85 dark:bg-[rgba(8,6,4,0.88)] backdrop-blur-lg dark:[backdrop-filter:blur(18px)_saturate(1.4)] border-b border-gray-200/60 dark:border-white/8"
+          : "bg-transparent"
       )}>
         <div>
-          <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+          <div className="mx-auto grid h-16 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4">
             {/* Brand */}
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight text-orange-500"
+              className="font-[family-name:var(--font-syne)] text-xl font-extrabold tracking-tight text-orange-500"
             >
-              Jason Quach
+              JQ
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden items-center gap-1 md:flex">
-              {navItems.map((item) => {
-     
-                  return (
-                      <NavLink
-                          key={item.path}
-                          href={item.path}
-                          label={item.label}
-                          isActive={activeSection === item.id}
-                      />
-                  );
-              })}
-              <Button
-                asChild
-                className="ml-2 rounded-full bg-orange-500 text-black hover:bg-orange-400"
-              >
-                <a href={RESUME_HREF} target="_blank" rel="noopener noreferrer">
-                  Resume
-                </a>
-              </Button>
-
-              <ThemeToggle/>
+            {/* Desktop Nav — centered */}
+            <nav className="hidden items-center justify-center gap-1 md:flex">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.path}
+                  href={item.path}
+                  label={item.label}
+                  isActive={activeSection === item.id}
+                />
+              ))}
             </nav>
+
+            {/* Right side — Resume + Theme */}
+            <div className="hidden items-center gap-2 md:flex">
+              <a
+                href={RESUME_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-orange-500/40 px-5 py-1.5 text-sm font-semibold text-orange-500 transition-colors hover:bg-orange-500/14"
+              >
+                Resume
+              </a>
+              <ThemeToggle/>
+            </div>
 
             {/* Mobile Nav */}
             <div className="flex items-center gap-2 md:hidden">
