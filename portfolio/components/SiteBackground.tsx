@@ -13,9 +13,8 @@ function NeuralCanvas({ isDark }: { isDark: boolean }) {
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext('2d')!;
-    const NODE_COUNT = 62;
-    const MAX_DIST = 190;
     let W = 0, H = 0, animId = 0;
+    let nodeCount = 62, maxDist = 190;
     const nodes: NetNode[] = [];
 
     function mkNode(): NetNode {
@@ -31,8 +30,11 @@ function NeuralCanvas({ isDark }: { isDark: boolean }) {
     function resize() {
       W = canvas.width = window.innerWidth;
       H = canvas.height = window.innerHeight;
+      const isMobile = W < 768;
+      nodeCount = isMobile ? 28 : 62;
+      maxDist = isMobile ? 120 : 190;
       nodes.length = 0;
-      for (let i = 0; i < NODE_COUNT; i++) nodes.push(mkNode());
+      for (let i = 0; i < nodeCount; i++) nodes.push(mkNode());
     }
 
     // Dark: bright orange on near-black. Light: darker orange on warm white.
@@ -63,8 +65,8 @@ function NeuralCanvas({ isDark }: { isDark: boolean }) {
           const dx = nodes[i].x - nodes[j].x;
           const dy = nodes[i].y - nodes[j].y;
           const d = Math.hypot(dx, dy);
-          if (d < MAX_DIST) {
-            const a = (1 - d / MAX_DIST) * edgeAlpha;
+          if (d < maxDist) {
+            const a = (1 - d / maxDist) * edgeAlpha;
             ctx.beginPath();
             ctx.strokeStyle = `rgba(${edgeColor},${a})`;
             ctx.lineWidth = 0.75;

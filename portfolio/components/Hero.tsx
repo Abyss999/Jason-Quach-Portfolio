@@ -61,10 +61,10 @@ export default function Hero() {
 
         {/* Two-line name */}
         <h1 className="mt-6 font-[family-name:var(--font-syne)] font-extrabold leading-[0.9] tracking-tight">
-          <span className="block text-7xl sm:text-8xl md:text-[118px] text-gray-900 dark:text-white">
+          <span className="block text-6xl sm:text-8xl md:text-[118px] text-gray-900 dark:text-white">
             Jason
           </span>
-          <span className="block text-7xl sm:text-8xl md:text-[118px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-200 bg-clip-text text-transparent">
+          <span className="block text-6xl sm:text-8xl md:text-[118px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-200 bg-clip-text text-transparent">
             Quach
           </span>
         </h1>
