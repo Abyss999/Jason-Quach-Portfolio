@@ -1,6 +1,6 @@
 # Jason Quach — Portfolio
 
-Personal portfolio website showcasing my software engineering, data science, and machine learning projects.
+Personal portfolio website showcasing my software engineering, data science, and machine learning projects. Currently working as a Software Engineer at Techemet; accepted to UT Austin M.S. Computer Science (Spring 2027).
 
 **Live:** https://jason-portfolio-one.vercel.app/
 
@@ -15,12 +15,13 @@ Personal portfolio website showcasing my software engineering, data science, and
 
 ## Features
 
-- Scroll-aware fixed navbar with active section tracking
-- Animated typing hero
+- Scroll-aware fixed navbar with active section tracking + scroll progress bar
+- Animated typing hero with counting stat animations
 - Work & education timelines (LinkedIn-style)
-- Filterable projects grid with tech-stack filter pills
+- Filterable projects grid with tech-stack filter pills; WIP cards show "In Progress" ribbon
 - Project gallery modal with keyboard navigation (← → Esc) and thumbnail strip
-- Skills section
+- Skills section with GitHub activity (top 3 languages, contribution graph)
+- Copy-to-clipboard on contact email
 - Dark / light mode toggle
 - Fully responsive (mobile-first)
 
@@ -53,7 +54,12 @@ portfolio/
 │   └── TechBadge.tsx     # Reusable tech pill badge
 ├── data/
 │   └── projects.tsx      # All project data and Tech definitions
-└── public/               # All images (logos, project screenshots)
+└── public/               # Static assets (organized by type)
+    ├── logos/            # Org/company/school logos
+    ├── profile/          # Personal photos
+    ├── projects/         # Project screenshots (per-project subfolders)
+    ├── docs/             # PDFs (resume, reports)
+    └── fonts/            # Local fonts (Syne ExtraBold TTF)
 ```
 
 ## Adding Projects
@@ -74,12 +80,12 @@ Projects are defined in `data/projects.tsx`. Each project includes:
 }
 ```
 
-Project images go in `public/`. Reference them as `/filename.ext`.
+Project images go in `public/projects/<project-name>/`. Reference them as `/projects/<project-name>/filename.ext`.
 
 ## Adding Work / Education Entries
 
 Edit the `work_experience` and `education` arrays in `components/AboutMe.tsx`.
-To add a logo image, drop the file in `public/` and add it to the `logoMap` at the top of that file.
+To add a logo image, drop the file in `public/logos/` and add it to the `logoMap` at the top of that file.
 
 ## Deployment
 

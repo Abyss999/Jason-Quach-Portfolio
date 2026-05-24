@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe, Shield, Plug, Plug2, Cloud, DatabaseIcon} from "lucide-react";
+import { Brain, Code2, Calendar, Layers, Search, TreePine, Trees, Globe, Shield, Plug, Plug2, Cloud, DatabaseIcon, FileCode, Eye} from "lucide-react";
 import {
   SiTypescript, SiPython, SiJavascript, SiCplusplus, SiR,
   SiNodedotjs, SiReact, SiTailwindcss, SiExpress, SiFlask, SiNextdotjs,
@@ -8,6 +8,7 @@ import {
   SiHeroku, SiVercel, SiStreamlit, SiPytorch, SiPlotly, SiVite,
   SiOpenai, SiAnthropic,
   SiFastapi, SiGooglegemini, SiDigitalocean, SiSwift,
+  SiJquery, SiVuedotjs,
 } from "react-icons/si";
 
 export const Tech = {
@@ -61,6 +62,10 @@ export const Tech = {
   gemini: { label: "Gemini AI", icon: <SiGooglegemini className="h-4 w-4" /> },
   digitalocean: { label: "DigitalOcean", icon: <SiDigitalocean className="h-4 w-4" /> },
   swift: { label: "SwiftUI", icon: <SiSwift className="h-4 w-4" /> },
+  cfml: { label: "CFML", icon: <FileCode className="h-4 w-4" /> },
+  yolo: { label: "YOLO", icon: <Eye className="h-4 w-4" /> },
+  jquery: { label: "jQuery", icon: <SiJquery className="h-4 w-4" /> },
+  vue: { label: "Vue.js", icon: <SiVuedotjs className="h-4 w-4" /> },
 
 } satisfies Record<string, ProjectTech>;
 
@@ -97,14 +102,14 @@ export const projects: Project[] = [
       Tech.api_integration,
     ],
     images: [
-      { src: "/righteous_pfp.png", caption: "Righteous Bot Profile Picture"},
-      { src: "/righteous.png", caption: "Connect 4 Command" },
-      { src: "/righteous_1.png", caption: "Righteous Server Statistics" },
-      { src: "/righteous_2.png", caption: "XXXTENTACION Colab" },
-      { src: "/righteous_3.png", caption: "Spotify Integration" },
-      { src: "/righteous_4.png", caption: "Youtube Integration" },
-      { src: "/righteous_5.png", caption: "LastFM Integration" },
-      { src: "/righteous_6.png", caption: "Wordle Command " },
+      { src: "/projects/righteous/righteous_pfp.png", caption: "Righteous Bot Profile Picture"},
+      { src: "/projects/righteous/righteous.png", caption: "Connect 4 Command" },
+      { src: "/projects/righteous/righteous_1.png", caption: "Righteous Server Statistics" },
+      { src: "/projects/righteous/righteous_2.png", caption: "XXXTENTACION Colab" },
+      { src: "/projects/righteous/righteous_3.png", caption: "Spotify Integration" },
+      { src: "/projects/righteous/righteous_4.png", caption: "Youtube Integration" },
+      { src: "/projects/righteous/righteous_5.png", caption: "LastFM Integration" },
+      { src: "/projects/righteous/righteous_6.png", caption: "Wordle Command " },
     ],
     categories: ["SWE"],
   },
@@ -128,16 +133,16 @@ export const projects: Project[] = [
       Tech.apscheduler,
     ],
     images: [
-      { src: "/cai_new_1.png", caption: "Home Page" },
-      { src: "/cai_new_2.png", caption: "About Us" },
-      { src: "/cai_new_3.png", caption: "Memberships" },
-      { src: "/cai_new_4.png", caption: "Contact Us" },
-      { src: "/cai_new_5.png", caption: "Calendar" },
-      { src: "/cai_new_6.png", caption: "Join Page" },
-      { src: "/cai_admin.png", caption: "Admin / Officer Dashboard" },
-      { src: "/cai_partner.png", caption: "Partner Portal" },
-      { src: "/cai_member_dashboard.png", caption: "Member Dashboard — Points & Leaderboard" },
-      { src: "/cai_geolocation.png", caption: "Event Editor — Geolocation Check-In & QR Code" },
+      { src: "/projects/cai/cai_new_1.png", caption: "Home Page" },
+      { src: "/projects/cai/cai_new_2.png", caption: "About Us" },
+      { src: "/projects/cai/cai_new_3.png", caption: "Memberships" },
+      { src: "/projects/cai/cai_new_4.png", caption: "Contact Us" },
+      { src: "/projects/cai/cai_new_5.png", caption: "Calendar" },
+      { src: "/projects/cai/cai_new_6.png", caption: "Join Page" },
+      { src: "/projects/cai/cai_admin.png", caption: "Admin / Officer Dashboard" },
+      { src: "/projects/cai/cai_partner.png", caption: "Partner Portal" },
+      { src: "/projects/cai/cai_member_dashboard.png", caption: "Member Dashboard — Points & Leaderboard" },
+      { src: "/projects/cai/cai_geolocation.png", caption: "Event Editor — Geolocation Check-In & QR Code" },
     ],
     categories: ["SWE", "WIP"]
   },{
@@ -155,8 +160,8 @@ export const projects: Project[] = [
         Tech.javascript,
     ],
     images: [
-        { src: "/comic_1.png", caption: "Reading Spider-Man comics" },
-        { src: "/comic_2.png", caption: "Scraping query" },
+        { src: "/projects/comic/comic_1.png", caption: "Reading Spider-Man comics" },
+        { src: "/projects/comic/comic_2.png", caption: "Scraping query" },
     ],
     categories: ["SWE"],
 }, {
@@ -173,10 +178,10 @@ export const projects: Project[] = [
       Tech.rest,
     ],
     images: [
-      {src: "/cai_bot_2.png", caption: "Point System (Google Forms -> Google Sheets -> PostgreSQL)"},
-      {src: "/cai_bot_1.png", caption: "Manage Events Command"},
-      {src: "/cai_bot.png", caption: "Points Manage Command"},
-      {src: "/cai_bot_3.png", caption: "Points History Command"},
+      {src: "/projects/cai-bot/cai_bot_2.png", caption: "Point System (Google Forms -> Google Sheets -> PostgreSQL)"},
+      {src: "/projects/cai-bot/cai_bot_1.png", caption: "Manage Events Command"},
+      {src: "/projects/cai-bot/cai_bot.png", caption: "Points Manage Command"},
+      {src: "/projects/cai-bot/cai_bot_3.png", caption: "Points History Command"},
     ],
     categories: ["SWE", "WIP"],
 }, {
@@ -197,11 +202,11 @@ export const projects: Project[] = [
       Tech.framermotion,
     ],
     images: [
-      { src: "/SortLab_1.gif", caption: "Gif of visualizer of merge sort" },
-      { src: "/SortLab_2.gif", caption: "Gif of manual sort" },
-      { src: "/SortLab_1.png", caption: "Visualizer — Bubble Sort with live code highlighting" },
-      { src: "/SortLab_2.png", caption: "Bubble Game — drag bubbles to sort smallest → largest" },
-      { src: "/SortLab_3.png", caption: "Manual Sort — drag-and-drop bar sorting challenge" },
+      { src: "/projects/sortlab/SortLab_1.gif", caption: "Gif of visualizer of merge sort" },
+      { src: "/projects/sortlab/SortLab_2.gif", caption: "Gif of manual sort" },
+      { src: "/projects/sortlab/SortLab_1.png", caption: "Visualizer — Bubble Sort with live code highlighting" },
+      { src: "/projects/sortlab/SortLab_2.png", caption: "Bubble Game — drag bubbles to sort smallest → largest" },
+      { src: "/projects/sortlab/SortLab_3.png", caption: "Manual Sort — drag-and-drop bar sorting challenge" },
     ],
   },{
     id: "dishmatch",
@@ -225,16 +230,16 @@ export const projects: Project[] = [
       Tech.jwt,
     ],
     images: [
-      { src: "/hcc_demo.gif",          caption: "Live demo — swipe session with instant match" },
-      { src: "/hcc_home.png",          caption: "Home screen — create or join a session" },
-      { src: "/hcc_session_start.png", caption: "Session setup — drop a pin and pick cuisine filters" },
-      { src: "/hcc_session_invite.png",caption: "Lobby — share the 4-digit code with friends" },
-      { src: "/hcc_swipe.png",         caption: "Swipe view — swipe or tap Like / Pass" },
-      { src: "/hcc_map.png",           caption: "Map picker — tap anywhere to set the search location" },
-      { src: "/hcc_results.png",       caption: "Results — Top 3 leaderboard with Vibe Pick" },
-      { src: "/hcc_history.png",       caption: "History tab — past sessions with filter + clear" },
-      { src: "/hcc_profile.png",       caption: "Profile — dietary prefs, cuisines, budget" },
-      { src: "/hcc_login.png",         caption: "Login screen" },
+      { src: "/projects/dishd/hcc_demo.gif",          caption: "Live demo — swipe session with instant match" },
+      { src: "/projects/dishd/hcc_home.png",          caption: "Home screen — create or join a session" },
+      { src: "/projects/dishd/hcc_session_start.png", caption: "Session setup — drop a pin and pick cuisine filters" },
+      { src: "/projects/dishd/hcc_session_invite.png",caption: "Lobby — share the 4-digit code with friends" },
+      { src: "/projects/dishd/hcc_swipe.png",         caption: "Swipe view — swipe or tap Like / Pass" },
+      { src: "/projects/dishd/hcc_map.png",           caption: "Map picker — tap anywhere to set the search location" },
+      { src: "/projects/dishd/hcc_results.png",       caption: "Results — Top 3 leaderboard with Vibe Pick" },
+      { src: "/projects/dishd/hcc_history.png",       caption: "History tab — past sessions with filter + clear" },
+      { src: "/projects/dishd/hcc_profile.png",       caption: "Profile — dietary prefs, cuisines, budget" },
+      { src: "/projects/dishd/hcc_login.png",         caption: "Login screen" },
     ],
   },{
     id: "coog-zoo",
@@ -251,11 +256,11 @@ export const projects: Project[] = [
       Tech.tailwindcss,
     ],
     images: [
-      { src: "/zoo_5.png", caption: "Dashboard" },
-      { src: "/zoo_1.png", caption: "Schema" },
-      { src: "/zoo_2.png", caption: "Tickets" },
-      { src: "/zoo_3.png", caption: "Calendar // Events" },
-      { src: "/zoo_4.png", caption: "Membership" },
+      { src: "/projects/zoo/zoo_5.png", caption: "Dashboard" },
+      { src: "/projects/zoo/zoo_1.png", caption: "Schema" },
+      { src: "/projects/zoo/zoo_2.png", caption: "Tickets" },
+      { src: "/projects/zoo/zoo_3.png", caption: "Calendar // Events" },
+      { src: "/projects/zoo/zoo_4.png", caption: "Membership" },
     ],
   },{
     id: "volunteer-management-app",
@@ -274,9 +279,9 @@ export const projects: Project[] = [
       Tech.apscheduler,
     ],
     images: [
-      { src: "/vol_1.png", caption: "Slideshow" },
-      { src: "/vol_2.png", caption: "Admin Management Table" },
-      { src: "/vol_3.png", caption: "Dashboard" },
+      { src: "/projects/volunteer/vol_1.png", caption: "Slideshow" },
+      { src: "/projects/volunteer/vol_2.png", caption: "Admin Management Table" },
+      { src: "/projects/volunteer/vol_3.png", caption: "Dashboard" },
     ],
   }, {
     id: "personal-portfolio",
@@ -293,9 +298,9 @@ export const projects: Project[] = [
       Tech.vercel,
     ],
     images: [
-      {src: "/portfolio_1.jpeg", caption: "Project modal with keyboard navigation"},
-      {src: "/portfolio_2.png", caption: "Timeline section with work and education timelines"},
-      {src: "/portfolio_3.png", caption: "Homepage with animated hero and scroll-aware navbar"},
+      {src: "/projects/portfolio/portfolio_1.jpeg", caption: "Project modal with keyboard navigation"},
+      {src: "/projects/portfolio/portfolio_2.png", caption: "Timeline section with work and education timelines"},
+      {src: "/projects/portfolio/portfolio_3.png", caption: "Homepage with animated hero and scroll-aware navbar"},
     ],
     categories: ["SWE", "WIP"],
   }, {
@@ -312,10 +317,10 @@ export const projects: Project[] = [
     Tech.lightgbm,
   ],
   images: [
-    { src: "/DBLP_1.png"},
-    { src: "/DBLP_2.png"},
-    { src: "/DBLP_3.png"},
-    { src: "/DBLP_4.png"},
+    { src: "/projects/dblp/DBLP_1.png"},
+    { src: "/projects/dblp/DBLP_2.png"},
+    { src: "/projects/dblp/DBLP_3.png"},
+    { src: "/projects/dblp/DBLP_4.png"},
   ],
   categories: ["DS"],
 }, {
@@ -324,7 +329,7 @@ export const projects: Project[] = [
     description:
         "Built tree-based ML models to predict student dropout using the UCI “Predict Students' Dropout and Academic Success” dataset (4,424 students, 36 features). Performed preprocessing to avoid leakage, converted the outcome into Dropout vs No Dropout, and compared Decision Trees (with pruning), Bagging, and Random Forests using an 80/20 split and error-rate evaluation.",
     githubLink: null,
-    liveLink: "/Dropout.pdf",
+    liveLink: "/docs/Dropout.pdf",
     techStack: [
         { label: "R", icon: <SiR className="h-4 w-4" /> },
         { label: "Decision Trees", icon: <TreePine className="h-4 w-4" /> },
@@ -332,12 +337,11 @@ export const projects: Project[] = [
         { label: "Random Forest", icon: <Trees className="h-4 w-4" /> },
     ],
     images: [
-        { src: "/Dropout_1.png" },
-        { src: "/Dropout_2.png" },
-        { src: "/Dropout_3.png" },
-        { src: "/Dropout_4.png" },
-        { src: "/Dropout_5.png" },
-        { src: "/Dropout_6.png" },
+        { src: "/projects/dropout/Dropout_1.png" },
+        { src: "/projects/dropout/Dropout_2.png" },
+        { src: "/projects/dropout/Dropout_3.png" },
+        { src: "/projects/dropout/Dropout_4.png" },
+        { src: "/projects/dropout/Dropout_5.png" },
     ],
     categories: ["ML"],
     },{
@@ -355,10 +359,10 @@ export const projects: Project[] = [
         Tech.streamlit,
     ],
     images: [
-        { src: "/uh_dining.gif", caption: "Gif of scraping process" },
-        { src: "/uh_dining.png", caption: "Streamlit interface for UH Dining Macros" },
-        { src: "/uh_dining_1.png", caption: "Cached CSV output" },
-        { src: "/uh_dining_2.png", caption: "Macro efficiency analysis"},
+        { src: "/projects/uh-dining/uh_dining.gif", caption: "Gif of scraping process" },
+        { src: "/projects/uh-dining/uh_dining.png", caption: "Streamlit interface for UH Dining Macros" },
+        { src: "/projects/uh-dining/uh_dining_1.png", caption: "Cached CSV output" },
+        { src: "/projects/uh-dining/uh_dining_2.png", caption: "Macro efficiency analysis"},
     ],
     categories: ["DE", "WIP"],
     },{
@@ -375,8 +379,8 @@ export const projects: Project[] = [
         Tech.plotly,
     ],
     images: [
-        { src: "/pneumonia_1.png", caption: "Model 1 — Primary Classifier output with class probability chart" },
-        { src: "/pneumonia_2.png", caption: "Model 2 — Secondary Classifier and Final Verdict with conflict resolution" },
+        { src: "/projects/pneumonia/pneumonia_1.png", caption: "Model 1 — Primary Classifier output with class probability chart" },
+        { src: "/projects/pneumonia/pneumonia_2.png", caption: "Model 2 — Secondary Classifier and Final Verdict with conflict resolution" },
     ],
     categories: ["DS", "SWE"],
     },

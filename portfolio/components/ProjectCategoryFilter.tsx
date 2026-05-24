@@ -5,8 +5,8 @@ const CATEGORY_LABELS: Record<ProjectCategory, string> = {
   DS: "Data Science",
   ML: "Machine Learning",
   DE: "Data Engineering",
-  WIP: "Work in Progress",
   Hackathon: "Hackathon",
+  WIP: "Work in Progress",
 }
 
 type Props = {

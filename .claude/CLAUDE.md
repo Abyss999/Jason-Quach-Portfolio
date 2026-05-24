@@ -1,7 +1,7 @@
 # Jason Quach Portfolio — Claude Context
 
 ## Project
-Personal portfolio website for Jason Quach — CS graduate at University of Houston, Lead Software Engineer at CougarAI, SWE Intern at Energy AI Solutions.
+Personal portfolio website for Jason Quach — CS graduate at University of Houston, Software Engineer at Techemet, Lead Software Engineer at CougarAI, SWE Intern at Energy AI Solutions. Accepted to UT Austin M.S. Computer Science (Spring 2027).
 
 ## Tech Stack
 - **Framework:** Next.js 15 (App Router), React 19, TypeScript
@@ -90,6 +90,16 @@ Order within the section:
 2. Stat overview tiles (Languages count, Frameworks count, Databases count, Projects count)
 3. GitHub Activity (see below)
 
+Skill stacks defined in `page.tsx`:
+- **Languages:** TypeScript, JavaScript, Python, C++, R, CFML
+- **Frameworks:** Tailwind CSS, Express.js, Streamlit, Node.js, Next.js, React, Flask, jQuery, Vue.js
+- **Databases:** PostgreSQL, MySQL, SQL Server, MongoDB
+- **Data:** Pandas, NumPy, scikit-learn, TensorFlow
+- **Cloud:** Docker, Heroku, Vercel, Azure
+- **Other:** GitHub, VS Code, JWT, REST APIs, ChatGPT, Claude
+
+TechBadge has no tooltip — the hover tooltip feature was removed.
+
 ## GitHub Activity (`app/page.tsx` + `app/api/github-stats/route.ts`)
 
 ### Client-side fetches (unauthenticated, in `page.tsx` useEffect)
@@ -145,7 +155,7 @@ Skeleton loaders shown while fetching; entire section hidden on fetch error (sil
 - Implemented via `React.useRef<HTMLDetailsElement[]>` — imperatively sets `.open` on all `<details>` elements; individual toggles still work independently
 - State: `eduAllExpanded`, `workAllExpanded` booleans; refs: `eduDetailsRefs`, `workDetailsRefs`
 - Each entry: orange dot → card with logo (40×40) → title/org/dates → `<details>` bullets → `TechBadge` tags
-- `EduEntry` supports `status?: string` — renders a yellow pill (e.g. "Applied") next to the degree
+- `EduEntry` supports `status?: string` — renders a pill next to the degree; yellow for "Applied", green for "Accepted"
 
 ### Types
 ```ts
@@ -154,14 +164,15 @@ type WorkEntry = { role, company, type, location, dates, logo, logoColor, logoIm
 ```
 
 ### logoMap (`AboutMe.tsx`)
-All logo images live in `public/` and are referenced via `logoMap`:
-- `CAI` → `/cai.jpeg` (CougarAI)
-- `EAI` → `/eai.jpeg` (Energy AI Solutions)
-- `Righteous` → `/righteous.webp`
-- `UH` → `/uh.png` (University of Houston)
-- `HCC` → `/hcc.png` (Houston Community College)
-- `SLHS` → `/SLHS.jpeg` (Seven Lakes High School)
-- `UT` → `/UT.png` (University of Texas at Austin)
+All logo images live in `public/logos/` and are referenced via `logoMap`:
+- `CAI` → `/logos/cai.jpeg` (CougarAI)
+- `EAI` → `/logos/eai.jpeg` (Energy AI Solutions)
+- `Righteous` → `/logos/righteous.webp`
+- `UH` → `/logos/uh.png` (University of Houston)
+- `HCC` → `/logos/hcc.png` (Houston Community College)
+- `SLHS` → `/logos/SLHS.jpeg` (Seven Lakes High School)
+- `UT` → `/logos/UT.png` (University of Texas at Austin)
+- `TE` → `/logos/techemet.png` (Techemet)
 
 Logo rendering: `<Image>` if `logoImg` is set, otherwise letter initials on `logoColor` background. When `logoImg` is set, the box background becomes `bg-white` for contrast.
 
@@ -254,12 +265,17 @@ Reuse existing entries from `Tech` wherever possible. Current entries include al
 - `Tech.gemini` — Gemini AI (SiGooglegemini)
 - `Tech.digitalocean` — DigitalOcean (SiDigitalocean)
 - `Tech.swift` — SwiftUI (SiSwift)
+- `Tech.cfml` — CFML (FileCode lucide icon)
+- `Tech.yolo` — YOLO (Eye lucide icon)
+- `Tech.jquery` — jQuery (SiJquery)
+- `Tech.vue` — Vue.js (SiVuedotjs)
 
 When adding a new tech that has no react-icons/si entry, use a Lucide icon inline (see `Tech.playwright`, `Tech.rest`, etc.).
 
 ## Conventions
 - `"use client"` at top of any component using hooks or browser APIs
-- All images in `public/` — referenced as `/filename.ext`
+- `public/` is organized: `logos/` (org logos), `profile/` (personal photos), `projects/<name>/` (project screenshots), `docs/` (PDFs), `fonts/` (local fonts)
+- Resume is at `/docs/resume.pdf`; project images use `/projects/<name>/filename.ext`; logos use `/logos/filename.ext`; profile photos use `/profile/filename.ext`
 - No tests currently in the project
 - Never add new files for one-off changes — extend existing components
 

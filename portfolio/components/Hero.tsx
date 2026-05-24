@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const stats = [
-  { value: "$8K+", label: "Revenue" },
-  { value: "100K+", label: "Users" },
-  { value: "650+", label: "Commands" },
-  { value: "12", label: "Projects" },
+  { prefix: "$", target: 8,   suffix: "K+", label: "Revenue"  },
+  { prefix: "",  target: 100, suffix: "K+", label: "Users"    },
+  { prefix: "",  target: 650, suffix: "+",  label: "Commands" },
+  { prefix: "",  target: 12,  suffix: "",   label: "Projects"  },
 ];
 
 export default function Hero() {
@@ -15,6 +15,10 @@ export default function Hero() {
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(100);
+
+  const [counts, setCounts] = useState(stats.map(() => 0));
+  const [started, setStarted] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];
@@ -41,6 +45,38 @@ export default function Hero() {
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
   }, [displayedText, isDeleting, currentRoleIndex, typingSpeed]);
+
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const duration = 1200;
+    const startTime = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = t * (2 - t);
+      setCounts(stats.map((s) => Math.round(eased * s.target)));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  }, [started]);
 
   return (
     <section
@@ -100,12 +136,12 @@ export default function Hero() {
         </div>
 
         {/* Stats row */}
-        <div className="mt-10 flex items-center justify-center gap-0">
+        <div ref={statsRef} className="mt-10 flex items-center justify-center gap-0">
           {stats.map((stat, i) => (
             <div key={stat.label} className="flex items-center">
               <div className="flex flex-col gap-0.5 pr-3 sm:pr-6 md:pr-8">
                 <span className="font-[family-name:var(--font-syne)] text-2xl font-bold text-orange-500 leading-none">
-                  {stat.value}
+                  {stat.prefix}{counts[i]}{stat.suffix}
                 </span>
                 <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-500 dark:text-white/35">
                   {stat.label}
