@@ -7,6 +7,7 @@ import {
   SiScikitlearn, SiDiscord, SiSocketdotio, SiTensorflow, SiNumpy,
   SiHeroku, SiVercel, SiStreamlit, SiPytorch, SiPlotly, SiVite,
   SiOpenai, SiAnthropic,
+  SiFastapi, SiGooglegemini, SiDigitalocean, SiSwift,
 } from "react-icons/si";
 
 export const Tech = {
@@ -56,11 +57,15 @@ export const Tech = {
   framermotion: { label: "Framer Motion", icon: <Layers className="h-4 w-4" /> },
   chatgpt: { label: "ChatGPT", icon: <SiOpenai className="h-4 w-4" /> },
   claude: { label: "Claude", icon: <SiAnthropic className="h-4 w-4" /> },
+  fastapi: { label: "FastAPI", icon: <SiFastapi className="h-4 w-4" /> },
+  gemini: { label: "Gemini AI", icon: <SiGooglegemini className="h-4 w-4" /> },
+  digitalocean: { label: "DigitalOcean", icon: <SiDigitalocean className="h-4 w-4" /> },
+  swift: { label: "SwiftUI", icon: <SiSwift className="h-4 w-4" /> },
 
 } satisfies Record<string, ProjectTech>;
 
 
-export type ProjectCategory = "SWE" | "DS" | "ML" | "DE" | "WIP";
+export type ProjectCategory = "SWE" | "DS" | "ML" | "DE" | "WIP" | "Hackathon";
 
 export type ProjectImage = { src: string; caption?: string; alt?: string };
 export type ProjectTech = { label: string; icon: ReactNode };
@@ -197,6 +202,39 @@ export const projects: Project[] = [
       { src: "/SortLab_1.png", caption: "Visualizer — Bubble Sort with live code highlighting" },
       { src: "/SortLab_2.png", caption: "Bubble Game — drag bubbles to sort smallest → largest" },
       { src: "/SortLab_3.png", caption: "Manual Sort — drag-and-drop bar sorting challenge" },
+    ],
+  },{
+    id: "dishmatch",
+    title: "DishMatch",
+    description:
+      "🏆 1st Place — DigitalOcean Track @ HCCHack (May 22–23, 2025). Group restaurant decision app — friends join via a 4-digit code, swipe yes/no on nearby restaurants, and get an instant match or a Top 3 leaderboard ranked by vote percentage. Solo mode lets a single user swipe for a personal top pick.",
+    longDescription:
+      "Built in 48 hours at HCCHack. The iOS app (SwiftUI) connects to a FastAPI backend backed by MongoDB (Beanie ODM). Real-time session sync uses FastAPI WebSockets — swipes, member joins, and match events are broadcast live. Google Places API fetches nearby restaurants with a 6-hour MongoDB cache so the Places bill stays low. Google Gemini 2.5 Flash generates a one-sentence vibe blurb per restaurant and a personalized \"why this fits you\" narrative on the results screen. Deployed on DigitalOcean App Platform from a single Dockerfile. Also features JWT auth with refresh tokens, rate limiting via slowapi, and APNs push notifications.",
+    githubLink: "https://github.com/Abyss999/HCCHack",
+    liveLink: "https://devpost.com/software/dishd-3pqzcy",
+    categories: ["SWE", "Hackathon"],
+    techStack: [
+      Tech.swift,
+      Tech.fastapi,
+      Tech.mongodb,
+      Tech.python,
+      Tech.gemini,
+      Tech.api_integration,
+      Tech.docker,
+      Tech.digitalocean,
+      Tech.jwt,
+    ],
+    images: [
+      { src: "/hcc_demo.gif",          caption: "Live demo — swipe session with instant match" },
+      { src: "/hcc_home.png",          caption: "Home screen — create or join a session" },
+      { src: "/hcc_session_start.png", caption: "Session setup — drop a pin and pick cuisine filters" },
+      { src: "/hcc_session_invite.png",caption: "Lobby — share the 4-digit code with friends" },
+      { src: "/hcc_swipe.png",         caption: "Swipe view — swipe or tap Like / Pass" },
+      { src: "/hcc_map.png",           caption: "Map picker — tap anywhere to set the search location" },
+      { src: "/hcc_results.png",       caption: "Results — Top 3 leaderboard with Vibe Pick" },
+      { src: "/hcc_history.png",       caption: "History tab — past sessions with filter + clear" },
+      { src: "/hcc_profile.png",       caption: "Profile — dietary prefs, cuisines, budget" },
+      { src: "/hcc_login.png",         caption: "Login screen" },
     ],
   },{
     id: "coog-zoo",
