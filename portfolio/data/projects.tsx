@@ -209,8 +209,8 @@ export const projects: Project[] = [
     description:
       "🏆 1st Place — DigitalOcean Track @ HCCHack (May 22–23, 2025). Group restaurant decision app — friends join via a 4-digit code, swipe yes/no on nearby restaurants, and get an instant match or a Top 3 leaderboard ranked by vote percentage. Solo mode lets a single user swipe for a personal top pick.",
     longDescription:
-      "Built in 48 hours at HCCHack. The iOS app (SwiftUI) connects to a FastAPI backend backed by MongoDB (Beanie ODM). Real-time session sync uses FastAPI WebSockets — swipes, member joins, and match events are broadcast live. Google Places API fetches nearby restaurants with a 6-hour MongoDB cache so the Places bill stays low. Google Gemini 2.5 Flash generates a one-sentence vibe blurb per restaurant and a personalized \"why this fits you\" narrative on the results screen. Deployed on DigitalOcean App Platform from a single Dockerfile. Also features JWT auth with refresh tokens, rate limiting via slowapi, and APNs push notifications.",
-    githubLink: "https://github.com/Abyss999/HCCHack",
+      "Built in 24 hours at HCCHack. The iOS app (SwiftUI) connects to a FastAPI backend backed by MongoDB (Beanie ODM). Real-time session sync uses FastAPI WebSockets — swipes, member joins, and match events are broadcast live. Google Places API fetches nearby restaurants with a 6-hour MongoDB cache so the Places bill stays low. Google Gemini 2.5 Flash generates a one-sentence vibe blurb per restaurant and a personalized \"why this fits you\" narrative on the results screen. Deployed on DigitalOcean App Platform from a single Dockerfile. Also features JWT auth with refresh tokens, rate limiting via slowapi, and APNs push notifications.",
+    githubLink: "https://github.com/Abyss999/HCCHack-Dishd",
     liveLink: "https://devpost.com/software/dishd-3pqzcy",
     categories: ["SWE", "Hackathon"],
     techStack: [
