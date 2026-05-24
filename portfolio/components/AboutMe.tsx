@@ -28,26 +28,27 @@ const socials = [
     {
         label: "Resume",
         icon: <FileText className="h-6 w-6"/>,
-        href: "/resume.pdf",
+        href: "/docs/resume.pdf",
     },
 ];
 
 const logoMap: {[key: string]: string} = {
-    "CAI": "/cai.jpeg",
-    "Righteous": "/righteous.webp",
-    "HCC": "/hcc.png",
-    "UH": "/uh.png",
-    "EAI": "/eai.jpeg",
-    "SLHS": "/SLHS.jpeg",
-    "UT": "/UT.png",
+    "CAI": "/logos/cai.jpeg",
+    "Righteous": "/logos/righteous.webp",
+    "HCC": "/logos/hcc.png",
+    "UH": "/logos/uh.png",
+    "EAI": "/logos/eai.jpeg",
+    "SLHS": "/logos/SLHS.jpeg",
+    "UT": "/logos/UT.png",
+    "TE": "/logos/techemet.png",
 }
 
 const profileImages = [
-    "/pfp_3.jpg",
-    "/grad_2.jpg",
-    "/pfp.jpg",
-    "/grad_1.jpg",
-    "/pfp_2.png",
+    "/profile/pfp_3.jpg",
+    "/profile/grad_2.jpg",
+    "/profile/pfp.jpg",
+    "/profile/grad_1.jpg",
+    "/profile/pfp_2.png",
 ];
 
 type EduEntry = {
@@ -70,13 +71,13 @@ const education: EduEntry[] = [
         school: "University of Texas at Austin",
         gpa: "",
         location: "Austin, TX",
-        dates: "Fall 2026",
+        dates: "Spring 2027",
         logo: "UT",
         logoImg: logoMap["UT"],
         logoColor: "bg-orange-700",
         bullets: [],
         tags: [],
-        status: "Applied",
+        status: "Accepted",
     },
     {
         degree: "B.S. Computer Science, Minor in Mathematics",
@@ -142,6 +143,22 @@ type WorkEntry = {
 
 const work_experience: WorkEntry[] = [
     {
+        role: "Software Engineer",
+        company: "Techemet",
+        type: "Full-Time",
+        location: "Houston, TX",
+        dates: "May 2026 – Present",
+        logoImg: logoMap["TE"],
+        logo: "TE",
+        logoColor: "bg-blue-700",
+        bullets: [
+            "Building and maintaining full-stack applications using ColdFusion Markup Language (CFML).",
+            "Implementing AI-powered object detection features using YOLO.",
+            "Developing dynamic front-end interfaces with jQuery and Vue.js.",
+        ],
+        tags: ["CFML", "YOLO", "jQuery", "Vue.js"],
+    },
+    {
         role: "Lead Software Engineer",
         company: "CougarAI",
         type: "Part-time",
@@ -166,7 +183,7 @@ const work_experience: WorkEntry[] = [
         dates: "Jan 2026 – May 2026",
         logo: "EAI",
         logoColor: "bg-blue-600",
-        logoImg: "/eai.jpeg",
+        logoImg: "/logos/eai.jpeg",
         bullets: [
             "Built and maintained full-stack internal tooling (React, Flask, T-SQL) on Azure within a 5-person agile team to support data-driven job market workflows.",
             "Engineered automated Workday scraping pipelines with configurable scheduling (hourly–monthly), pagination controls, and real-time status monitoring; scraped 100+ employers weekly.",
@@ -593,7 +610,11 @@ export default function AboutMe() {
                                                     <div className="flex items-center gap-2 flex-wrap">
                                                         <p className="font-semibold text-gray-900 dark:text-white leading-tight">{edu.degree}</p>
                                                         {edu.status && (
-                                                            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full border border-yellow-400/40 text-yellow-400 bg-yellow-400/10">
+                                                            <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${
+                                                                edu.status === "Accepted"
+                                                                    ? "border-green-400/40 text-green-400 bg-green-400/10"
+                                                                    : "border-yellow-400/40 text-yellow-400 bg-yellow-400/10"
+                                                            }`}>
                                                                 {edu.status}
                                                             </span>
                                                         )}

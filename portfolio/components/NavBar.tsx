@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 import { Menu } from "lucide-react";
 
-const RESUME_HREF = "/resume.pdf";
+const RESUME_HREF = "/docs/resume.pdf";
 
 function NavLink({
   href,
@@ -61,12 +61,15 @@ export default function NavBar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>("hero");
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 8);
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
       if (atBottom) setActiveSection("contact");
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -109,6 +112,10 @@ export default function NavBar() {
 
   return (
     <>
+      <div
+        className="fixed top-0 left-0 z-[60] h-[2px] bg-orange-500 transition-[width] duration-75"
+        style={{ width: `${scrollProgress}%` }}
+      />
       <header className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled

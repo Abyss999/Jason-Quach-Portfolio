@@ -12,7 +12,7 @@ import TechBadge from "@/components/TechBadge";
 import {projects, Tech, ProjectCategory} from "@/data/projects";
 import ProjectCategoryFilter from "@/components/ProjectCategoryFilter";
 import { Button } from "@/components/ui/button";
-import { X, BookOpen, GitCommit, Users } from "lucide-react";
+import { X, BookOpen, GitCommit, Users, Copy, Check } from "lucide-react";
 
 // Map GitHub API language names → Tech entries for badge rendering
 const LANG_TO_TECH: Record<string, { label: string; icon: React.ReactNode }> = {
@@ -21,6 +21,7 @@ const LANG_TO_TECH: Record<string, { label: string; icon: React.ReactNode }> = {
   Python: Tech.python,
   "C++": Tech.cpp,
   R: Tech.r,
+  Swift: Tech.swift,
 };
 
 type GitHubStats = {
@@ -36,6 +37,7 @@ const languageStack = [
   Tech.python,
   Tech.cpp,
   Tech.r,
+  Tech.cfml,
 ];
 
 const frameworkStack = [
@@ -46,6 +48,8 @@ const frameworkStack = [
   Tech.nextjs,
   Tech.react,
   Tech.flask,
+  Tech.jquery,
+  Tech.vue,
 ];
 
 const databaseStack = [
@@ -106,7 +110,7 @@ export default function HomePage() {
         });
         const topLangs = Object.entries(langMap)
           .sort((a, b) => b[1] - a[1])
-          .slice(0, 6)
+          .slice(0, 3)
           .map(([name, count]) => ({ name, count }));
 
         setGithubStats({ repos: user.public_repos, followers: user.followers, contributions: contributionsData.contributions, topLangs });
@@ -122,6 +126,7 @@ export default function HomePage() {
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
+  const [copied, setCopied] = useState(false);
   const toEmail = "jtquach@cougarnet.uh.edu";
   const mailtoLink = `mailto:${toEmail}?subject=${encodeURIComponent(`Portfolio Contact from ${contactName} || Portfolio`)}&body=${encodeURIComponent(`Name: ${contactName}\nEmail: ${contactEmail}\n\nMessage:\n${contactMessage}`)}`;
 
@@ -268,7 +273,7 @@ export default function HomePage() {
             </p>
             {githubLoading ? (
               <div className="flex flex-wrap gap-2">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(3)].map((_, i) => (
                   <div key={i} className="h-7 w-24 animate-pulse rounded-full bg-orange-500/10" />
                 ))}
               </div>
@@ -402,11 +407,18 @@ export default function HomePage() {
             <a href={mailtoLink}>Send Message</a>
           </Button>
 
-          <p className="mt-4 text-center text-sm text-gray-600 dark:text-white/60">
+          <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-gray-600 dark:text-white/60">
             Or email me directly at{" "}
             <a href={`mailto:${toEmail}`} className="text-orange-500 hover:text-orange-400 hover:underline">
               {toEmail}
             </a>
+            <button
+              onClick={() => { navigator.clipboard.writeText(toEmail); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
+              className="inline-flex items-center text-gray-400 hover:text-orange-500 transition-colors"
+              aria-label="Copy email address"
+            >
+              {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
+            </button>
           </p>
         </div>
       </section>

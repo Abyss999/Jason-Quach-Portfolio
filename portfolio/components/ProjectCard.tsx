@@ -144,6 +144,13 @@ export default function ProjectCard({
                         )}
                     </div>
                 )}
+
+                {/* WIP diagonal ribbon */}
+                {categories?.includes("WIP") && (
+                    <div className="pointer-events-none absolute top-5 right-[-34px] w-[140px] rotate-45 bg-gradient-to-r from-amber-500 to-yellow-400 py-1 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-black shadow-[0_2px_8px_rgba(0,0,0,0.35)] border-y border-amber-600/30">
+                        In Progress
+                    </div>
+                )}
             </button>
 
             {/* Content */}
