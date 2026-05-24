@@ -68,7 +68,7 @@ Projects are defined in `data/projects.tsx`. Each project includes:
   longDescription?: string;  // shown in full in the modal
   githubLink?: string | null;
   liveLink?: string | null;
-  categories: ("SWE" | "DS" | "ML" | "DE" | "WIP")[];
+  categories: ("SWE" | "DS" | "ML" | "DE" | "WIP" | "Hackathon")[];
   techStack: ProjectTech[];  // use entries from the Tech object or inline
   images: { src: string; caption?: string; alt?: string }[];
 }

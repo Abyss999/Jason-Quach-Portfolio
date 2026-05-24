@@ -1,7 +1,7 @@
 # Jason Quach Portfolio — Claude Context
 
 ## Project
-Personal portfolio website for Jason Quach — CS student at University of Houston, President of CougarAI, SWE Intern at Energy AI Solutions.
+Personal portfolio website for Jason Quach — CS graduate at University of Houston, Lead Software Engineer at CougarAI, SWE Intern at Energy AI Solutions.
 
 ## Tech Stack
 - **Framework:** Next.js 15 (App Router), React 19, TypeScript
@@ -19,16 +19,19 @@ All source code lives in `Jason-Quach-Portfolio/portfolio/` relative to the repo
 | `app/page.tsx` | Homepage — renders Hero, AboutMe, Skills, Projects, Contact sections |
 | `app/layout.tsx` | Root layout — metadata, fonts, NavBar, Footer, ThemeProvider |
 | `app/globals.css` | Tailwind import + OKLCh CSS custom properties for theme colors |
+| `app/icon.tsx` | Favicon — `ImageResponse` renders "JQ" in Syne 800 on dark background; reads `public/fonts/syne-800.ttf` |
 | `app/api/github-stats/route.ts` | Server-side API route — proxies GitHub GraphQL + contributor stats; reads `GITHUB_TOKEN` |
-| `components/NavBar.tsx` | Sticky navbar with scroll-aware backdrop blur, active section tracking, mobile sheet |
-| `components/AboutMe.tsx` | About section — profile pic carousel, bio, education & work experience timelines |
-| `components/Hero.tsx` | Hero with typing animation |
+| `components/NavBar.tsx` | Transparent-to-blur navbar, centered nav links, active section tracking, mobile sheet |
+| `components/AboutMe.tsx` | About section — profile pic carousel, bio, Spotify panel, education & work experience timelines |
+| `components/Hero.tsx` | Hero with typing animation, centered layout, 4 stats |
+| `components/SiteBackground.tsx` | Animated neural-net canvas + glow/grid layers; mobile-responsive node count |
 | `components/ProjectCard.tsx` | Project card — image-on-top layout with gallery modal |
 | `components/ProjectCategoryFilter.tsx` | Category filter pills + result count / tech-filter hint line |
 | `components/TechBadge.tsx` | Reusable skill pill — `size="sm"` or `size="md"`, orange-500 by default |
 | `components/SkillCard.tsx` | Category skill card used in the Skills section |
 | `components/ContactMe.tsx` | Legacy contact modal — no longer wired up (superseded by inline Contact section) |
 | `data/projects.tsx` | All project data and tech stack definitions |
+| `public/fonts/syne-800.ttf` | Syne ExtraBold TTF used by `app/icon.tsx` favicon generator |
 | `.env.local` | `GITHUB_TOKEN=...` — gitignored, never commit; required for contributions + diff stats |
 
 ## Page Sections (in order)
@@ -37,14 +40,16 @@ All source code lives in `Jason-Quach-Portfolio/portfolio/` relative to the repo
 NavBar tracks all five via `IntersectionObserver`: `["hero", "about", "skills", "projects", "contact"]`
 
 ## NavBar
-- `sticky top-0 z-50` — always visible
-- Scroll-aware: past 8px scroll → `bg-white/80 dark:bg-black/80 backdrop-blur-md` + bottom border + shadow. At top → solid `bg-white dark:bg-black`
-- Uses `IntersectionObserver` to track active section (`hero`, `about`, `skills`, `projects`, `contact`)
-- Mobile: Radix Sheet (hamburger) — closes on all nav taps including non-Contact links
-- "Contact" nav link scrolls to `#contact` section (previously opened a modal — `ContactMe.tsx` is now unused)
+- **Layout:** 3-column grid (`logo | centered links | resume+theme`) — logo left, nav links centered, Resume+ThemeToggle right
+- **Transparency:** fully transparent at top; on scroll past 8px → `bg-white/85 dark:bg-[rgba(8,6,4,0.88)]` with `backdrop-blur-lg` + bottom border
+- **Logo:** "JQ" in Syne extrabold, orange-500
+- **Nav links:** inactive = muted gray/white, active = orange-500; `rounded-lg px-3 py-1.5`
+- **Resume button:** bordered pill (`border border-orange-500/40`), not filled
+- **Active section:** `IntersectionObserver` with `-40% 0px -40% 0px` rootMargin + scroll-to-bottom check that forces `contact` active when within 80px of page bottom
+- **Mobile:** Radix Sheet (hamburger) — closes on all nav taps; ThemeToggle shown inline next to hamburger
 
 ## Contact Section (`app/page.tsx`)
-- Inline form at the bottom of the page (id=`contact`), no modal
+- Inline form at the bottom of the page (id=`contact`), centered title + label
 - State lives in `page.tsx`: `contactName`, `contactEmail`, `contactMessage`
 - "Send Message" builds a `mailto:` link with subject + body pre-filled
 - Email: `jtquach@cougarnet.uh.edu`
@@ -57,6 +62,7 @@ NavBar tracks all five via `IntersectionObserver`: `["hero", "about", "skills", 
 - **Empty state:** shown when no projects match, with a "Clear all filters" button
 - **Result count:** `ProjectCategoryFilter` shows `"X of N projects"` when filtered, otherwise shows a tip about tech-badge filtering
 - Filter state: `activeCategories: Set<ProjectCategory>`, `activeTech: string | null`
+- **Categories:** `"SWE" | "DS" | "ML" | "DE" | "WIP" | "Hackathon"` — `CATEGORY_LABELS` in `ProjectCategoryFilter.tsx` must be kept in sync when adding new categories
 
 ## ProjectCard
 - Layout: image on top (`aspect-video`, `object-cover`, zoom on hover) → content below
@@ -127,9 +133,18 @@ Skeleton loaders shown while fetching; entire section hidden on fetch error (sil
 `LANG_TO_TECH` map lives at the top of `page.tsx` — extend it when new languages are added to Tech in `data/projects.tsx`.
 
 ## AboutMe.tsx Structure
-Both Education and Work Experience use the same vertical timeline pattern:
-- Outer `relative pl-6` container with an absolute orange gradient line at `left-[11px]`
-- Each entry: orange dot at `-left-[19px] top-[14px]`, card with logo box (40×40) → title/org/dates → bullets with `▸` → `TechBadge` tags
+
+### Layout
+- **Top grid:** `grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] md:items-start`
+  - Column 1: profile photo carousel (capped at `sm:max-w-sm`)
+  - Column 2: bio paragraphs → social links → Spotify panel (`mt-6 w-full`)
+- **Below grid:** `md:col-span-2` education + work experience timelines (centered, `max-w-5xl lg:grid-cols-2`)
+
+### Timeline cards (Education & Work Experience)
+- Both cards have an **"Expand all" / "Collapse all"** button in the card header (top-right)
+- Implemented via `React.useRef<HTMLDetailsElement[]>` — imperatively sets `.open` on all `<details>` elements; individual toggles still work independently
+- State: `eduAllExpanded`, `workAllExpanded` booleans; refs: `eduDetailsRefs`, `workDetailsRefs`
+- Each entry: orange dot → card with logo (40×40) → title/org/dates → `<details>` bullets → `TechBadge` tags
 - `EduEntry` supports `status?: string` — renders a yellow pill (e.g. "Applied") next to the degree
 
 ### Types
@@ -140,18 +155,19 @@ type WorkEntry = { role, company, type, location, dates, logo, logoColor, logoIm
 
 ### logoMap (`AboutMe.tsx`)
 All logo images live in `public/` and are referenced via `logoMap`:
-- `CAI` → `/cai.svg` (CougarAI)
+- `CAI` → `/cai.jpeg` (CougarAI)
 - `EAI` → `/eai.jpeg` (Energy AI Solutions)
 - `Righteous` → `/righteous.webp`
-- `UH` → `/uh.svg` (University of Houston)
-- `HCC` → `/hcc.png` (Houston Community College / Houston City College)
-- `SLHS` → no image, falls back to initials on `bg-indigo-600`
+- `UH` → `/uh.png` (University of Houston)
+- `HCC` → `/hcc.png` (Houston Community College)
+- `SLHS` → `/SLHS.jpeg` (Seven Lakes High School)
+- `UT` → `/UT.png` (University of Texas at Austin)
 
 Logo rendering: `<Image>` if `logoImg` is set, otherwise letter initials on `logoColor` background. When `logoImg` is set, the box background becomes `bg-white` for contrast.
 
 ## Spotify Section (`components/AboutMe.tsx`)
 
-Collapsible "My Music Taste" section at the bottom of the About Me section. It is the **last child inside** the `md:grid-cols-2` grid, placed as `md:col-span-2` so it inherits the grid's `gap-10` spacing automatically — do not add manual `mt-*` to it.
+Collapsible "My Music Taste" panel inside the **right bio column** (after the social links), not below the timelines. Uses `mt-6 w-full` — no `md:col-span-2` wrapper.
 
 ### API
 - Route: `app/api/spotify/route.ts` — single `GET` endpoint, accepts `?timeRange=short_term|medium_term|long_term`
@@ -163,7 +179,7 @@ Collapsible "My Music Taste" section at the bottom of the About Me section. It i
 
 ### UI
 - **Toggle button** — "My Music Taste" with Music icon + ChevronDown/Up
-- **Time range filter pills** — "1 Month" (`short_term`), "6 Months" (`medium_term`), "All Time" (`long_term`); refetches on change
+- **Time range filter pills** — "Recent" (`short_term`), "This Year" (`medium_term`), "All Time" (`long_term`); refetches on change
 - **Now Playing** — green-bordered card, pulsing green dot when `is_playing`, links to Spotify; shows "Not currently playing" when null
 - **Top Tracks + Top Artists** — 2-column grid (`lg:grid-cols-2`), top 5 each, album/artist thumbnails, ranked, each row links to Spotify
 - Skeleton loaders shown while fetching
@@ -171,7 +187,38 @@ Collapsible "My Music Taste" section at the bottom of the About Me section. It i
 ### Next.js image config
 `i.scdn.co` added to `remotePatterns` in `next.config.ts` for Spotify album/artist images.
 
-### Workspace root issue
+## Hero (`components/Hero.tsx`)
+- Content block: `max-w-3xl mx-auto text-center`
+- Name: `text-6xl sm:text-8xl md:text-[118px]` in Syne extrabold, two lines (Jason / Quach gradient)
+- Typing role: `text-xl sm:text-2xl md:text-3xl`
+- CTAs: `flex flex-wrap gap-3 justify-center`
+- Stats row: `flex flex-wrap items-center justify-center` — 4 stats: Revenue, Users, Commands, Projects
+- Description references $8K+, 100K+ users, 1,000+ servers
+
+## SiteBackground (`components/SiteBackground.tsx`)
+- Fixed full-screen canvas + layered glow/grid divs, `z-0`
+- **Neural net canvas:** animated nodes with connecting lines; **mobile-responsive** — on screens < 768px uses 28 nodes / `maxDist: 120`; on desktop uses 62 nodes / `maxDist: 190`
+- Layers (dark mode): warm dark base → neural canvas → hero glow → edge vignette → orange grid → bottom fade
+- Light mode uses the same layers with softer colors
+
+## Favicon (`app/icon.tsx`)
+- Uses `ImageResponse` (Node.js runtime, no `export const runtime = 'edge'`)
+- Reads `public/fonts/syne-800.ttf` from disk via `fs/promises`
+- Renders "JQ" in Syne 800, orange-500 (`#f97316`), on dark background (`#080604`), 32×32px with `borderRadius: 6`
+- **Font must be TTF** — `ImageResponse` does not support woff2
+
+## Responsive / Mobile Conventions
+- Section headings: `text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15] pb-1`
+  - The `pb-1` prevents descender clipping (e.g. the J in "Projects") at tight line-heights
+  - Contact section heading also has `text-center`; all other section headings are left-aligned
+- Section labels (`▸ label`): `text-xs font-semibold uppercase tracking-widest text-orange-500`
+  - Contact label is `text-center`; all others left-aligned
+- Hero h1: `text-6xl sm:text-8xl md:text-[118px]`
+- Typing animation: `text-xl sm:text-2xl md:text-3xl`
+- Always use mobile-first breakpoints: `sm:` (640px), `md:` (768px), `lg:` (1024px)
+- `overflow-x-hidden` on `<html>` and `<body>` to prevent horizontal scroll
+
+## Workspace root issue
 If `npm run dev` fails with "Can't resolve 'tailwindcss'" error, Turbopack is inferring the wrong workspace root. **Solution:** ensure a `package.json` exists at `Jason-Quach-Portfolio/` (parent of `portfolio/`) with a workspaces declaration:
 ```json
 {
@@ -182,15 +229,33 @@ If `npm run dev` fails with "Can't resolve 'tailwindcss'" error, Turbopack is in
 ```
 This tells Turbopack that `portfolio/` is the actual workspace to resolve dependencies from. Do NOT add a `package-lock.json` at this level.
 
-## Responsive / Mobile Conventions
-- Section headings: `text-3xl sm:text-4xl md:text-5xl` — never just `text-5xl`
-- Hero h1: `text-4xl sm:text-5xl md:text-6xl`
-- Typing animation: `text-xl sm:text-2xl md:text-3xl`
-- Always use mobile-first breakpoints: `sm:` (640px), `md:` (768px), `lg:` (1024px)
-- `overflow-x-hidden` on `<html>` and `<body>` to prevent horizontal scroll
-
 ## Data
 All content (work experience, education, projects, skills) is hardcoded directly in component or data files — no external API or CMS.
+
+### Projects (`data/projects.tsx`)
+Current project order (matches display order on the page):
+1. Righteous Bot
+2. CougarAI Website
+3. Comic Bot
+4. CougarAI Bot
+5. SortLab
+6. **DishMatch** — HCCHack 2025, 1st place DigitalOcean track; SwiftUI + FastAPI + MongoDB + Gemini + DigitalOcean
+7. Coog Zoo
+8. Volunteer Management App
+9. Personal Portfolio
+10. DBLP Venue Analysis
+11. Student Dropout Prediction
+12. UH Dining Macros
+13. Pneumonia X-Ray Classifier
+
+### Tech object (`data/projects.tsx`)
+Reuse existing entries from `Tech` wherever possible. Current entries include all common icons plus:
+- `Tech.fastapi` — FastAPI (SiFastapi)
+- `Tech.gemini` — Gemini AI (SiGooglegemini)
+- `Tech.digitalocean` — DigitalOcean (SiDigitalocean)
+- `Tech.swift` — SwiftUI (SiSwift)
+
+When adding a new tech that has no react-icons/si entry, use a Lucide icon inline (see `Tech.playwright`, `Tech.rest`, etc.).
 
 ## Conventions
 - `"use client"` at top of any component using hooks or browser APIs
